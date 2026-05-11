@@ -29,13 +29,18 @@
     $$("[data-logo]").forEach((image) => {
       image.src = content.assets.logo;
     });
-
-    setText('[data-content="hero-eyebrow"]', content.hero.eyebrow);
+    $$("[data-logo-white]").forEach((image) => {
+      image.src = content.assets.logoWhite;
+    });
+    $$('[data-icon="phone"]').forEach((image) => {
+      image.src = content.assets.icons.phone;
+    });
+    // setText('[data-content="hero-eyebrow"]', content.hero.eyebrow);
     setText('[data-content="hero-title"]', content.hero.title);
     setText('[data-content="hero-body"]', content.hero.body);
-    setText('[data-content="expertise-eyebrow"]', content.expertiseIntro.eyebrow);
-    setText('[data-content="expertise-title"]', content.expertiseIntro.title);
-    setText('[data-content="expertise-body"]', content.expertiseIntro.body);
+    // setText('[data-content="expertise-eyebrow"]', content.expertiseIntro.eyebrow);
+    // setText('[data-content="expertise-title"]', content.expertiseIntro.title);
+    // setText('[data-content="expertise-body"]', content.expertiseIntro.body);
     setText('[data-content="solutions-eyebrow"]', content.solutionsIntro.eyebrow);
     setText('[data-content="solutions-title"]', content.solutionsIntro.title);
     setText('[data-content="podcast-eyebrow"]', content.podcast.eyebrow);
@@ -45,6 +50,7 @@
     setText('[data-content="media-eyebrow"]', content.media.eyebrow);
     setText('[data-content="media-title"]', content.media.title);
     setText('[data-content="media-body"]', content.media.body);
+    setText('[data-content="footer-body"]', content.footer.body);
     setText('[data-content="footer-title"]', content.footer.title);
     setText('[data-content="copyright"]', content.footer.copyright);
     setText('[data-content="primary-cta"]', content.cta.primary);
@@ -55,6 +61,19 @@
     setLink('[data-content="secondary-cta"]', content.cta.email);
     setLink('[data-content="contact-phone"]', content.cta.phone);
     setLink('[data-content="podcast-all"]', content.podcast.allEpisodesUrl);
+    decorateCtas();
+  }
+
+  function decorateCtas() {
+    $$('[data-content="primary-cta"]').forEach((node) => {
+      node.classList.add("btn-with-icon");
+      node.innerHTML = `<span>${content.cta.primary}</span><img src="${content.assets.icons.phone}" alt="" />`;
+    });
+
+    $$('[data-content="secondary-cta"]').forEach((node) => {
+      node.classList.add("btn-with-icon", "btn-with-icon-secondary");
+      node.innerHTML = `<span>${content.cta.secondary}</span><img src="${content.assets.icons.mail}" alt="" />`;
+    });
   }
 
   function renderNav() {
@@ -87,13 +106,31 @@
     heroMedia.prepend(video);
   }
 
+  function renderProjectsMedia() {
+    const projectsMedia = $("[data-projects-media]");
+    if (!projectsMedia || !content.assets.projectsVideo) return;
+
+    const video = document.createElement("video");
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute("aria-hidden", "true");
+
+    const source = document.createElement("source");
+    source.src = content.assets.projectsVideo;
+    source.type = "video/mp4";
+    video.append(source);
+    projectsMedia.prepend(video);
+  }
+
   function renderExpertise() {
     const list = $("[data-expertise-list]");
     list.innerHTML = content.expertise
       .map(
         (item) => `
           <article class="expertise-card" data-animate>
-            <span class="check-icon" aria-hidden="true"></span>
+            <img class="check-icon" src="${content.assets.icons.expertise}" alt="" loading="lazy" />
             <h3>${item.title}</h3>
             <p>${item.body}</p>
           </article>
@@ -109,15 +146,12 @@
         (item, index) => `
           <article class="solution-slide" data-solution-slide aria-label="${pad(index + 1)} מתוך ${pad(content.solutions.length)}">
             <div class="solution-visual" aria-hidden="true">
-              <img src="${content.assets.solutionImage}" alt="" loading="lazy" />
+              <img src="${content.assets.solutionImages[index % content.assets.solutionImages.length]}" alt="" loading="lazy" />
             </div>
             <div class="solution-content">
-              <span class="solution-label">${item.label}</span>
               <h3>${item.title}</h3>
+              ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
               <p>${item.body}</p>
-              <ul>
-                ${item.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}
-              </ul>
             </div>
           </article>
         `,
@@ -131,9 +165,9 @@
     const list = $("[data-stats-list]");
     list.innerHTML = content.stats
       .map(
-        (item) => `
+        (item, index) => `
           <article class="stat-card" data-animate>
-            <span class="stat-icon" aria-hidden="true"></span>
+            <img class="stat-icon" src="${content.assets.icons.stats[index % content.assets.icons.stats.length]}" alt="" loading="lazy" />
             <strong class="stat-value">${item.value}</strong>
             <p class="stat-label">${item.label}</p>
           </article>
@@ -146,8 +180,8 @@
     const list = $("[data-podcast-list]");
     list.innerHTML = content.podcast.items
       .map(
-        (item) => `
-          <a class="video-card" href="${item.url}" target="_blank" rel="noreferrer" data-animate>
+        (item, index) => `
+          <a class="video-card ${index === 0 ? "video-card-featured" : ""}" href="${item.url}" target="_blank" rel="noreferrer" data-animate>
             <span class="video-thumb">
               <img src="${content.assets.videoThumb}" alt="" loading="lazy" />
               <span class="play-button" aria-hidden="true">▶</span>
@@ -164,7 +198,7 @@
     list.innerHTML = content.media.items
       .map(
         (item) => `
-          <article class="media-card" data-animate>
+          <article class="media-card" style="--media-paper: url('${content.assets.mediaPaper}')" data-animate>
             <span class="media-source">${item.source}</span>
             <h3>${item.title}</h3>
             <p>${item.body}</p>
@@ -178,7 +212,13 @@
   function renderSocials() {
     const list = $("[data-social-links]");
     list.innerHTML = content.footer.socials
-      .map((item) => `<a href="${item.url}" target="_blank" rel="noreferrer" aria-label="${item.label}">${item.label.slice(0, 2)}</a>`)
+      .map(
+        (item) => `
+          <a href="${item.url}" target="_blank" rel="noreferrer" aria-label="${item.label}">
+            <img src="${content.assets.icons.socials[item.label]}" alt="" loading="lazy" />
+          </a>
+        `,
+      )
       .join("");
   }
 
@@ -253,8 +293,6 @@
     const track = $("[data-solutions-track]");
     const slides = $$("[data-solution-slide]", track);
     const current = $("[data-solution-current]");
-    const prev = $("[data-solution-prev]");
-    const next = $("[data-solution-next]");
     if (!track || !slides.length) return;
 
     let activeIndex = 0;
@@ -264,22 +302,13 @@
       current.textContent = pad(activeIndex + 1);
     };
 
-    const goTo = (index) => {
-      const slide = slides[Math.max(0, Math.min(slides.length - 1, index))];
-      slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-      setActive(index);
-    };
-
-    prev.addEventListener("click", () => goTo(activeIndex - 1));
-    next.addEventListener("click", () => goTo(activeIndex + 1));
-
     const updateFromScroll = () => {
       const trackRect = track.getBoundingClientRect();
-      const center = trackRect.left + trackRect.width / 2;
+      const center = trackRect.top + trackRect.height / 2;
       const nearest = slides.reduce(
         (best, slide, index) => {
           const rect = slide.getBoundingClientRect();
-          const distance = Math.abs(rect.left + rect.width / 2 - center);
+          const distance = Math.abs(rect.top + rect.height / 2 - center);
           return distance < best.distance ? { index, distance } : best;
         },
         { index: 0, distance: Infinity },
@@ -315,35 +344,8 @@
     });
   }
 
-  function setupFooterScale() {
-    const footer = $(".footer");
-    const bg = $("[data-footer-bg]");
-    if (!footer || !bg) return;
-
-    let raf = 0;
-    const update = () => {
-      const rect = footer.getBoundingClientRect();
-      const viewport = window.innerHeight || document.documentElement.clientHeight;
-      const visible = 1 - Math.min(1, Math.max(0, rect.top / viewport));
-      const leaving = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport));
-      const progress = Math.max(0, Math.min(1, visible - leaving * 0.35));
-      const scale = 0.68 + progress * 0.42;
-      bg.style.transform = `translateX(50%) scale(${scale.toFixed(3)})`;
-      raf = 0;
-    };
-
-    const requestUpdate = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    update();
-  }
-
   function setupKeyboardScroll() {
-    $$(".carousel, .solution-viewport").forEach((track) => {
+    $$(".carousel, .media-layout").forEach((track) => {
       track.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
@@ -351,12 +353,23 @@
         scrollByCard(track, direction);
       });
     });
+
+    const solutionTrack = $("[data-solutions-track]");
+    if (solutionTrack) {
+      solutionTrack.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+        event.preventDefault();
+        const direction = event.key === "ArrowDown" ? 1 : -1;
+        solutionTrack.scrollBy({ top: solutionTrack.clientHeight * direction, behavior: "smooth" });
+      });
+    }
   }
 
   function init() {
     hydrateStaticContent();
     renderNav();
     renderHeroMedia();
+    renderProjectsMedia();
     renderExpertise();
     renderSolutions();
     renderStats();
@@ -368,7 +381,6 @@
     setupRevealAnimations();
     setupSolutionSlider();
     setupCarousels();
-    setupFooterScale();
     setupKeyboardScroll();
   }
 
