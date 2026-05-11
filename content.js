@@ -5,28 +5,15 @@ window.PRO_ALGORITHM_CONTENT = {
       "בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל\"ן, האדריכלות וההנדסה.",
   },
   assets: {
-    logo: "assets/images/company logos/logo-main.png",
-    logoWhite: "assets/images/company logos/logo-main-white.png",
+    logo: "assets/images/company logos/MAIN-LOGO.png",
+    logoWhite: "assets/images/company logos/MAIN-LOGO white.png",
     heroFallback: "assets/images/fallback/hero-fallback.svg",
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     projectsVideo: "assets/videos/projects-background-video.mp4",
     expertiseScroll: "assets/images/background images/expertise-scroll-full.png",
     mediaPaper: "assets/images/background images/media-paper.png",
-    solutionImages: [
-      "assets/images/projects images/projects-image-1.png",
-      "assets/images/projects images/projects-image-2.png",
-      "assets/images/projects images/projects-image-3.png",
-      "assets/images/projects images/projects-image-4.png",
-      "assets/images/projects images/projects-image-5.png",
-    ],
-    videoThumb: "assets/images/fallback/video-thumb.svg",
     icons: {
       expertise: "assets/images/icons/icon-check-blue.png",
-      stats: [
-        "assets/images/icons/icon-building-blue.png",
-        "assets/images/icons/icon-briefcase-blue.png",
-        "assets/images/icons/icon-sketch-blue.png",
-      ],
       phone: "assets/images/icons/icon-phone-white.png",
       mail: "assets/images/icons/icon-mail-green.png",
       socials: {
@@ -39,14 +26,13 @@ window.PRO_ALGORITHM_CONTENT = {
   },
   nav: [
     { label: "מומחיות", target: "expertise" },
-    { label: "פתרונות", target: "solutions" },
-    { label: "פודקאסט", target: "podcast" },
-    { label: "תקשורת", target: "media" },
+    { label: "פרויקטים", target: "solutions" },
+    { label: "מרכז ידע", target: "podcast" },
   ],
   cta: {
     primary: "דברו עם מהנדס פתרונות",
     secondary: "שלחו לנו מייל",
-    contact: "צרו קשר",
+    contact: "← צרו קשר",
     email: "mailto:hello@pro-algorithm.example",
     phone: "tel:+972000000000",
   },
@@ -79,45 +65,45 @@ window.PRO_ALGORITHM_CONTENT = {
   },
   solutions: [
     {
-      label: "AI & GNN",
       title: "פיתוח מודלי AI ורשתות נוירונים (GNN) מותאמים אישית",
       body:
         "אנו מאפיינים ומאמנים מודלים מתקדמים מבוססי Graph Neural Networks, הנתפרים ספציפית ללוגיקת התכנון שלכם. הפיתוח מאפשר לבצע אוטומציה מלאה לשלבי הגמר – החל ממיקום חכם של דלתות ופתחים בודדים, ועד לפריסה מרחבית שלמה של מערכות מחיצות וקירות גבס.",
       bullets: ["AI & GNN", "אדריכלות פנים", "תכנון אוטונומי"],
+      image: "assets/images/projects images/projects-image-1.png",
     },
     {
-      label: "דאטה",
       title: "ארכיטקטורת תוכנה לבקרת שינויי דיירים",
       body:
         " אלגוריתמים המנתחים את בקשת הדייר אל מול שרטוט הסטנדרט, מפיקים רשימת שינויים מדויקת ומבצעים תמחור אוטומטי המקושר למחירונים שלכם. המערכת כוללת מנגנוני התראה חכמים לזיהוי שינויים בעייתיים (כמו הזזת קירות תומכים).",
       bullets: ["שינויי דיירים", "השוואת תוכניות", "בקרת עליות"],
+      image: "assets/images/projects images/projects-image-2.png",
     },
     {
-      label: "תכנון אוטונומי",
       title: "בקרת איכות קונסטרוקטיבית היברידית",
       body:
         "מנועי ולידציה המשלבים אלגוריתמים הנדסיים מורכבים יחד עם יכולות ניתוח של מודלי בינה מלאכותית. המערכת חורגת מהשוואה גרפית סטנדרטית – היא מבינה את ההקשר ההנדסי והסמנטי, מבצעת הצלבה חכמה בין תוכניות הקונסטרוקציה לשרטוטי הביצוע, ומזהה פערים לוגיים ופיזיים טרם הירידה לשטח.",
       bullets: ["בקרת איכות", "הנדסת מבנים", "ניהול סיכונים"],
+      image: "assets/images/projects images/projects-image-3.png",
     },
     {
-      label: "BIM",
       title: "אוטומציה ייעודית להמרת שרטוטים ורגולציה",
       body:
         "פיתוח תשתיות אוטומציה להמרה חכמה מ-Revit ל-AutoCAD, תוך התאמה קפדנית לדרישות הרגולציה ומשרד השיכון. המערכת מחלצת דאטה מתוך השרטוט ומפיקה דוחות מפורטים בצורה אוטומטית.",
       bullets: ["אוטומציה", "רגולציה", "המרת שרטוטים"],
+      image: "assets/images/projects images/projects-image-4.png",
     },
     {
-      label: "רגולציה",
       title: "טרנספורמציית BIM חכמה (DWG ל-Revit)",
       body:
         "מודלי Machine Learning לזיהוי אובייקטים הנדסיים. האלגוריתמים מנתחים שרטוטים דו-מימדיים, מזהים תבניות אדריכליות, ומתרגמים אותן בזמן אמת לאלמנטים תלת-מימדיים עשירים במידע בתוך סביבת BIM מתקדמת.",
       bullets: ["Machine Learning", "מודל BIM", "המרה חכמה"],
+      image: "assets/images/projects images/projects-image-5.png",
     }
   ],
   stats: [
-    { value: "24,000+", label: "שרטוטים אדריכליים שעברו תחת ידינו" },
-    { value: "8,000+", label: "בניינים שלקחנו חלק בתכנונם" },
-    { value: "+ 50,000 מ״ר", label: "קומות משרדים שתוכננו ומוטבו ב-AI" },
+    { value: "24,000+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
+    { value: "8,000+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
+    { value: "מ״ר 50,000+", title: "קומות משרדים", body: "שתוכננו ומוטבו ב-AI", icon: "assets/images/icons/icon-briefcase-blue.png", },
   ],
   podcast: {
     eyebrow: "פודקאסט",
@@ -125,30 +111,39 @@ window.PRO_ALGORITHM_CONTENT = {
     body:
       "שיחות עומק עם מנהלי הנדסה, אדריכלים ומפתחי AI על איפה הטכנולוגיה פוגשת את הבטון.",
     allEpisodes: "צפייה בכל הפרקים ביוטיוב",
-    allEpisodesUrl: "https://www.youtube.com/",
+    allEpisodesUrl: "https://www.youtube.com/@ProAlgorithm-israel/videos",
     items: [
       {
-        title: "פרק לדוגמה: AI, תכנון ונדל\"ן",
-        url: "https://www.youtube.com/",
+        title: "ד״ר הדס נור",
+        url: "https://www.youtube.com/watch?v=F7tHmD-HIbQ",
+        image: "assets/images/podcast thumbnails/podcast-5.png",
       },
       {
-        title: "פרק לדוגמה: אוטומציה בהנדסה",
-        url: "https://www.youtube.com/",
+        title: "הנושאים המשמעותיים ביותר בעולם הטכנולוגי של היום",
+        url: "https://www.youtube.com/watch?v=2r0zz-L6ZUc",
+        image: "assets/images/podcast thumbnails/podcast-4.png",
       },
       {
-        title: "פרק לדוגמה: עתיד BIM",
-        url: "https://www.youtube.com/",
+        title: "אבלינה שיימן",
+        url: "https://www.youtube.com/watch?v=HFRGA_S8ZmI",
+        image: "assets/images/podcast thumbnails/podcast-3.png",
       },
       {
-        title: "פרק לדוגמה: רגולציה חכמה",
-        url: "https://www.youtube.com/",
+        title: "עוז פלג",
+        url: "https://www.youtube.com/watch?v=XfDlYjLkM14",
+        image: "assets/images/podcast thumbnails/podcast-2.png",
+      },
+      {
+        title: "פרו אלגוריתם",
+        url: "https://www.youtube.com/watch?v=5ZjZ466ETAQ",
+        image: "assets/images/podcast thumbnails/podcast-1.png",
       },
     ],
   },
   media: {
     eyebrow: "תקשורת",
     title: "AI בעולם האדריכלות",
-    body: "8 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
+    body: "4 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
     items: [
       {
         source: "מדיה",
@@ -185,10 +180,10 @@ window.PRO_ALGORITHM_CONTENT = {
     body: "בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל\"ן, האדריכלות וההנדסה.",
     copyright: "© 2026 Pro Algorithm. All rights reserved.",
     socials: [
-      { label: "YouTube", url: "https://www.youtube.com/" },
-      { label: "Instagram", url: "https://www.instagram.com/" },
-      { label: "Facebook", url: "https://www.facebook.com/" },
-      { label: "LinkedIn", url: "https://www.linkedin.com/" },
+      { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },
+      { label: "Instagram", url: "https://www.instagram.com/pro.algorithm", icon: "fab fa-instagram" },
+      { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61579382173682", icon: "fab fa-facebook-f" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/company/pro-algorithm", icon: "fab fa-linkedin-in" },
     ],
   },
 };

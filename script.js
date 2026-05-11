@@ -35,18 +35,14 @@
     $$('[data-icon="phone"]').forEach((image) => {
       image.src = content.assets.icons.phone;
     });
-    // setText('[data-content="hero-eyebrow"]', content.hero.eyebrow);
     setText('[data-content="hero-title"]', content.hero.title);
     setText('[data-content="hero-body"]', content.hero.body);
-    // setText('[data-content="expertise-eyebrow"]', content.expertiseIntro.eyebrow);
-    // setText('[data-content="expertise-title"]', content.expertiseIntro.title);
-    // setText('[data-content="expertise-body"]', content.expertiseIntro.body);
     setText('[data-content="solutions-eyebrow"]', content.solutionsIntro.eyebrow);
     setText('[data-content="solutions-title"]', content.solutionsIntro.title);
     setText('[data-content="podcast-eyebrow"]', content.podcast.eyebrow);
     setText('[data-content="podcast-title"]', content.podcast.title);
     setText('[data-content="podcast-body"]', content.podcast.body);
-    setText('[data-content="podcast-all"]', `${content.podcast.allEpisodes} ←`);
+    setText('[data-content="podcast-all"]', `← ${content.podcast.allEpisodes}`);
     setText('[data-content="media-eyebrow"]', content.media.eyebrow);
     setText('[data-content="media-title"]', content.media.title);
     setText('[data-content="media-body"]', content.media.body);
@@ -146,11 +142,13 @@
         (item, index) => `
           <article class="solution-slide" data-solution-slide aria-label="${pad(index + 1)} מתוך ${pad(content.solutions.length)}">
             <div class="solution-visual" aria-hidden="true">
-              <img src="${content.assets.solutionImages[index % content.assets.solutionImages.length]}" alt="" loading="lazy" />
+              <img src="${item.image}" alt="" loading="lazy" />
             </div>
             <div class="solution-content">
               <h3>${item.title}</h3>
-              ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
+              <div class="solution-tags">
+                ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
+              </div>
               <p>${item.body}</p>
             </div>
           </article>
@@ -165,11 +163,12 @@
     const list = $("[data-stats-list]");
     list.innerHTML = content.stats
       .map(
-        (item, index) => `
+        (item) => `
           <article class="stat-card" data-animate>
-            <img class="stat-icon" src="${content.assets.icons.stats[index % content.assets.icons.stats.length]}" alt="" loading="lazy" />
+            <img class="stat-icon" src="${item.icon}" alt="" loading="lazy" />
             <strong class="stat-value">${item.value}</strong>
-            <p class="stat-label">${item.label}</p>
+            <h3 class="stat-title">${item.title}</h3>
+            <p class="stat-label">${item.body}</p>
           </article>
         `,
       )
@@ -178,19 +177,23 @@
 
   function renderPodcast() {
     const list = $("[data-podcast-list]");
-    list.innerHTML = content.podcast.items
-      .map(
-        (item, index) => `
-          <a class="video-card ${index === 0 ? "video-card-featured" : ""}" href="${item.url}" target="_blank" rel="noreferrer" data-animate>
+    const [featured, ...sideItems] = content.podcast.items;
+    const renderCard = (item, className = "") => `
+          <a class="video-card ${className}" href="${item.url}" target="_blank" rel="noreferrer" data-animate>
             <span class="video-thumb">
-              <img src="${content.assets.videoThumb}" alt="" loading="lazy" />
+              <img src="${item.image}" alt="" loading="lazy" />
               <span class="play-button" aria-hidden="true">▶</span>
             </span>
             <h3>${item.title}</h3>
           </a>
-        `,
-      )
-      .join("");
+        `;
+
+    list.innerHTML = `
+      ${renderCard(featured, "video-card-featured")}
+      <div class="video-side-list" aria-label="פרקים נוספים">
+        ${sideItems.map((item) => renderCard(item, "video-card-compact")).join("")}
+      </div>
+    `;
   }
 
   function renderMedia() {
