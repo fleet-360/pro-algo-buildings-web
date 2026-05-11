@@ -32,9 +32,6 @@
     $$("[data-logo-white]").forEach((image) => {
       image.src = content.assets.logoWhite;
     });
-    $$('[data-icon="phone"]').forEach((image) => {
-      image.src = content.assets.icons.phone;
-    });
     setText('[data-content="hero-title"]', content.hero.title);
     setText('[data-content="hero-body"]', content.hero.body);
     setText('[data-content="solutions-eyebrow"]', content.solutionsIntro.eyebrow);
@@ -57,19 +54,6 @@
     setLink('[data-content="secondary-cta"]', content.cta.email);
     setLink('[data-content="contact-phone"]', content.cta.phone);
     setLink('[data-content="podcast-all"]', content.podcast.allEpisodesUrl);
-    decorateCtas();
-  }
-
-  function decorateCtas() {
-    $$('[data-content="primary-cta"]').forEach((node) => {
-      node.classList.add("btn-with-icon");
-      node.innerHTML = `<span>${content.cta.primary}</span><img src="${content.assets.icons.phone}" alt="" />`;
-    });
-
-    $$('[data-content="secondary-cta"]').forEach((node) => {
-      node.classList.add("btn-with-icon", "btn-with-icon-secondary");
-      node.innerHTML = `<span>${content.cta.secondary}</span><img src="${content.assets.icons.mail}" alt="" />`;
-    });
   }
 
   function renderNav() {
@@ -184,7 +168,11 @@
               <img src="${item.image}" alt="" loading="lazy" />
               <span class="play-button" aria-hidden="true">▶</span>
             </span>
-            <h3>${item.title}</h3>
+            <span class="video-content">
+              <span class="video-info">${item.info}</span>
+              <span class="video-title">${item.title}</span>
+              <span class="video-body">${item.body}</span>
+            </span>
           </a>
         `;
 
@@ -218,7 +206,7 @@
       .map(
         (item) => `
           <a href="${item.url}" target="_blank" rel="noreferrer" aria-label="${item.label}">
-            <img src="${content.assets.icons.socials[item.label]}" alt="" loading="lazy" />
+            <i class="${item.icon}" aria-hidden="true"></i>
           </a>
         `,
       )

@@ -14,8 +14,6 @@ window.PRO_ALGORITHM_CONTENT = {
     mediaPaper: "assets/images/background images/media-paper.png",
     icons: {
       expertise: "assets/images/icons/icon-check-blue.png",
-      phone: "assets/images/icons/icon-phone-white.png",
-      mail: "assets/images/icons/icon-mail-green.png",
       socials: {
         YouTube: "assets/images/icons/icon-youtube-white.png",
         Instagram: "assets/images/icons/icon-instagram-white.png",
@@ -30,8 +28,8 @@ window.PRO_ALGORITHM_CONTENT = {
     { label: "מרכז ידע", target: "podcast" },
   ],
   cta: {
-    primary: "דברו עם מהנדס פתרונות",
-    secondary: "שלחו לנו מייל",
+    primary: "דברו עם מהנדס פתרונות ✆",
+    secondary: "שלחו לנו מייל ✉",
     contact: "← צרו קשר",
     email: "mailto:hello@pro-algorithm.example",
     phone: "tel:+972000000000",
@@ -101,9 +99,9 @@ window.PRO_ALGORITHM_CONTENT = {
     }
   ],
   stats: [
-    { value: "24,000+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
-    { value: "8,000+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
     { value: "מ״ר 50,000+", title: "קומות משרדים", body: "שתוכננו ומוטבו ב-AI", icon: "assets/images/icons/icon-briefcase-blue.png", },
+    { value: "8,000+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
+    { value: "24,000+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
   ],
   podcast: {
     eyebrow: "פודקאסט",
@@ -114,27 +112,37 @@ window.PRO_ALGORITHM_CONTENT = {
     allEpisodesUrl: "https://www.youtube.com/@ProAlgorithm-israel/videos",
     items: [
       {
-        title: "ד״ר הדס נור",
+        title: "איך הבינה המלאכותית משנה את כללי המשחק?",
+        body: "בפרק הזה אנחנו מארחים את ד״ר הדס נור – חוקרת את השינוי הגדול שמתרחש היום בעולם האדריכלות והעיצוב",
+        info: "פרק 5 | 20 ינואר 2026",
         url: "https://www.youtube.com/watch?v=F7tHmD-HIbQ",
         image: "assets/images/podcast thumbnails/podcast-5.png",
       },
       {
         title: "הנושאים המשמעותיים ביותר בעולם הטכנולוגי של היום",
+        body: "צח דבוש ונועד ג'ורנו נכנסים לעומקם של כמה מהנושאים המשמעותיים ביותר בעולם הטכנולוגי של היום",
+        info: "פרק 4 | 10 דצמבר 2025",
         url: "https://www.youtube.com/watch?v=2r0zz-L6ZUc",
         image: "assets/images/podcast thumbnails/podcast-4.png",
       },
       {
-        title: "אבלינה שיימן",
+        title: "מאחורי הקלעים של עולם המכירות והצמיחה",
+        body: "צח דבוש, CTO של פרו אלגוריתם, מארח את אבלינה שיימן, מנהלת השיווק והמכירות של החברה",
+        info: "פרק 3 | 9 דצמבר 2025",
         url: "https://www.youtube.com/watch?v=HFRGA_S8ZmI",
         image: "assets/images/podcast thumbnails/podcast-3.png",
       },
       {
-        title: "עוז פלג",
+        title: "עתיד הטכנולוגיה והעבודה",
+        body: "מה באמת הולך לקרות בעשור הקרוב? | נועד ג'ורנו × עוז פלג",
+        info: "פרק 2 | 7 דצמבר 2025",
         url: "https://www.youtube.com/watch?v=XfDlYjLkM14",
         image: "assets/images/podcast thumbnails/podcast-2.png",
       },
       {
-        title: "פרו אלגוריתם",
+        title: "בונים את הדיגיטל של ישראל",
+        body: "נועד ג'ורנו וצח דבוש מדברים על פרו אלגוריתם",
+        info: "פרק 1 | 20 נובמבר 2025",
         url: "https://www.youtube.com/watch?v=5ZjZ466ETAQ",
         image: "assets/images/podcast thumbnails/podcast-1.png",
       },
@@ -143,35 +151,28 @@ window.PRO_ALGORITHM_CONTENT = {
   media: {
     eyebrow: "תקשורת",
     title: "AI בעולם האדריכלות",
-    body: "4 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
+    body: "3 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
     items: [
       {
-        source: "מדיה",
+        source: "כלכליסט",
         title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
         body:
-          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI.",
-        url: "#",
+          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
+        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
       },
       {
-        source: "ראיון",
-        title: "איך אלגוריתמים משנים את שולחן התכנון",
+        source: "כלכליסט",
+        title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
         body:
-          "טקסט זמני לכתבה נוספת. החליפו בהמשך בלינק, לוגו מקור ותיאור מדויק.",
-        url: "#",
+          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
+        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
       },
       {
-        source: "כתבה",
-        title: "הדור הבא של תכנון מבוסס נתונים",
+        source: "כלכליסט",
+        title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
         body:
-          "טקסט זמני לכתבה נוספת. הכרטיסים נשארים גלילים במובייל ובדסקטופ.",
-        url: "#",
-      },
-      {
-        source: "סקירה",
-        title: "מ-AI למחסן הכלים של האדריכל",
-        body:
-          "טקסט זמני לכתבה נוספת. אפשר להוסיף עוד כרטיסים למערך הזה.",
-        url: "#",
+          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
+        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
       },
     ],
   },
