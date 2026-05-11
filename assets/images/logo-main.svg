@@ -1,0 +1,19 @@
+<svg width="420" height="78" viewBox="0 0 420 78" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Pro Algorithm</title>
+  <desc id="desc">Temporary Pro Algorithm logo placeholder.</desc>
+  <rect width="420" height="78" rx="18" fill="white"/>
+  <g fill="#000641">
+    <path d="M46 22h32c14 0 23 8 23 20s-9 20-23 20H62v-12h15c6 0 10-3 10-8s-4-8-10-8H60v28H46V22Z"/>
+    <path d="M109 22h43v12h-29v8h25v11h-25v9h30v12h-44V22Z"/>
+    <path d="M162 22h14v40h27v12h-41V22Z"/>
+    <path d="M210 22h14v52h-14V22Z"/>
+    <path d="M234 22h15l22 29V22h14v52h-14l-23-30v30h-14V22Z"/>
+    <path d="M297 22h43v12h-29v8h25v11h-25v9h30v12h-44V22Z"/>
+  </g>
+  <g fill="#4758F4">
+    <path d="M360 24h14v14h-14V24Z"/>
+    <path d="M379 40h14v14h-14V40Z"/>
+    <path d="M360 56h14v14h-14V56Z"/>
+  </g>
+  <text x="210" y="17" text-anchor="middle" font-family="Heebo, Arial, sans-serif" font-size="13" font-weight="800" fill="#4758F4">PRO ALGORITHM</text>
+</svg>

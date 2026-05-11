@@ -1,0 +1,29 @@
+<svg width="1920" height="980" viewBox="0 0 1920 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="980" fill="#0E174E"/>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7E7FF"/>
+      <stop offset="0.58" stop-color="#7186B8"/>
+      <stop offset="1" stop-color="#000641"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" x2="1920" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#243066"/>
+      <stop offset="0.5" stop-color="#5F6EA4"/>
+      <stop offset="1" stop-color="#18235E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="980" fill="url(#sky)"/>
+  <g opacity="0.72">
+    <rect x="0" y="420" width="1920" height="34" fill="url(#steel)"/>
+    <rect x="170" y="260" width="26" height="320" rx="8" fill="#1F2A62"/>
+    <rect x="830" y="230" width="28" height="365" rx="8" fill="#1F2A62"/>
+    <rect x="1460" y="278" width="28" height="300" rx="8" fill="#1F2A62"/>
+    <path d="M0 432L190 286L384 432L578 286L772 432L966 286L1160 432L1354 286L1548 432L1742 286L1920 420" stroke="#111A52" stroke-width="18" stroke-linejoin="round"/>
+    <path d="M0 432L190 578L384 432L578 578L772 432L966 578L1160 432L1354 578L1548 432L1742 578L1920 440" stroke="#111A52" stroke-width="18" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.35">
+    <rect x="0" y="620" width="1920" height="360" fill="#000641"/>
+    <circle cx="240" cy="760" r="150" fill="#4758F4"/>
+    <circle cx="1590" cy="690" r="220" fill="#28B8A0"/>
+  </g>
+</svg>

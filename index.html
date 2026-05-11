@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pro Algorithm landing page" />
+    <title>Pro Algorithm | נדל"ן ובנייה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="content.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">דלגו לתוכן</a>
+
+    <header class="site-header" data-animate>
+      <nav class="header-shell" aria-label="ניווט ראשי">
+        <a class="header-cta" data-content="contact-phone" href="#" aria-label="צרו קשר">
+          <span class="desktop-only">צרו קשר</span>
+          <span class="mobile-only" aria-hidden="true">☎</span>
+        </a>
+
+        <div class="header-links" data-nav-links></div>
+
+        <a class="brand" href="#hero" aria-label="Pro Algorithm">
+          <img data-logo src="assets/images/logo-main.svg" alt="Pro Algorithm" />
+          <span>נדל״ן ובנייה</span>
+        </a>
+
+        <button class="menu-toggle mobile-only" type="button" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">פתיחת תפריט</span>
+        </button>
+      </nav>
+
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden></div>
+    </header>
+
+    <main id="main">
+      <section class="hero section-dark" id="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true" data-hero-media></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-inner" data-animate>
+          <img class="hero-logo" data-logo src="assets/images/logo-main.svg" alt="Pro Algorithm" />
+          <article class="hero-card">
+            <p class="eyebrow" data-content="hero-eyebrow"></p>
+            <h1 id="hero-title" data-content="hero-title"></h1>
+            <p data-content="hero-body"></p>
+            <div class="button-row">
+              <a class="btn btn-primary" data-content="primary-cta" href="#footer"></a>
+              <a class="btn btn-ghost" data-content="secondary-cta" href="#footer"></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="מבוא" data-animate>
+        <div class="container intro-card">
+          <h2 data-content="expertise-title"></h2>
+          <p data-content="expertise-body"></p>
+        </div>
+      </section>
+
+      <section class="expertise" id="expertise" aria-labelledby="expertise-heading">
+        <div class="container section-heading" data-animate>
+          <p class="section-kicker" data-content="expertise-eyebrow"></p>
+          <h2 id="expertise-heading" data-content="expertise-title"></h2>
+        </div>
+        <div class="container expertise-stage" data-animate="scroll">
+          <div class="scroll-art" aria-hidden="true">
+            <span class="scroll-roll scroll-roll-start"></span>
+            <span class="scroll-paper"></span>
+            <span class="scroll-roll scroll-roll-end"></span>
+          </div>
+          <div class="expertise-grid" data-expertise-list></div>
+        </div>
+      </section>
+
+      <section class="solutions" id="solutions" aria-labelledby="solutions-heading">
+        <div class="container section-heading" data-animate>
+          <p class="section-kicker" data-content="solutions-eyebrow"></p>
+          <h2 id="solutions-heading" data-content="solutions-title"></h2>
+        </div>
+        <div class="container solutions-shell">
+          <div class="solution-viewport" data-solutions-track tabindex="0" aria-label="גלריית פתרונות"></div>
+          <div class="solution-controls" aria-label="ניווט פתרונות">
+            <button class="circle-btn" type="button" data-solution-prev aria-label="הפתרון הקודם">‹</button>
+            <div class="solution-count" aria-live="polite">
+              <span data-solution-current>01</span>
+              <span>/</span>
+              <span data-solution-total>05</span>
+            </div>
+            <button class="circle-btn" type="button" data-solution-next aria-label="הפתרון הבא">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="נתונים" data-animate>
+        <div class="container stats-grid" data-stats-list></div>
+      </section>
+
+      <section class="podcast" id="podcast" aria-labelledby="podcast-heading">
+        <div class="container section-heading" data-animate>
+          <p class="section-kicker" data-content="podcast-eyebrow"></p>
+          <h2 id="podcast-heading" data-content="podcast-title"></h2>
+          <p data-content="podcast-body"></p>
+        </div>
+        <div class="container carousel-block">
+          <div class="carousel" data-podcast-list tabindex="0" aria-label="סרטוני יוטיוב"></div>
+          <div class="carousel-actions">
+            <button class="circle-btn" type="button" data-scroll-prev="podcast" aria-label="גלילה ימינה">‹</button>
+            <a class="btn btn-primary" data-content="podcast-all" href="#" target="_blank" rel="noreferrer"></a>
+            <button class="circle-btn" type="button" data-scroll-next="podcast" aria-label="גלילה שמאלה">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="media" id="media" aria-labelledby="media-heading">
+        <div class="container section-heading" data-animate>
+          <p class="section-kicker" data-content="media-eyebrow"></p>
+          <h2 id="media-heading" data-content="media-title"></h2>
+          <p data-content="media-body"></p>
+        </div>
+        <div class="container carousel-block">
+          <div class="carousel recommendations" data-media-list tabindex="0" aria-label="המלצות ותקשורת"></div>
+          <div class="carousel-actions">
+            <button class="circle-btn" type="button" data-scroll-prev="media" aria-label="גלילה ימינה">‹</button>
+            <button class="circle-btn" type="button" data-scroll-next="media" aria-label="גלילה שמאלה">›</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="footer">
+      <div class="footer-bg" aria-hidden="true" data-footer-bg></div>
+      <div class="container footer-inner" data-animate>
+        <img class="footer-logo" data-logo src="assets/images/logo-main.svg" alt="Pro Algorithm" />
+        <h2 data-content="footer-title"></h2>
+        <div class="button-row">
+          <a class="btn btn-primary" data-content="primary-cta" href="#"></a>
+          <a class="btn btn-outline" data-content="secondary-cta" href="#"></a>
+        </div>
+        <div class="footer-bottom">
+          <div class="socials" data-social-links></div>
+          <p data-content="copyright"></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
