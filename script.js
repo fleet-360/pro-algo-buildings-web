@@ -4,7 +4,6 @@
     url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
     // url: "http://127.0.0.1:8181/contact/buildings",
   };
-  let contactApiKeyPromise;
 
   if (!content) {
     throw new Error("Missing PRO_ALGORITHM_CONTENT. Load content.js before script.js.");
@@ -357,23 +356,6 @@
     }
   }
 
-  async function getContactApiKey() {
-    if (!contactApiKeyPromise) {
-      contactApiKeyPromise = fetch(".env", { cache: "no-store" })
-        .then((response) => {
-          if (!response.ok) throw new Error("Missing .env file");
-          return response.text();
-        })
-        .then((envText) => {
-          const match = envText.match(/^\s*CONTACT_API_KEY\s*=\s*["']?([^"'\r\n]+)["']?\s*$/m);
-          if (!match) throw new Error("Missing CONTACT_API_KEY in .env");
-          return match[1].trim();
-        });
-    }
-
-    return contactApiKeyPromise;
-  }
-
   function initContactForm() {
     const form = $("#contactForm");
     if (!form) return;
@@ -395,12 +377,10 @@
       };
 
       try {
-        const contactApiKey = await getContactApiKey();
         const response = await fetch(CONTACT_API.url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-contact-key": contactApiKey,
           },
           body: JSON.stringify(payload),
         });
