@@ -1,8 +1,8 @@
 (function () {
   const content = window.PRO_ALGORITHM_CONTENT;
   const CONTACT_API = {
-    // url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
-    url: "http://127.0.0.1:8181/contact/buildings",
+    url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
+    // url: "http://127.0.0.1:8181/contact/buildings",
   };
   let contactApiKeyPromise;
 
@@ -111,7 +111,7 @@
       .map(
         (item) => `
           <article class="expertise-card" data-animate>
-            <img class="check-icon" src="${content.assets.icons.expertise}" alt="" loading="lazy" />
+            <h1>🗹</h1>
             <h3>${item.title}</h3>
             <p>${item.body}</p>
           </article>

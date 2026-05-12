@@ -11,7 +11,7 @@ window.PRO_ALGORITHM_CONTENT = {
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     projectsVideo: "assets/videos/projects-background-video.mp4",
     expertiseScroll: "assets/images/background images/expertise-scroll-full.png",
-    mediaPaper: "assets/images/background images/media-paper-white.png",
+    mediaPaper: "assets/images/background images/media-paper-new.png",
     icons: {
       expertise: "assets/images/icons/icon-check-blue.png",
       socials: {
