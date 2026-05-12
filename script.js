@@ -1,5 +1,10 @@
 (function () {
   const content = window.PRO_ALGORITHM_CONTENT;
+  const CONTACT_API = {
+    // url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
+    url: "http://localhost:8181/contact/buildings",
+  };
+  let contactApiKeyPromise;
 
   if (!content) {
     throw new Error("Missing PRO_ALGORITHM_CONTENT. Load content.js before script.js.");
@@ -46,13 +51,9 @@
     setText('[data-content="footer-body"]', content.footer.body);
     setText('[data-content="footer-title"]', content.footer.title);
     setText('[data-content="copyright"]', content.footer.copyright);
-    setText('[data-content="primary-cta"]', content.cta.primary);
-    setText('[data-content="secondary-cta"]', content.cta.secondary);
     setText('[data-content="contact-phone"] .desktop-only', content.cta.contact);
 
-    setLink('[data-content="primary-cta"]', content.cta.phone);
-    setLink('[data-content="secondary-cta"]', content.cta.email);
-    setLink('[data-content="contact-phone"]', content.cta.phone);
+    setLink('[data-content="contact-phone"]', "#contact");
     setLink('[data-content="podcast-all"]', content.podcast.allEpisodesUrl);
   }
 
@@ -356,6 +357,78 @@
     }
   }
 
+  async function getContactApiKey() {
+    if (!contactApiKeyPromise) {
+      contactApiKeyPromise = fetch(".env", { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) throw new Error("Missing .env file");
+          return response.text();
+        })
+        .then((envText) => {
+          const match = envText.match(/^\s*CONTACT_API_KEY\s*=\s*["']?([^"'\r\n]+)["']?\s*$/m);
+          if (!match) throw new Error("Missing CONTACT_API_KEY in .env");
+          return match[1].trim();
+        });
+    }
+
+    return contactApiKeyPromise;
+  }
+
+  function initContactForm() {
+    const form = $("#contactForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const button = form.querySelector('button[type="submit"]');
+      const originalHtml = button.innerHTML;
+      const isEnglish = document.documentElement.lang === "en";
+
+      button.textContent = isEnglish ? "Sending..." : "שולח...";
+      button.disabled = true;
+
+      const payload = {
+        name: form.querySelector('[name="name"]').value.trim(),
+        phone: form.querySelector('[name="phone"]').value.trim(),
+        email: form.querySelector('[name="email"]').value.trim(),
+      };
+
+      try {
+        const contactApiKey = await getContactApiKey();
+        const response = await fetch(CONTACT_API.url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-contact-key": contactApiKey,
+          },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const fallback = isEnglish ? "Something went wrong" : "משהו השתבש";
+          throw new Error(data?.message || fallback);
+        }
+
+        button.textContent = isEnglish ? "Sent!" : "נשלח!";
+        button.classList.add("is-success");
+
+        window.setTimeout(() => {
+          form.reset();
+          button.innerHTML = originalHtml;
+          button.disabled = false;
+          button.classList.remove("is-success");
+        }, 2000);
+      } catch (error) {
+        button.innerHTML = originalHtml;
+        button.disabled = false;
+        button.classList.remove("is-success");
+        alert(error.message);
+      }
+    });
+  }
+
   function init() {
     hydrateStaticContent();
     renderNav();
@@ -373,6 +446,7 @@
     setupSolutionSlider();
     setupCarousels();
     setupKeyboardScroll();
+    initContactForm();
   }
 
   if (document.readyState === "loading") {

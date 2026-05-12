@@ -131,9 +131,25 @@
       <div class="container footer-inner" data-animate>
         <img class="footer-logo" data-logo-white src="assets/images/company logos/MAIN-LOGO white.png" alt="Pro Algorithm" />
         <h2 data-content="footer-title"></h2>
-        <div class="button-row">
-          <a class="btn btn-primary" data-content="primary-cta" href="#"></a>
-          <a class="btn btn-outline" data-content="secondary-cta" href="#"></a>
+        <div class="contact-form-wrap" id="contact">
+          <form class="contact-form-inline" id="contactForm" data-contact-form>
+            <div class="form-group">
+              <input type="text" id="contact-name" name="name" required placeholder=" " autocomplete="name" />
+              <label for="contact-name">שם מלא</label>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="contact-phone" name="phone" required placeholder=" " autocomplete="tel" />
+              <label for="contact-phone">טלפון</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="contact-email" name="email" required placeholder=" " autocomplete="email" />
+              <label for="contact-email">אימייל</label>
+            </div>
+            <button type="submit" class="btn btn-submit">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              <span>שלח פרטים</span>
+            </button>
+          </form>
         </div>
         <div class="footer-bottom">
           <div class="footer-brand-left">

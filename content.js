@@ -11,7 +11,7 @@ window.PRO_ALGORITHM_CONTENT = {
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     projectsVideo: "assets/videos/projects-background-video.mp4",
     expertiseScroll: "assets/images/background images/expertise-scroll-full.png",
-    mediaPaper: "assets/images/background images/media-paper.png",
+    mediaPaper: "assets/images/background images/media-paper-white.png",
     icons: {
       expertise: "assets/images/icons/icon-check-blue.png",
       socials: {
@@ -154,11 +154,11 @@ window.PRO_ALGORITHM_CONTENT = {
     body: "3 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
     items: [
       {
-        source: "כלכליסט",
-        title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
+        source: "Biz",
+        title: "ה-AI משנה את עולם האדריכלות",
         body:
-          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
-        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
+          "״פעם היה צריך 3-4 אנשים על פרויקט היום צריך אחד-שניים״",
+        url: "https://www.bizportal.co.il/career/news/article/20022741",
       },
       {
         source: "כלכליסט",
@@ -168,11 +168,11 @@ window.PRO_ALGORITHM_CONTENT = {
         url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
       },
       {
-        source: "כלכליסט",
-        title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
+        source: "Deloitte",
+        title: "כיצד Gen-AI עתיד לחולל מהפכה בעולם הנדל\"ן?",
         body:
-          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
-        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
+          "כיצד סוכנים חכמים מניעים חדשנות, אוטומציה ויעילות חסרת תקדים במגזרי הנדל\"ן המניב והפרטי.",
+        url: "https://www.deloitte.com/il/he/what-we-do/Own-Tomorrow-With-Deloitte/articles/The-building-block-of-the-future.html",
       },
     ],
   },
