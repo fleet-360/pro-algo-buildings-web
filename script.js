@@ -2,7 +2,7 @@
   const content = window.PRO_ALGORITHM_CONTENT;
   const CONTACT_API = {
     // url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
-    url: "http://localhost:8181/contact/buildings",
+    url: "http://127.0.0.1:8181/contact/buildings",
   };
   let contactApiKeyPromise;
 
