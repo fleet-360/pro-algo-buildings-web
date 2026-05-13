@@ -11,7 +11,7 @@ window.PRO_ALGORITHM_CONTENT = {
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     projectsVideo: "assets/videos/projects-background-video.mp4",
     expertiseScroll: "assets/images/background images/expertise-scroll-full.png",
-    mediaPaper: "assets/images/background images/media-paper-new.png",
+    mediaPaper: "assets/images/background images/media-paper.png",
     icons: {
       expertise: "assets/images/icons/icon-check-blue.png",
       socials: {
@@ -99,9 +99,9 @@ window.PRO_ALGORITHM_CONTENT = {
     }
   ],
   stats: [
-    { value: "מ״ר 50,000+", title: "קומות משרדים", body: "שתוכננו ומוטבו ב-AI", icon: "assets/images/icons/icon-briefcase-blue.png", },
-    { value: "8,000+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
-    { value: "24,000+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
+    { value: "50000", suffix: "+ מ״ר", title: "קומות משרדים", body: "שתוכננו ומוטבו ב-AI", icon: "assets/images/icons/icon-briefcase-blue.png", },
+    { value: "8000", suffix: "+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
+    { value: "24000", suffix: "+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
   ],
   podcast: {
     eyebrow: "פודקאסט",
@@ -155,6 +155,7 @@ window.PRO_ALGORITHM_CONTENT = {
     items: [
       {
         source: "Biz",
+        logo: "assets/images/media logos/biz.png",
         title: "ה-AI משנה את עולם האדריכלות",
         body:
           "״פעם היה צריך 3-4 אנשים על פרויקט היום צריך אחד-שניים״",
@@ -162,6 +163,7 @@ window.PRO_ALGORITHM_CONTENT = {
       },
       {
         source: "כלכליסט",
+        logo: "assets/images/media logos/calcalist.png",
         title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
         body:
           "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב.",
@@ -169,6 +171,7 @@ window.PRO_ALGORITHM_CONTENT = {
       },
       {
         source: "Deloitte",
+        logo: "assets/images/media logos/Deloitte.png",
         title: "כיצד Gen-AI עתיד לחולל מהפכה בעולם הנדל\"ן?",
         body:
           "כיצד סוכנים חכמים מניעים חדשנות, אוטומציה ויעילות חסרת תקדים במגזרי הנדל\"ן המניב והפרטי.",

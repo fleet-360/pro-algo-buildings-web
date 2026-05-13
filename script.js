@@ -150,7 +150,10 @@
         (item) => `
           <article class="stat-card" data-animate>
             <img class="stat-icon" src="${item.icon}" alt="" loading="lazy" />
-            <strong class="stat-value">${item.value}</strong>
+            <strong class="stat-value">
+              <span class="stat-number" data-target="${item.value}">0</span>
+              <span class="stat-suffix">${item.suffix ? ` ${item.suffix}` : ""}</span>
+            </strong>
             <h3 class="stat-title">${item.title}</h3>
             <p class="stat-label">${item.body}</p>
           </article>
@@ -190,7 +193,7 @@
       .map(
         (item) => `
           <article class="media-card" style="--media-paper: url('${content.assets.mediaPaper}')" data-animate>
-            <span class="media-source">${item.source}</span>
+            <img class="media-logo" src="${item.logo}" alt="${item.source}" loading="lazy" />
             <h3>${item.title}</h3>
             <p>${item.body}</p>
             <a href="${item.url}">לכתבה המלאה ←</a>
@@ -290,7 +293,7 @@
 
     const setActive = (index) => {
       activeIndex = Math.max(0, Math.min(slides.length - 1, index));
-      current.textContent = pad(activeIndex + 1);
+      current.textContent = activeIndex + 1;
     };
 
     const updateFromScroll = () => {
@@ -356,6 +359,54 @@
     }
   }
 
+  function initCounters() {
+    const counters = $$(".stat-number");
+    const statsSection = $(".stats");
+    if (!counters.length || !statsSection) return;
+
+    let hasAnimated = false;
+
+    const animateCounter = (counter) => {
+      const target = parseInt(counter.dataset.target, 10) || 0;
+      const duration = 2000;
+      const startTime = performance.now();
+
+      const easeOutExpo = (progress) => (progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress));
+
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(easeOutExpo(progress) * target);
+
+        counter.textContent = current.toLocaleString();
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target.toLocaleString();
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
+    };
+
+    const animateCounters = () => {
+      if (hasAnimated) return;
+
+      const rect = statsSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
+        hasAnimated = true;
+        counters.forEach(animateCounter);
+        window.removeEventListener("scroll", animateCounters);
+      }
+    };
+
+    window.addEventListener("scroll", animateCounters, { passive: true });
+    animateCounters();
+  }
+
   function initContactForm() {
     const form = $("#contactForm");
     if (!form) return;
@@ -417,6 +468,7 @@
     renderExpertise();
     renderSolutions();
     renderStats();
+    initCounters();
     renderPodcast();
     renderMedia();
     renderSocials();
