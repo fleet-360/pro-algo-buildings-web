@@ -115,17 +115,26 @@
 
   function renderExpertise() {
     const list = $("[data-expertise-list]");
+    const checkIcon = content.assets.icons.expertise;
     list.innerHTML = content.expertise
       .map(
         (item) => `
           <article class="expertise-card" data-animate>
-            <h1>🗹</h1>
+            <img class="check-icon" src="${checkIcon}" alt="" aria-hidden="true" loading="lazy" />
             <h3>${item.title}</h3>
             <p>${item.body}</p>
           </article>
         `,
       )
       .join("");
+
+    const stage = $(".expertise-stage");
+    if (stage && content.assets.expertiseScrollSide) {
+      stage.style.setProperty(
+        "--expertise-scroll-mobile",
+        `url("${content.assets.expertiseScrollSide}")`,
+      );
+    }
   }
 
   function renderSolutions() {
@@ -142,8 +151,8 @@
               <div class="solution-tags">
                 ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
               </div>
-              <button type="button" class="solution-toggle btn btn-ghost mobile-only" aria-expanded="false">
-                ${content.solutionsIntro.readMore || "קראו עוד"}
+              <button type="button" class="solution-toggle" aria-expanded="false">
+                ${content.solutionsIntro.readMore || "קראו עוד← "}
               </button>
               <p class="solution-body">${item.body}</p>
             </div>
@@ -353,6 +362,54 @@
     });
   }
 
+  function setupMobileSolutionViewport() {
+    const track = $("[data-solutions-track]");
+    if (!track) return;
+
+    const mq = window.matchMedia("(max-width: 1024px)");
+
+    const sync = () => {
+      if (!mq.matches) {
+        track.style.removeProperty("--solution-mobile-height");
+        return;
+      }
+
+      const slides = $$("[data-solution-slide]", track);
+      if (!slides.length) return;
+
+      const openStates = slides.map((slide) => {
+        const body = slide.querySelector(".solution-body");
+        const wasOpen = body?.classList.contains("is-open");
+        if (body) body.classList.remove("is-open");
+        return { body, wasOpen };
+      });
+
+      track.classList.add("is-measuring");
+      const maxHeight = Math.max(
+        ...slides.map((slide) => slide.scrollHeight),
+        0,
+      );
+      track.classList.remove("is-measuring");
+
+      openStates.forEach(({ body, wasOpen }) => {
+        if (body && wasOpen) body.classList.add("is-open");
+      });
+
+      if (maxHeight > 0) {
+        track.style.setProperty("--solution-mobile-height", `${Math.ceil(maxHeight)}px`);
+      }
+    };
+
+    sync();
+
+    window.addEventListener("resize", sync, { passive: true });
+
+    track.querySelectorAll(".solution-visual img").forEach((image) => {
+      if (image.complete) return;
+      image.addEventListener("load", sync, { once: true });
+    });
+  }
+
   function setupSolutionSlider() {
     const track = $("[data-solutions-track]");
     const slides = $$("[data-solution-slide]", track);
@@ -558,6 +615,7 @@
     renderExpertise();
     renderSolutions();
     setupSolutionToggles();
+    setupMobileSolutionViewport();
     renderStats();
     initCounters();
     renderCustomers();

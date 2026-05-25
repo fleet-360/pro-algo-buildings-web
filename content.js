@@ -12,9 +12,10 @@ window.PRO_ALGORITHM_CONTENT = {
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     projectsVideo: "assets/videos/projects-background-video.mp4",
     expertiseScroll: "assets/images/background images/expertise-scroll-full.png",
+    expertiseScrollSide: "assets/images/background images/expertise-scroll-side.png",
     mediaPaper: "assets/images/background images/media-paper.png",
     icons: {
-      expertise: "assets/images/icons/icon-check-blue.png",
+      expertise: "assets/images/icons/icon-checkbox.png",
       socials: {
         YouTube: "assets/images/icons/icon-youtube-white.png",
         Instagram: "assets/images/icons/icon-instagram-white.png",
@@ -25,7 +26,7 @@ window.PRO_ALGORITHM_CONTENT = {
   },
   nav: [
     { label: "מומחיות", target: "expertise" },
-    { label: "פרויקטים", target: "solutions" },
+    { label: "פרויקטים", target: "solutions-intro" },
     { label: "מרכז ידע", target: "podcast" },
   ],
   cta: {
@@ -61,7 +62,7 @@ window.PRO_ALGORITHM_CONTENT = {
   solutionsIntro: {
     eyebrow: "הפתרונות שלנו:",
     title: "חזית הטכנולוגיה בעולם הבנייה",
-    readMore: "קראו עוד",
+    readMore: "קראו עוד← ",
     hideText: "הסתר טקסט",
   },
   solutions: [
