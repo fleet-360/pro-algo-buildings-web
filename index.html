@@ -21,13 +21,22 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div class="splash" id="splash" aria-hidden="true" hidden>
+      <div class="splash-inner">
+        <div class="splash-logo-wrap" aria-hidden="true">
+          <img class="splash-logo splash-logo-full" data-splash-logo src="" alt="" />
+          <img class="splash-logo splash-logo-icon" data-splash-icon src="" alt="" />
+        </div>
+      </div>
+    </div>
+
     <a class="skip-link" href="#main">דלגו לתוכן</a>
 
     <header class="site-header" data-animate>
       <nav class="header-shell" aria-label="ניווט ראשי">
         <a class="header-cta" data-content="contact-phone" href="#" aria-label="צרו קשר">
           <span class="desktop-only">צרו קשר</span>
-          <span class="mobile-only">צרו קשר</span>
+          <i class="fas fa-phone mobile-only" aria-hidden="true"></i>
         </a>
 
         <div class="header-links" data-nav-links></div>
@@ -79,7 +88,7 @@
       </section>
 
       <section class="solutions" id="solutions" aria-label="פתרונות">
-        <div class="container solutions-shell">
+        <div class="solutions-shell">
           <div class="solutions-media" data-projects-media aria-hidden="true"></div>
           <div class="solution-viewport" data-solutions-track tabindex="0" aria-label="גלריית פתרונות"></div>
           <div class="solution-controls" aria-label="ניווט פתרונות">
@@ -94,6 +103,16 @@
 
       <section class="stats" aria-label="נתונים" data-animate>
         <div class="container stats-grid" data-stats-list></div>
+      </section>
+
+      <section class="customers" id="customers" aria-labelledby="customers-heading">
+        <div class="container section-heading" data-animate>
+          <p class="section-kicker" data-content="customers-eyebrow"></p>
+          <h2 id="customers-heading" data-content="customers-title"></h2>
+        </div>
+        <div class="container customers-stage" data-animate>
+          <div class="customers-grid" data-customers-list></div>
+        </div>
       </section>
 
       <section class="podcast" id="podcast" aria-labelledby="podcast-heading">

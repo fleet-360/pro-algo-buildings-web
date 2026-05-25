@@ -40,6 +40,8 @@
     setText('[data-content="hero-body"]', content.hero.body);
     setText('[data-content="solutions-eyebrow"]', content.solutionsIntro.eyebrow);
     setText('[data-content="solutions-title"]', content.solutionsIntro.title);
+    setText('[data-content="customers-eyebrow"]', content.customers.eyebrow);
+    setText('[data-content="customers-title"]', content.customers.title);
     setText('[data-content="podcast-eyebrow"]', content.podcast.eyebrow);
     setText('[data-content="podcast-title"]', content.podcast.title);
     setText('[data-content="podcast-body"]', content.podcast.body);
@@ -76,8 +78,15 @@
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
-    video.poster = content.assets.heroFallback;
+    video.preload = "auto";
     video.setAttribute("aria-hidden", "true");
+
+    const markReady = () => {
+      heroMedia.classList.add("is-video-ready");
+    };
+
+    video.addEventListener("loadeddata", markReady, { once: true });
+    video.addEventListener("canplay", markReady, { once: true });
 
     const source = document.createElement("source");
     source.src = content.assets.heroVideo;
@@ -133,7 +142,10 @@
               <div class="solution-tags">
                 ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
               </div>
-              <p>${item.body}</p>
+              <button type="button" class="solution-toggle btn btn-ghost mobile-only" aria-expanded="false">
+                ${content.solutionsIntro.readMore || "קראו עוד"}
+              </button>
+              <p class="solution-body">${item.body}</p>
             </div>
           </article>
         `,
@@ -162,14 +174,33 @@
       .join("");
   }
 
+  function renderCustomers() {
+    const list = $("[data-customers-list]");
+    if (!list || !content.customers?.images?.length) return;
+
+    list.innerHTML = content.customers.images
+      .map(
+        (src) => `
+          <article class="customer-card" data-animate>
+            <img src="${src}" alt="" loading="lazy" />
+          </article>
+        `,
+      )
+      .join("");
+  }
+
   function renderPodcast() {
     const list = $("[data-podcast-list]");
     const [featured, ...sideItems] = content.podcast.items;
+    const durationBadge = (length) =>
+      length ? `<span class="video-duration">${length}</span>` : "";
+
     const renderCard = (item, className = "") => `
           <a class="video-card ${className}" href="${item.url}" target="_blank" rel="noreferrer" data-animate>
             <span class="video-thumb">
               <img src="${item.image}" alt="" loading="lazy" />
               <span class="play-button" aria-hidden="true">▶</span>
+              ${durationBadge(item.length)}
             </span>
             <span class="video-content">
               <span class="video-info">${item.info}</span>
@@ -216,25 +247,47 @@
       .join("");
   }
 
-  function setupRevealAnimations() {
-    const animated = $$("[data-animate]");
-    if (!("IntersectionObserver" in window)) {
-      animated.forEach((node) => node.classList.add("is-visible"));
+  function setupSplashScreen() {
+    const splash = $("#splash");
+    if (!splash) return;
+
+    const storageKey = "pro-algorithm-splash-seen";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (sessionStorage.getItem(storageKey)) {
+      splash.remove();
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          if (entry.target.dataset.animate === "scroll") observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" },
-    );
+    const logo = $("[data-splash-logo]");
+    const icon = $("[data-splash-icon]");
+    if (logo) {
+      logo.src = content.assets.logo;
+      logo.alt = "Pro Algorithm";
+    }
+    if (icon) {
+      icon.src = content.assets.logoIcon || content.assets.logoWhite;
+      icon.alt = "Pro Algorithm";
+    }
 
-    animated.forEach((node) => observer.observe(node));
+    splash.hidden = false;
+    splash.setAttribute("aria-hidden", "false");
+    document.body.classList.add("splash-active");
+
+    const revealDuration = reducedMotion ? 0 : 1350;
+    const holdDuration = reducedMotion ? 250 : 650;
+    const exitDuration = 520;
+
+    window.setTimeout(() => {
+      splash.classList.add("is-exiting");
+      splash.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("splash-active");
+      sessionStorage.setItem(storageKey, "1");
+
+      window.setTimeout(() => {
+        splash.remove();
+      }, exitDuration);
+    }, revealDuration + holdDuration);
   }
 
   function setupSmoothNav() {
@@ -283,17 +336,32 @@
     track.scrollBy({ left: distance * direction, behavior: "smooth" });
   }
 
+  function setupSolutionToggles() {
+    const readMore = content.solutionsIntro.readMore || "קראו עוד";
+    const hideText = content.solutionsIntro.hideText || "הסתר טקסט";
+
+    $$(".solution-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        const slide = button.closest("[data-solution-slide]");
+        const body = slide?.querySelector(".solution-body");
+        if (!body) return;
+
+        const isOpen = body.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", String(isOpen));
+        button.textContent = isOpen ? hideText : readMore;
+      });
+    });
+  }
+
   function setupSolutionSlider() {
     const track = $("[data-solutions-track]");
     const slides = $$("[data-solution-slide]", track);
     const current = $("[data-solution-current]");
     if (!track || !slides.length) return;
 
-    let activeIndex = 0;
-
     const setActive = (index) => {
-      activeIndex = Math.max(0, Math.min(slides.length - 1, index));
-      current.textContent = activeIndex + 1;
+      const safeIndex = Math.max(0, Math.min(slides.length - 1, index));
+      if (current) current.textContent = pad(safeIndex + 1);
     };
 
     const updateFromScroll = () => {
@@ -321,6 +389,27 @@
     );
 
     setActive(0);
+  }
+
+  function setupRevealAnimations() {
+    const animated = $$("[data-animate]");
+    if (!("IntersectionObserver" in window)) {
+      animated.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          if (entry.target.dataset.animate === "scroll") observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    animated.forEach((node) => observer.observe(node));
   }
 
   function setupCarousels() {
@@ -461,14 +550,17 @@
   }
 
   function init() {
+    setupSplashScreen();
     hydrateStaticContent();
     renderNav();
     renderHeroMedia();
     renderProjectsMedia();
     renderExpertise();
     renderSolutions();
+    setupSolutionToggles();
     renderStats();
     initCounters();
+    renderCustomers();
     renderPodcast();
     renderMedia();
     renderSocials();
