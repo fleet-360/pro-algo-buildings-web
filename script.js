@@ -271,7 +271,7 @@
     const logo = $("[data-splash-logo]");
     const icon = $("[data-splash-icon]");
     if (logo) {
-      logo.src = content.assets.logo;
+      logo.src = content.assets.logoWhite;
       logo.alt = "Pro Algorithm";
     }
     if (icon) {
