@@ -52,6 +52,7 @@
     setText('[data-content="footer-body"]', content.footer.body);
     setText('[data-content="footer-title"]', content.footer.title);
     setText('[data-content="copyright"]', content.footer.copyright);
+    setText('[data-content="contact-success"]', content.contact?.successMessage);
     setText('[data-content="contact-phone"] .desktop-only', content.cta.contact);
 
     setLink('[data-content="contact-phone"]', "#contact");
@@ -73,26 +74,67 @@
     const heroMedia = $("[data-hero-media]");
     if (!heroMedia || !content.assets.heroVideo) return;
 
-    const video = document.createElement("video");
-    video.autoplay = true;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.setAttribute("aria-hidden", "true");
-
     const markReady = () => {
       heroMedia.classList.add("is-video-ready");
     };
 
-    video.addEventListener("loadeddata", markReady, { once: true });
-    video.addEventListener("canplay", markReady, { once: true });
+    const createHeroVideo = (src, className) => {
+      const video = document.createElement("video");
+      video.className = className;
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = "auto";
+      video.setAttribute("aria-hidden", "true");
 
-    const source = document.createElement("source");
-    source.src = content.assets.heroVideo;
-    source.type = "video/mp4";
-    video.append(source);
-    heroMedia.prepend(video);
+      video.addEventListener("loadeddata", markReady, { once: true });
+      video.addEventListener("canplay", markReady, { once: true });
+
+      const source = document.createElement("source");
+      source.src = src;
+      source.type = "video/mp4";
+      video.append(source);
+      return video;
+    };
+
+    const desktopVideo = createHeroVideo(
+      content.assets.heroVideo,
+      "hero-video hero-video--desktop",
+    );
+    heroMedia.prepend(desktopVideo);
+
+    if (content.assets.heroVideoSmall) {
+      const mobileVideo = createHeroVideo(
+        content.assets.heroVideoSmall,
+        "hero-video hero-video--mobile",
+      );
+      heroMedia.prepend(mobileVideo);
+
+      const mqSmall = window.matchMedia("(max-width: 519px)");
+      const mqMobile = window.matchMedia("(max-width: 900px)");
+
+      const syncPlayback = () => {
+        if (!mqMobile.matches) {
+          mobileVideo.pause();
+          desktopVideo.play().catch(() => {});
+          return;
+        }
+
+        if (mqSmall.matches) {
+          desktopVideo.pause();
+          mobileVideo.play().catch(() => {});
+          return;
+        }
+
+        mobileVideo.pause();
+        desktopVideo.play().catch(() => {});
+      };
+
+      syncPlayback();
+      mqSmall.addEventListener("change", syncPlayback);
+      mqMobile.addEventListener("change", syncPlayback);
+    }
   }
 
   function renderProjectsMedia() {
@@ -116,10 +158,11 @@
   function renderExpertise() {
     const list = $("[data-expertise-list]");
     const checkIcon = content.assets.icons.expertise;
+    const total = content.expertise.length;
     list.innerHTML = content.expertise
       .map(
-        (item) => `
-          <article class="expertise-card" data-animate>
+        (item, index) => `
+          <article class="expertise-card" style="--expertise-stagger: ${total - 1 - index}">
             <img class="check-icon" src="${checkIcon}" alt="" aria-hidden="true" loading="lazy" />
             <h3>${item.title}</h3>
             <p>${item.body}</p>
@@ -469,6 +512,24 @@
     animated.forEach((node) => observer.observe(node));
   }
 
+  function showContactToast() {
+    const toast = $("#contactToast");
+    if (!toast) return;
+
+    toast.hidden = false;
+    requestAnimationFrame(() => {
+      toast.classList.add("is-visible");
+    });
+
+    window.clearTimeout(showContactToast._timer);
+    showContactToast._timer = window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 300);
+    }, 2000);
+  }
+
   function setupCarousels() {
     const tracks = {
       podcast: $("[data-podcast-list]"),
@@ -590,6 +651,7 @@
 
         button.textContent = isEnglish ? "Sent!" : "נשלח!";
         button.classList.add("is-success");
+        showContactToast();
 
         window.setTimeout(() => {
           form.reset();
