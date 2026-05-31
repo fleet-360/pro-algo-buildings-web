@@ -344,7 +344,7 @@ button {
   display: grid;
   align-items: end;
   justify-items: center;
-  padding-block: clamp(300px, 46vh, 520px) clamp(70px, 9vh, 120px);
+  padding-block: clamp(380px, 55vh, 620px) clamp(70px, 9vh, 120px);
 }
 
 .hero-card,
