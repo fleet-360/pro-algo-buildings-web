@@ -1854,24 +1854,47 @@ button {
   }
 }
 
-/* Small mobile: hero matches small-logo video dimensions */
+/* Small mobile: fixed video placement + card at 380px, section grows to fit card */
 @media (max-width: 519px) {
   .hero {
     --hero-video-width: min(100%, 390px);
     --hero-video-height: 600px;
+    display: grid;
+    grid-template-areas: "hero-stack";
     width: var(--hero-video-width);
-    height: var(--hero-video-height);
-    min-height: var(--hero-video-height);
     max-width: 390px;
+    height: auto;
+    min-height: 0;
     margin-inline: auto;
+    overflow: visible;
+    isolation: isolate;
   }
 
   .hero-media,
-  .hero-overlay {
-    inset: 0;
+  .hero-overlay,
+  .hero-inner {
+    grid-area: hero-stack;
+  }
+
+  .hero-media {
+    position: relative;
+    inset: auto;
     width: 100%;
-    height: 100%;
+    height: var(--hero-video-height);
     margin-top: 0;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--hero-video-height);
+    margin-top: 0;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .hero-media .hero-video--desktop {
@@ -1887,9 +1910,20 @@ button {
   }
 
   .hero-inner {
+    position: relative;
+    z-index: 2;
+    align-self: start;
+    justify-self: stretch;
+    width: 100%;
+    height: auto;
     min-height: 0;
-    height: 100%;
-    padding-block: 268px 58px;
+    margin-top: 380px;
+    padding: 0 12px 58px;
+    box-sizing: border-box;
+  }
+
+  .hero-inner.container {
+    width: 100%;
   }
 }
 
