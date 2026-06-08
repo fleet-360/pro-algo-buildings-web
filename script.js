@@ -1,17 +1,55 @@
 (function () {
-  const content = window.PRO_ALGORITHM_CONTENT;
-  const CONTACT_API = {
-    url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
-    // url: "http://127.0.0.1:8181/contact/buildings",
-  };
+  const LOCALE_KEY = "pro-algorithm-locale";
+  const i18nRoot = window.PRO_ALGORITHM;
 
-  if (!content) {
-    throw new Error("Missing PRO_ALGORITHM_CONTENT. Load content.js before script.js.");
+  if (!i18nRoot?.locales) {
+    throw new Error("Missing PRO_ALGORITHM.locales. Load content.js before script.js.");
   }
+
+  function isEnglishDomain(hostname) {
+    const host = hostname.toLowerCase();
+    return (i18nRoot.englishDomains || []).some(
+      (domain) => host === domain || host.endsWith(`.${domain}`),
+    );
+  }
+
+  function getDefaultLocale() {
+    return isEnglishDomain(window.location.hostname) ? "en" : "he";
+  }
+
+  function getStoredLocale() {
+    const saved = localStorage.getItem(LOCALE_KEY);
+    return saved === "en" || saved === "he" ? saved : null;
+  }
+
+  function getLocale() {
+    return getStoredLocale() || getDefaultLocale();
+  }
+
+  function buildContent(locale) {
+    const localeContent = i18nRoot.locales[locale] || i18nRoot.locales.he;
+    return {
+      ...localeContent,
+      assets: i18nRoot.assets,
+    };
+  }
+
+  let locale = getLocale();
+  let content = buildContent(locale);
 
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const pad = (number) => String(number).padStart(2, "0");
+  const ui = () => content.ui || {};
+
+  const CONTACT_API = {
+    url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
+  };
+
+  function applyDocumentLocale() {
+    document.documentElement.lang = locale;
+    document.documentElement.dataset.locale = locale;
+  }
 
   function setText(selector, value) {
     $$(selector).forEach((node) => {
@@ -22,6 +60,51 @@
   function setLink(selector, href) {
     $$(selector).forEach((node) => {
       node.href = href || "#";
+    });
+  }
+
+  function hydrateUiStrings() {
+    const strings = ui();
+    setText('[data-i18n="skipLink"]', strings.skipLink);
+    setText('[data-i18n="brandTagline"]', strings.brandTagline);
+    setText('[data-i18n="openMenu"]', strings.openMenu);
+    setText('[data-i18n="formFullName"]', strings.formFullName);
+    setText('[data-i18n="formPhone"]', strings.formPhone);
+    setText('[data-i18n="formEmail"]', strings.formEmail);
+    setText('[data-i18n="formSubmit"]', strings.formSubmit);
+
+    const contactCta = $('[data-content="contact-phone"]');
+    if (contactCta) {
+      contactCta.setAttribute("aria-label", strings.contactUsAria || strings.contactUs);
+    }
+
+    const mainNav = $("nav.header-shell");
+    if (mainNav) mainNav.setAttribute("aria-label", strings.mainNav);
+
+    const solutionsSection = $("#solutions");
+    if (solutionsSection) solutionsSection.setAttribute("aria-label", strings.solutionsSection);
+
+    const solutionsTrack = $("[data-solutions-track]");
+    if (solutionsTrack) solutionsTrack.setAttribute("aria-label", strings.solutionsGallery);
+
+    $$(".solution-controls").forEach((node) => {
+      node.setAttribute("aria-label", strings.solutionsNav);
+    });
+
+    const statsSection = $(".stats");
+    if (statsSection) statsSection.setAttribute("aria-label", strings.statsSection);
+
+    const podcastList = $("[data-podcast-list]");
+    if (podcastList) podcastList.setAttribute("aria-label", strings.youtubeVideos);
+
+    const mediaList = $("[data-media-list]");
+    if (mediaList) mediaList.setAttribute("aria-label", strings.mediaSection);
+
+    $$('[data-scroll-prev="media"]').forEach((button) => {
+      button.setAttribute("aria-label", strings.scrollPrev);
+    });
+    $$('[data-scroll-next="media"]').forEach((button) => {
+      button.setAttribute("aria-label", strings.scrollNext);
     });
   }
 
@@ -45,7 +128,10 @@
     setText('[data-content="podcast-eyebrow"]', content.podcast.eyebrow);
     setText('[data-content="podcast-title"]', content.podcast.title);
     setText('[data-content="podcast-body"]', content.podcast.body);
-    setText('[data-content="podcast-all"]', `← ${content.podcast.allEpisodes}`);
+    setText(
+      '[data-content="podcast-all"]',
+      `${ui().podcastAllPrefix || ""}${content.podcast.allEpisodes}`,
+    );
     setText('[data-content="media-eyebrow"]', content.media.eyebrow);
     setText('[data-content="media-title"]', content.media.title);
     setText('[data-content="media-body"]', content.media.body);
@@ -57,6 +143,8 @@
 
     setLink('[data-content="contact-phone"]', "#contact");
     setLink('[data-content="podcast-all"]', content.podcast.allEpisodesUrl);
+
+    hydrateUiStrings();
   }
 
   function renderNav() {
@@ -182,10 +270,11 @@
 
   function renderSolutions() {
     const track = $("[data-solutions-track]");
+    const ofLabel = ui().solutionOf || "of";
     track.innerHTML = content.solutions
       .map(
         (item, index) => `
-          <article class="solution-slide" data-solution-slide aria-label="${pad(index + 1)} מתוך ${pad(content.solutions.length)}">
+          <article class="solution-slide" data-solution-slide aria-label="${pad(index + 1)} ${ofLabel} ${pad(content.solutions.length)}">
             <div class="solution-visual" aria-hidden="true">
               <img src="${item.image}" alt="" loading="lazy" />
             </div>
@@ -195,7 +284,7 @@
                 ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
               </div>
               <button type="button" class="solution-toggle" aria-expanded="false">
-                ${content.solutionsIntro.readMore || "קראו עוד← "}
+                ${content.solutionsIntro.readMore || "Read more → "}
               </button>
               <p class="solution-body">${item.body}</p>
             </div>
@@ -264,7 +353,7 @@
 
     list.innerHTML = `
       ${renderCard(featured, "video-card-featured")}
-      <div class="video-side-list" aria-label="פרקים נוספים">
+      <div class="video-side-list" aria-label="${ui().moreEpisodes || "More episodes"}">
         ${sideItems.map((item) => renderCard(item, "video-card-compact")).join("")}
       </div>
     `;
@@ -272,6 +361,7 @@
 
   function renderMedia() {
     const list = $("[data-media-list]");
+    const fullArticle = ui().fullArticle || "Read full article →";
     list.innerHTML = content.media.items
       .map(
         (item) => `
@@ -279,7 +369,7 @@
             <img class="media-logo" src="${item.logo}" alt="${item.source}" loading="lazy" />
             <h3>${item.title}</h3>
             <p>${item.body}</p>
-            <a href="${item.url}">לכתבה המלאה ←</a>
+            <a href="${item.url}">${fullArticle}</a>
           </article>
         `,
       )
@@ -297,6 +387,30 @@
         `,
       )
       .join("");
+  }
+
+  function setupLanguageSwitcher() {
+    const switcher = $("[data-lang-switcher]");
+    if (!switcher) return;
+
+    switcher.querySelectorAll("[data-lang]").forEach((button) => {
+      const buttonLocale = button.dataset.lang;
+      const isActive = buttonLocale === locale;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+
+      if (buttonLocale === "he") {
+        button.setAttribute("aria-label", ui().langHe || "Hebrew");
+      } else if (buttonLocale === "en") {
+        button.setAttribute("aria-label", ui().langEn || "English");
+      }
+
+      button.addEventListener("click", () => {
+        if (buttonLocale === locale) return;
+        localStorage.setItem(LOCALE_KEY, buttonLocale);
+        window.location.reload();
+      });
+    });
   }
 
   function setupSplashScreen() {
@@ -389,8 +503,8 @@
   }
 
   function setupSolutionToggles() {
-    const readMore = content.solutionsIntro.readMore || "קראו עוד";
-    const hideText = content.solutionsIntro.hideText || "הסתר טקסט";
+    const readMore = content.solutionsIntro.readMore || "Read more → ";
+    const hideText = content.solutionsIntro.hideText || "Hide text";
 
     $$(".solution-toggle").forEach((button) => {
       button.addEventListener("click", () => {
@@ -585,12 +699,12 @@
         const progress = Math.min(elapsed / duration, 1);
         const current = Math.floor(easeOutExpo(progress) * target);
 
-        counter.textContent = current.toLocaleString();
+        counter.textContent = current.toLocaleString(locale === "he" ? "he-IL" : "en-US");
 
         if (progress < 1) {
           requestAnimationFrame(updateCounter);
         } else {
-          counter.textContent = target.toLocaleString();
+          counter.textContent = target.toLocaleString(locale === "he" ? "he-IL" : "en-US");
         }
       };
 
@@ -623,9 +737,9 @@
 
       const button = form.querySelector('button[type="submit"]');
       const originalHtml = button.innerHTML;
-      const isEnglish = document.documentElement.lang === "en";
+      const strings = ui();
 
-      button.textContent = isEnglish ? "Sending..." : "שולח...";
+      button.textContent = strings.formSending;
       button.disabled = true;
 
       const payload = {
@@ -645,11 +759,10 @@
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
-          const fallback = isEnglish ? "Something went wrong" : "משהו השתבש";
-          throw new Error(data?.message || fallback);
+          throw new Error(data?.message || strings.formError);
         }
 
-        button.textContent = isEnglish ? "Sent!" : "נשלח!";
+        button.textContent = strings.formSent;
         button.classList.add("is-success");
         showContactToast();
 
@@ -669,6 +782,7 @@
   }
 
   function init() {
+    applyDocumentLocale();
     setupSplashScreen();
     hydrateStaticContent();
     renderNav();
@@ -684,6 +798,7 @@
     renderPodcast();
     renderMedia();
     renderSocials();
+    setupLanguageSwitcher();
     setupMobileMenu();
     setupSmoothNav();
     setupRevealAnimations();

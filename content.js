@@ -1,9 +1,5 @@
-window.PRO_ALGORITHM_CONTENT = {
-  meta: {
-    title: "Pro Algorithm | נדל\"ן ובנייה",
-    description:
-      "בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל\"ן, האדריכלות וההנדסה.",
-  },
+window.PRO_ALGORITHM = {
+  englishDomains: ["buildalgo.com", "www.buildalgo.com"],
   assets: {
     logo: "assets/images/company logos/MAIN-LOGO.png",
     logoWhite: "assets/images/company logos/MAIN-LOGO white.png",
@@ -25,247 +21,556 @@ window.PRO_ALGORITHM_CONTENT = {
       },
     },
   },
-  nav: [
-    { label: "מומחיות", target: "expertise" },
-    { label: "פרויקטים", target: "solutions-intro" },
-    { label: "מרכז ידע", target: "podcast" },
-  ],
-  cta: {
-    primary: "דברו עם מהנדס פתרונות ✆",
-    secondary: "שלחו לנו מייל ✉",
-    contact: "← צרו קשר",
-    email: "mailto:hello@pro-algorithm.example",
-    phone: "tel:+972000000000",
-  },
-  hero: {
-    title: "הטכנולוגיה שבונה את העתיד",
-    body:
-      "פרו אלגוריתם - בית תוכנה ישראלי פורץ דרך המפתח פתרונות AI ו-GNN לענף הנדל\"ן, האדריכלות וההנדסה. אנו הופכים לוגיקה תכנונית מורכבת למערכות אוטונומיות חכמות.",
-  },
-  expertise: [
-    {
-      title: "תאימות לרגולציה",
-      body: "אוטומציה מלאה להגשות ורגולציה.",
+  locales: {
+    he: {
+      meta: {
+        title: 'Pro Algorithm | נדל"ן ובנייה',
+        description:
+          'בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל"ן, האדריכלות וההנדסה.',
+      },
+      ui: {
+        skipLink: "דלגו לתוכן",
+        brandTagline: "נדל״ן ובנייה",
+        contactUs: "צרו קשר",
+        contactUsAria: "צרו קשר",
+        openMenu: "פתיחת תפריט",
+        mainNav: "ניווט ראשי",
+        solutionsSection: "פתרונות",
+        solutionsGallery: "גלריית פתרונות",
+        solutionsNav: "ניווט פתרונות",
+        statsSection: "נתונים",
+        youtubeVideos: "סרטוני יוטיוב",
+        mediaSection: "המלצות ותקשורת",
+        scrollPrev: "גלילה ימינה",
+        scrollNext: "גלילה שמאלה",
+        formFullName: "שם מלא",
+        formPhone: "טלפון",
+        formEmail: "אימייל",
+        formSubmit: "שלח פרטים",
+        formSending: "שולח...",
+        formSent: "נשלח!",
+        formError: "משהו השתבש",
+        solutionOf: "מתוך",
+        moreEpisodes: "פרקים נוספים",
+        fullArticle: "לכתבה המלאה ←",
+        podcastAllPrefix: "← ",
+        langHe: "עברית",
+        langEn: "English",
+      },
+      nav: [
+        { label: "מומחיות", target: "expertise" },
+        { label: "פרויקטים", target: "solutions-intro" },
+        { label: "מרכז ידע", target: "podcast" },
+      ],
+      cta: {
+        primary: "דברו עם מהנדס פתרונות ✆",
+        secondary: "שלחו לנו מייל ✉",
+        contact: "← צרו קשר",
+        email: "mailto:hello@pro-algorithm.example",
+        phone: "tel:+972000000000",
+      },
+      hero: {
+        title: "הטכנולוגיה שבונה את העתיד",
+        body:
+          'פרו אלגוריתם - בית תוכנה ישראלי פורץ דרך המפתח פתרונות AI ו-GNN לענף הנדל"ן, האדריכלות וההנדסה. אנו הופכים לוגיקה תכנונית מורכבת למערכות אוטונומיות חכמות.',
+      },
+      expertise: [
+        { title: "תאימות לרגולציה", body: "אוטומציה מלאה להגשות ורגולציה." },
+        { title: "הנדסה ב-DNA", body: "מומחיות Native ב-Revit ו-AutoCAD." },
+        { title: "Tailor-Made", body: "טכנולוגיה המותאמת ללוגיקת הארגון." },
+        { title: "מומחיות ב-GNN", body: "פיצוח לוגיקה מרחבית מורכבת." },
+      ],
+      solutionsIntro: {
+        eyebrow: "הפתרונות שלנו:",
+        title: "חזית הטכנולוגיה בעולם הבנייה",
+        readMore: "קראו עוד← ",
+        hideText: "הסתר טקסט",
+      },
+      solutions: [
+        {
+          title: "פיתוח מודלי AI ורשתות נוירונים (GNN) מותאמים אישית",
+          body:
+            "אנו מאפיינים ומאמנים מודלים מתקדמים מבוססי Graph Neural Networks, הנתפרים ספציפית ללוגיקת התכנון שלכם. הפיתוח מאפשר לבצע אוטומציה מלאה לשלבי הגמר – החל ממיקום חכם של דלתות ופתחים בודדים, ועד לפריסה מרחבית שלמה של מערכות מחיצות וקירות גבס.",
+          bullets: ["AI & GNN", "אדריכלות פנים", "תכנון אוטונומי"],
+          image: "assets/images/projects images/projects-image-1.png",
+        },
+        {
+          title: "בקרת איכות קונסטרוקטיבית היברידית",
+          body:
+            "מנועי ולידציה המשלבים אלגוריתמים הנדסיים מורכבים יחד עם יכולות ניתוח של מודלי בינה מלאכותית. המערכת חורגת מהשוואה גרפית סטנדרטית – היא מבינה את ההקשר ההנדסי והסמנטי, מבצעת הצלבה חכמה בין תוכניות הקונסטרוקציה לשרטוטי הביצוע, ומזהה פערים לוגיים ופיזיים טרם הירידה לשטח.",
+          bullets: ["בקרת איכות", "הנדסת מבנים", "ניהול סיכונים"],
+          image: "assets/images/projects images/projects-image-3.png",
+        },
+        {
+          title: "אוטומציה ייעודית להמרת שרטוטים ורגולציה",
+          body:
+            "פיתוח תשתיות אוטומציה להמרה חכמה מ-Revit ל-AutoCAD, תוך התאמה קפדנית לדרישות הרגולציה ומשרד השיכון. המערכת מחלצת דאטה מתוך השרטוט ומפיקה דוחות מפורטים בצורה אוטומטית.",
+          bullets: ["אוטומציה", "רגולציה", "המרת שרטוטים"],
+          image: "assets/images/projects images/projects-image-4.png",
+        },
+        {
+          title: "טרנספורמציית BIM חכמה (DWG ל-Revit)",
+          body:
+            "מודלי Machine Learning לזיהוי אובייקטים הנדסיים. האלגוריתמים מנתחים שרטוטים דו-מימדיים, מזהים תבניות אדריכליות, ומתרגמים אותן בזמן אמת לאלמנטים תלת-מימדיים עשירים במידע בתוך סביבת BIM מתקדמת.",
+          bullets: ["Machine Learning", "מודל BIM", "המרה חכמה"],
+          image: "assets/images/projects images/projects-image-5.png",
+        },
+      ],
+      stats: [
+        {
+          value: "50000",
+          suffix: "+ מ״ר",
+          title: "קומות משרדים",
+          body: "שתוכננו ומוטבו ב-AI",
+          icon: "assets/images/icons/icon-briefcase-blue.png",
+        },
+        {
+          value: "600",
+          suffix: "+",
+          title: "בניינים",
+          body: "שלקחנו חלק בתכנונם",
+          icon: "assets/images/icons/icon-building-blue.png",
+        },
+        {
+          value: "4000",
+          suffix: "+",
+          title: "שרטוטים אדריכליים",
+          body: "שעברו תחת ידינו",
+          icon: "assets/images/icons/icon-sketch-blue.png",
+        },
+      ],
+      customers: {
+        eyebrow: "בין לקוחותינו",
+        title: "אנחנו עובדים עם חברות וארגונים מובילים בארץ",
+        images: [
+          "assets/images/customer logos/mydesk.png",
+          "assets/images/customer logos/pekerman.png",
+          "assets/images/customer logos/mor.png",
+          "assets/images/customer logos/bar-ilan.png",
+          "assets/images/customer logos/hanot.png",
+          "assets/images/customer logos/rupin.png",
+          "assets/images/customer logos/boti.png",
+          "assets/images/customer logos/global-group.png",
+          "assets/images/customer logos/tool-point.png",
+          "assets/images/customer logos/vista-line.png",
+          "assets/images/customer logos/TAU.png",
+        ],
+      },
+      podcast: {
+        eyebrow: "פודקאסט",
+        title: 'מדברים אלגוריתמים ונדל"ן',
+        body:
+          "שיחות עומק עם מנהלי הנדסה, אדריכלים ומפתחי AI על איפה הטכנולוגיה פוגשת את הבטון.",
+        allEpisodes: "צפייה בכל הפרקים ביוטיוב",
+        allEpisodesUrl: "https://www.youtube.com/@ProAlgorithm-israel/videos",
+        items: [
+          {
+            title: "איך הבינה המלאכותית משנה את כללי המשחק?",
+            body: "בפרק הזה אנחנו מארחים את ד״ר הדס נור – חוקרת את השינוי הגדול שמתרחש היום בעולם האדריכלות והעיצוב",
+            info: "20 ינואר 2026",
+            length: "01:01:29",
+            url: "https://www.youtube.com/watch?v=F7tHmD-HIbQ",
+            image: "assets/images/podcast thumbnails/podcast-5.png",
+          },
+          {
+            title: "מגמות חדשות באדריכלות",
+            body: "המגמות בשוק והשינוי בתפקיד האדריכל",
+            info: "19 דצמבר 2025",
+            length: "00:01:29",
+            url: "https://www.youtube.com/shorts/fNFjbPN5hcQ",
+            image: "assets/images/podcast thumbnails/podcast-5-1.png",
+          },
+          {
+            title: "הזמן כמרכיב יצירתי",
+            body: "למה יצירתיות חייבת זמן ולא יכולה לרוץ מהר כמו הAI",
+            info: "17 דצמבר 2025",
+            length: "00:01:18",
+            url: "https://www.youtube.com/shorts/_HUQrO_xbGI",
+            image: "assets/images/podcast thumbnails/podcast-5-3.png",
+          },
+          {
+            title: "החיבור בין AI לפרמטריות",
+            body: "מדברים על שילוב הAI עם תוכנה פרמטרית",
+            info: "11 דצמבר 2025",
+            length: "00:00:46",
+            url: "https://www.youtube.com/shorts/LzLAs7v1FMc",
+            image: "assets/images/podcast thumbnails/podcast-5-5.png",
+          },
+          {
+            title: "עתיד מקצוע האדריכלות",
+            body: "האם המקצוע של האדריכלות עתיד להיעלם מהעולם",
+            info: "6 דצמבר 2025",
+            length: "00:00:29",
+            url: "https://www.youtube.com/shorts/81_jL2nej1k",
+            image: "assets/images/podcast thumbnails/podcast-5-2.png",
+          },
+          {
+            title: "תובנות מהמחקר על טכנולוגיות מחר",
+            body: "מה היה ממצע המחץ במחקר שלה באדריכלות עם הטכנולגיה של המחר",
+            info: "3 דצמבר 2025",
+            length: "00:00:52",
+            url: "https://www.youtube.com/shorts/NdzYcBNJTmI",
+            image: "assets/images/podcast thumbnails/podcast-5-4.png",
+          },
+        ],
+      },
+      media: {
+        eyebrow: "תקשורת",
+        title: "AI בעולם האדריכלות",
+        body: '8 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל"ן',
+        items: [
+          {
+            source: "globes",
+            logo: "assets/images/media logos/globes.png",
+            title: "הסטארט-אפים שיחליפו את האדריכלים",
+            body:
+              "שתי חברות סטארט-אפ ישראליות מציעות תוכנות שמנסות להחליף אלמנטים מרכזיים בעבודת התכנון",
+            url: "https://www.globes.co.il/news/article.aspx?did=1001380915",
+          },
+          {
+            source: "calcalist",
+            logo: "assets/images/media logos/calcalist.png",
+            title: "מה יעשה ה-AI לאדריכלות והבנייה?",
+            body:
+              "השפעת ה-AI על מקצוע האדריכלות והחשש מהחלפת כוח אדם אנושי במכונות",
+            url: "https://www.calcalist.co.il/real-estate/article/b1hwhj251x",
+          },
+          {
+            source: "globes",
+            logo: "assets/images/media logos/globes.png",
+            title: "אנחנו מחליפים את מהנדסי הבניין ב-AI, מי שיישאר זה רק האדריכל",
+            body: "סטארט־אפ חדש לשילוב בינה מלאכותית בתכנון",
+            url: "https://www.globes.co.il/news/article.aspx?did=1001526847",
+          },
+          {
+            source: "calcalist",
+            logo: "assets/images/media logos/calcalist.png",
+            title: '"המענה לבעיות בענף הנדל"ן יגיע מ-AI"',
+            body:
+              'ענף הנדל"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב',
+            url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
+          },
+          {
+            source: "mako",
+            logo: "assets/images/media logos/mako.png",
+            title: "AI וניהול חכם: הדרך של ענף הבנייה להתחדשות וצמיחה",
+            body:
+              "הטכנולוגיות החדשות שקיימות היום בשוק יכולות לצמצם משמעותית את בעיית הדיור הלאומית",
+            url: "https://www.mako.co.il/news-business/duns_100-realestate/Article-ebba5c87bde1691026.htm",
+          },
+          {
+            source: "ynet",
+            logo: "assets/images/media logos/ynet.png",
+            title: "בינה מלאכותית בעיצוב ואדריכלות: חיובי או שלילי?",
+            body: "בשנים הקרובות נפח העבודה שייעשה באמצעות בינה מלאכותית ואוטומציה יגיע לכ-40%",
+            url: "https://www.ynet.co.il/architecture/article/sygzyvxt3",
+          },
+          {
+            source: "nadlancenter",
+            logo: "assets/images/media logos/nadlan-center.png",
+            title: "ה-AI משנה את האדריכלות, האם יחליף אותה?",
+            body:
+              "משרדי אדריכלים ומעצבי פנים משתמשים ב-AI כדי ליצור הדמיות וסרטונים במהירות ולייעל תהליכים",
+            url: "https://www.nadlancenter.co.il/article/13052",
+          },
+          {
+            source: "walla",
+            logo: "assets/images/media logos/walla.png",
+            title: "זה כבר כאן: האם אנו לפני מהפכת ה-AI בעולם האדריכלות, העיצוב והבנייה?",
+            body: "עולם הבינה המלאכותית ישפיע נמרצות על תחומים רבים בענף",
+            url: "https://home.walla.co.il/item/3647977",
+          },
+        ],
+      },
+      contact: {
+        successMessage: "תודה על ההודעה! נחזור אליכם בהקדם",
+      },
+      footer: {
+        title: "רוצים לשמוע עוד על הפתרונות שלנו? צרו איתנו קשר",
+        body: 'בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל"ן, האדריכלות וההנדסה.',
+        copyright: "© 2026 Pro Algorithm. All rights reserved.",
+        socials: [
+          { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },
+          { label: "Instagram", url: "https://www.instagram.com/pro.algorithm", icon: "fab fa-instagram" },
+          { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61579382173682", icon: "fab fa-facebook-f" },
+          { label: "LinkedIn", url: "https://www.linkedin.com/company/pro-algorithm", icon: "fab fa-linkedin-in" },
+        ],
+      },
     },
-    {
-      title: "הנדסה ב-DNA",
-      body: "מומחיות Native ב-Revit ו-AutoCAD.",
+    en: {
+      meta: {
+        title: "Pro Algorithm | Real Estate & Construction",
+        description:
+          "An Israeli software house developing AI and GNN solutions for real estate, architecture, and engineering.",
+      },
+      ui: {
+        skipLink: "Skip to content",
+        brandTagline: "Real Estate & Construction",
+        contactUs: "Contact us",
+        contactUsAria: "Contact us",
+        openMenu: "Open menu",
+        mainNav: "Main navigation",
+        solutionsSection: "Solutions",
+        solutionsGallery: "Solutions gallery",
+        solutionsNav: "Solutions navigation",
+        statsSection: "Statistics",
+        youtubeVideos: "YouTube videos",
+        mediaSection: "Recommendations and media",
+        scrollPrev: "Scroll left",
+        scrollNext: "Scroll right",
+        formFullName: "Full name",
+        formPhone: "Phone",
+        formEmail: "Email",
+        formSubmit: "Send details",
+        formSending: "Sending...",
+        formSent: "Sent!",
+        formError: "Something went wrong",
+        solutionOf: "of",
+        moreEpisodes: "More episodes",
+        fullArticle: "Read full article →",
+        podcastAllPrefix: "",
+        langHe: "עברית",
+        langEn: "English",
+      },
+      nav: [
+        { label: "Expertise", target: "expertise" },
+        { label: "Projects", target: "solutions-intro" },
+        { label: "Knowledge Hub", target: "podcast" },
+      ],
+      cta: {
+        primary: "Talk to a Solutions Engineer ✆",
+        secondary: "Send us an email ✉",
+        contact: "Contact us →",
+        email: "mailto:hello@pro-algorithm.example",
+        phone: "tel:+972000000000",
+      },
+      hero: {
+        title: "The Technology Building the Future",
+        body:
+          "Pro Algorithm is a groundbreaking Israeli software house developing AI and GNN solutions for real estate, architecture, and engineering. We transform complex planning logic into smart autonomous systems.",
+      },
+      expertise: [
+        { title: "Regulatory Compliance", body: "Full automation for submissions and regulation." },
+        { title: "Engineering in Our DNA", body: "Native expertise in Revit and AutoCAD." },
+        { title: "Tailor-Made", body: "Technology tailored to your organization's logic." },
+        { title: "GNN Expertise", body: "Cracking complex spatial logic." },
+      ],
+      solutionsIntro: {
+        eyebrow: "Our solutions:",
+        title: "The Technological Frontier in Construction",
+        readMore: "Read more → ",
+        hideText: "Hide text",
+      },
+      solutions: [
+        {
+          title: "Custom AI & Graph Neural Network (GNN) Model Development",
+          body:
+            "We characterize and train advanced Graph Neural Network models tailored specifically to your planning logic. The development enables full automation of finishing stages – from smart placement of individual doors and openings to complete spatial layout of partition and drywall systems.",
+          bullets: ["AI & GNN", "Interior Architecture", "Autonomous Planning"],
+          image: "assets/images/projects images/projects-image-1.png",
+        },
+        {
+          title: "Hybrid Constructive Quality Control",
+          body:
+            "Validation engines combining complex engineering algorithms with AI model analysis capabilities. The system goes beyond standard graphical comparison – it understands engineering and semantic context, performs smart cross-referencing between structural plans and execution drawings, and identifies logical and physical gaps before reaching the field.",
+          bullets: ["Quality Control", "Structural Engineering", "Risk Management"],
+          image: "assets/images/projects images/projects-image-3.png",
+        },
+        {
+          title: "Dedicated Drawing Conversion & Regulatory Automation",
+          body:
+            "Automation infrastructure development for smart conversion from Revit to AutoCAD, with strict adherence to regulatory requirements and housing ministry standards. The system extracts data from drawings and automatically generates detailed reports.",
+          bullets: ["Automation", "Regulation", "Drawing Conversion"],
+          image: "assets/images/projects images/projects-image-4.png",
+        },
+        {
+          title: "Smart BIM Transformation (DWG to Revit)",
+          body:
+            "Machine Learning models for identifying engineering objects. The algorithms analyze 2D drawings, recognize architectural patterns, and translate them in real time into information-rich 3D elements within an advanced BIM environment.",
+          bullets: ["Machine Learning", "BIM Model", "Smart Conversion"],
+          image: "assets/images/projects images/projects-image-5.png",
+        },
+      ],
+      stats: [
+        {
+          value: "50000",
+          suffix: "+ sqm",
+          title: "Office Floors",
+          body: "Planned and optimized with AI",
+          icon: "assets/images/icons/icon-briefcase-blue.png",
+        },
+        {
+          value: "600",
+          suffix: "+",
+          title: "Buildings",
+          body: "We took part in planning",
+          icon: "assets/images/icons/icon-building-blue.png",
+        },
+        {
+          value: "4000",
+          suffix: "+",
+          title: "Architectural Drawings",
+          body: "Processed by our team",
+          icon: "assets/images/icons/icon-sketch-blue.png",
+        },
+      ],
+      customers: {
+        eyebrow: "Our Clients",
+        title: "We work with leading companies and organizations in Israel",
+        images: [
+          "assets/images/customer logos/mydesk.png",
+          "assets/images/customer logos/pekerman.png",
+          "assets/images/customer logos/mor.png",
+          "assets/images/customer logos/bar-ilan.png",
+          "assets/images/customer logos/hanot.png",
+          "assets/images/customer logos/rupin.png",
+          "assets/images/customer logos/boti.png",
+          "assets/images/customer logos/global-group.png",
+          "assets/images/customer logos/tool-point.png",
+          "assets/images/customer logos/vista-line.png",
+          "assets/images/customer logos/TAU.png",
+        ],
+      },
+      podcast: {
+        eyebrow: "Podcast",
+        title: "Talking Algorithms & Real Estate",
+        body:
+          "In-depth conversations with engineering managers, architects, and AI developers about where technology meets concrete.",
+        allEpisodes: "Watch all episodes on YouTube →",
+        allEpisodesUrl: "https://www.youtube.com/@ProAlgorithm-israel/videos",
+        items: [
+          {
+            title: "How Is Artificial Intelligence Changing the Rules of the Game?",
+            body: "In this episode we host Dr. Hadas Noor – exploring the major shift happening today in architecture and design",
+            info: "January 20, 2026",
+            length: "01:01:29",
+            url: "https://www.youtube.com/watch?v=F7tHmD-HIbQ",
+            image: "assets/images/podcast thumbnails/podcast-5.png",
+          },
+          {
+            title: "New Trends in Architecture",
+            body: "Market trends and the changing role of the architect",
+            info: "December 19, 2025",
+            length: "00:01:29",
+            url: "https://www.youtube.com/shorts/fNFjbPN5hcQ",
+            image: "assets/images/podcast thumbnails/podcast-5-1.png",
+          },
+          {
+            title: "Time as a Creative Component",
+            body: "Why creativity needs time and can't run as fast as AI",
+            info: "December 17, 2025",
+            length: "00:01:18",
+            url: "https://www.youtube.com/shorts/_HUQrO_xbGI",
+            image: "assets/images/podcast thumbnails/podcast-5-3.png",
+          },
+          {
+            title: "The Connection Between AI and Parametrics",
+            body: "Discussing the integration of AI with parametric software",
+            info: "December 11, 2025",
+            length: "00:00:46",
+            url: "https://www.youtube.com/shorts/LzLAs7v1FMc",
+            image: "assets/images/podcast thumbnails/podcast-5-5.png",
+          },
+          {
+            title: "The Future of the Architecture Profession",
+            body: "Will the architecture profession disappear from the world?",
+            info: "December 6, 2025",
+            length: "00:00:29",
+            url: "https://www.youtube.com/shorts/81_jL2nej1k",
+            image: "assets/images/podcast thumbnails/podcast-5-2.png",
+          },
+          {
+            title: "Research Insights on Tomorrow's Technologies",
+            body: "What was the median in her architecture research with tomorrow's technology",
+            info: "December 3, 2025",
+            length: "00:00:52",
+            url: "https://www.youtube.com/shorts/NdzYcBNJTmI",
+            image: "assets/images/podcast thumbnails/podcast-5-4.png",
+          },
+        ],
+      },
+      media: {
+        eyebrow: "Media",
+        title: "AI in the World of Architecture",
+        body: "8 articles in Israel's leading media outlets on AI and the future of real estate",
+        items: [
+          {
+            source: "globes",
+            logo: "assets/images/media logos/globes.png",
+            title: "The Startups That Will Replace Architects",
+            body:
+              "Two Israeli startups offer software trying to replace central elements in the planning process",
+            url: "https://www.globes.co.il/news/article.aspx?did=1001380915",
+          },
+          {
+            source: "calcalist",
+            logo: "assets/images/media logos/calcalist.png",
+            title: "What Will AI Do to Architecture and Construction?",
+            body:
+              "The impact of AI on the architecture profession and concerns about replacing human workforce with machines",
+            url: "https://www.calcalist.co.il/real-estate/article/b1hwhj251x",
+          },
+          {
+            source: "globes",
+            logo: "assets/images/media logos/globes.png",
+            title: "We're Replacing Building Engineers with AI – Only the Architect Remains",
+            body: "A new startup for integrating artificial intelligence into planning",
+            url: "https://www.globes.co.il/news/article.aspx?did=1001526847",
+          },
+          {
+            source: "calcalist",
+            logo: "assets/images/media logos/calcalist.png",
+            title: '"The Answer to Real Estate Industry Problems Will Come from AI"',
+            body:
+              "Real estate, one of the slowest industries in technology adoption, is being pushed toward fundamental change – and the answer to challenges will come from AI and widespread technology adoption",
+            url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
+          },
+          {
+            source: "mako",
+            logo: "assets/images/media logos/mako.png",
+            title: "AI and Smart Management: Construction's Path to Renewal and Growth",
+            body:
+              "New technologies available today can significantly reduce the national housing problem",
+            url: "https://www.mako.co.il/news-business/duns_100-realestate/Article-ebba5c87bde1691026.htm",
+          },
+          {
+            source: "ynet",
+            logo: "assets/images/media logos/ynet.png",
+            title: "Artificial Intelligence in Design and Architecture: Positive or Negative?",
+            body: "In the coming years, the volume of work done through AI and automation will reach about 40%",
+            url: "https://www.ynet.co.il/architecture/article/sygzyvxt3",
+          },
+          {
+            source: "nadlancenter",
+            logo: "assets/images/media logos/nadlan-center.png",
+            title: "AI Is Changing Architecture – Will It Replace It?",
+            body:
+              "Architecture firms and interior designers use AI to create renderings and videos quickly and streamline processes",
+            url: "https://www.nadlancenter.co.il/article/13052",
+          },
+          {
+            source: "walla",
+            logo: "assets/images/media logos/walla.png",
+            title: "It's Already Here: Are We on the Brink of an AI Revolution in Architecture, Design, and Construction?",
+            body: "The world of artificial intelligence will intensely impact many areas of the industry",
+            url: "https://home.walla.co.il/item/3647977",
+          },
+        ],
+      },
+      contact: {
+        successMessage: "Thank you for your message! We'll get back to you soon.",
+      },
+      footer: {
+        title: "Want to learn more about our solutions? Get in touch",
+        body: "An Israeli software house developing AI and GNN solutions for real estate, architecture, and engineering.",
+        copyright: "© 2026 Pro Algorithm. All rights reserved.",
+        socials: [
+          { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },
+          { label: "Instagram", url: "https://www.instagram.com/pro.algorithm", icon: "fab fa-instagram" },
+          { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61579382173682", icon: "fab fa-facebook-f" },
+          { label: "LinkedIn", url: "https://www.linkedin.com/company/pro-algorithm", icon: "fab fa-linkedin-in" },
+        ],
+      },
     },
-    {
-      title: "Tailor-Made",
-      body: "טכנולוגיה המותאמת ללוגיקת הארגון.",
-    },
-    {
-      title: "מומחיות ב-GNN",
-      body: "פיצוח לוגיקה מרחבית מורכבת.",
-    },
-  ],
-  solutionsIntro: {
-    eyebrow: "הפתרונות שלנו:",
-    title: "חזית הטכנולוגיה בעולם הבנייה",
-    readMore: "קראו עוד← ",
-    hideText: "הסתר טקסט",
-  },
-  solutions: [
-    {
-      title: "פיתוח מודלי AI ורשתות נוירונים (GNN) מותאמים אישית",
-      body:
-        "אנו מאפיינים ומאמנים מודלים מתקדמים מבוססי Graph Neural Networks, הנתפרים ספציפית ללוגיקת התכנון שלכם. הפיתוח מאפשר לבצע אוטומציה מלאה לשלבי הגמר – החל ממיקום חכם של דלתות ופתחים בודדים, ועד לפריסה מרחבית שלמה של מערכות מחיצות וקירות גבס.",
-      bullets: ["AI & GNN", "אדריכלות פנים", "תכנון אוטונומי"],
-      image: "assets/images/projects images/projects-image-1.png",
-    },
-    // {
-    //   title: "ארכיטקטורת תוכנה לבקרת שינויי דיירים",
-    //   body:
-    //     " אלגוריתמים המנתחים את בקשת הדייר אל מול שרטוט הסטנדרט, מפיקים רשימת שינויים מדויקת ומבצעים תמחור אוטומטי המקושר למחירונים שלכם. המערכת כוללת מנגנוני התראה חכמים לזיהוי שינויים בעייתיים (כמו הזזת קירות תומכים).",
-    //   bullets: ["שינויי דיירים", "השוואת תוכניות", "בקרת עליות"],
-    //   image: "assets/images/projects images/projects-image-2.png",
-    // },
-    {
-      title: "בקרת איכות קונסטרוקטיבית היברידית",
-      body:
-        "מנועי ולידציה המשלבים אלגוריתמים הנדסיים מורכבים יחד עם יכולות ניתוח של מודלי בינה מלאכותית. המערכת חורגת מהשוואה גרפית סטנדרטית – היא מבינה את ההקשר ההנדסי והסמנטי, מבצעת הצלבה חכמה בין תוכניות הקונסטרוקציה לשרטוטי הביצוע, ומזהה פערים לוגיים ופיזיים טרם הירידה לשטח.",
-      bullets: ["בקרת איכות", "הנדסת מבנים", "ניהול סיכונים"],
-      image: "assets/images/projects images/projects-image-3.png",
-    },
-    {
-      title: "אוטומציה ייעודית להמרת שרטוטים ורגולציה",
-      body:
-        "פיתוח תשתיות אוטומציה להמרה חכמה מ-Revit ל-AutoCAD, תוך התאמה קפדנית לדרישות הרגולציה ומשרד השיכון. המערכת מחלצת דאטה מתוך השרטוט ומפיקה דוחות מפורטים בצורה אוטומטית.",
-      bullets: ["אוטומציה", "רגולציה", "המרת שרטוטים"],
-      image: "assets/images/projects images/projects-image-4.png",
-    },
-    {
-      title: "טרנספורמציית BIM חכמה (DWG ל-Revit)",
-      body:
-        "מודלי Machine Learning לזיהוי אובייקטים הנדסיים. האלגוריתמים מנתחים שרטוטים דו-מימדיים, מזהים תבניות אדריכליות, ומתרגמים אותן בזמן אמת לאלמנטים תלת-מימדיים עשירים במידע בתוך סביבת BIM מתקדמת.",
-      bullets: ["Machine Learning", "מודל BIM", "המרה חכמה"],
-      image: "assets/images/projects images/projects-image-5.png",
-    }
-  ],
-  stats: [
-    { value: "50000", suffix: "+ מ״ר", title: "קומות משרדים", body: "שתוכננו ומוטבו ב-AI", icon: "assets/images/icons/icon-briefcase-blue.png", },
-    { value: "600", suffix: "+", title: "בניינים", body: "שלקחנו חלק בתכנונם", icon: "assets/images/icons/icon-building-blue.png", },
-    { value: "4000", suffix: "+", title: "שרטוטים אדריכליים", body: "שעברו תחת ידינו", icon: "assets/images/icons/icon-sketch-blue.png", },
-  ],
-  customers: {
-    eyebrow: "בין לקוחותינו",
-    title: "אנחנו עובדים עם חברות וארגונים מובילים בארץ",
-    images: [
-      "assets/images/customer logos/mydesk.png",
-      "assets/images/customer logos/pekerman.png",
-      "assets/images/customer logos/mor.png",
-      "assets/images/customer logos/bar-ilan.png",
-      "assets/images/customer logos/hanot.png",
-      "assets/images/customer logos/rupin.png",
-      "assets/images/customer logos/boti.png",
-      "assets/images/customer logos/global-group.png",
-      "assets/images/customer logos/tool-point.png",
-      "assets/images/customer logos/vista-line.png",
-      "assets/images/customer logos/TAU.png",
-    ],
-  },
-  podcast: {
-    eyebrow: "פודקאסט",
-    title: "מדברים אלגוריתמים ונדל\"ן",
-    body:
-      "שיחות עומק עם מנהלי הנדסה, אדריכלים ומפתחי AI על איפה הטכנולוגיה פוגשת את הבטון.",
-    allEpisodes: "צפייה בכל הפרקים ביוטיוב",
-    allEpisodesUrl: "https://www.youtube.com/@ProAlgorithm-israel/videos",
-    items: [
-      {
-        title: "איך הבינה המלאכותית משנה את כללי המשחק?",
-        body: "בפרק הזה אנחנו מארחים את ד״ר הדס נור – חוקרת את השינוי הגדול שמתרחש היום בעולם האדריכלות והעיצוב",
-        info: "20 ינואר 2026",
-        length: "01:01:29",
-        url: "https://www.youtube.com/watch?v=F7tHmD-HIbQ",
-        image: "assets/images/podcast thumbnails/podcast-5.png",
-      },
-      {
-        title: "מגמות חדשות באדריכלות",
-        body: "המגמות בשוק והשינוי בתפקיד האדריכל",
-        info: "19 דצמבר 2025",
-        length: "00:01:29",
-        url: "https://www.youtube.com/shorts/fNFjbPN5hcQ",
-        image: "assets/images/podcast thumbnails/podcast-5-1.png",
-      },
-      {
-        title: "הזמן כמרכיב יצירתי",
-        body: "למה יצירתיות חייבת זמן ולא יכולה לרוץ מהר כמו הAI",
-        info: "17 דצמבר 2025",
-        length: "00:01:18",
-        url: "https://www.youtube.com/shorts/_HUQrO_xbGI",
-        image: "assets/images/podcast thumbnails/podcast-5-3.png",
-      },
-      {
-        title: "החיבור בין AI לפרמטריות",
-        body: "מדברים על שילוב הAI עם תוכנה פרמטרית",
-        info: "11 דצמבר 2025",
-        length: "00:00:46",
-        url: "https://www.youtube.com/shorts/LzLAs7v1FMc",
-        image: "assets/images/podcast thumbnails/podcast-5-5.png",
-      },
-      {
-        title: "עתיד מקצוע האדריכלות",
-        body: "האם המקצוע של האדריכלות עתיד להיעלם מהעולם",
-        info: "6 דצמבר 2025",
-        length: "00:00:29",
-        url: "https://www.youtube.com/shorts/81_jL2nej1k",
-        image: "assets/images/podcast thumbnails/podcast-5-2.png",
-      },
-      {
-        title: "תובנות מהמחקר על טכנולוגיות מחר",
-        body: "מה היה ממצע המחץ במחקר שלה באדריכלות עם הטכנולגיה של המחר",
-        info: "3 דצמבר 2025",
-        length: "00:00:52",
-        url: "https://www.youtube.com/shorts/NdzYcBNJTmI",
-        image: "assets/images/podcast thumbnails/podcast-5-4.png",
-      },
-    ],
-  },
-  media: {
-    eyebrow: "תקשורת",
-    title: "AI בעולם האדריכלות",
-    body: "8 כתבות בכלי התקשורת המובילים בישראל על AI ועתיד הנדל\"ן",
-    items: [
-      {
-        source: "globes", //1
-        logo: "assets/images/media logos/globes.png",
-        title: "הסטארט-אפים שיחליפו את האדריכלים",
-        body:
-          "שתי חברות סטארט-אפ ישראליות מציעות תוכנות שמנסות להחליף אלמנטים מרכזיים בעבודת התכנון",
-        url: "https://www.globes.co.il/news/article.aspx?did=1001380915",
-      },
-      {
-        source: "calcalist", //2
-        logo: "assets/images/media logos/calcalist.png",
-        title: "מה יעשה ה-AI לאדריכלות והבנייה?",
-        body:
-          "השפעת ה-AI על מקצוע האדריכלות והחשש מהחלפת כוח אדם אנושי במכונות",
-        url: "https://www.calcalist.co.il/real-estate/article/b1hwhj251x",
-      },
-      {
-        source: "globes", //3
-        logo: "assets/images/media logos/globes.png",
-        title: "אנחנו מחליפים את מהנדסי הבניין ב-AI, מי שיישאר זה רק האדריכל",
-        body:
-          "סטארט־אפ חדש לשילוב בינה מלאכותית בתכנון",
-        url: "https://www.globes.co.il/news/article.aspx?did=1001526847",
-      },
-      {
-        source: "calcalist", //4
-        logo: "assets/images/media logos/calcalist.png",
-        title: "\"המענה לבעיות בענף הנדל\"ן יגיע מ-AI\"",
-        body:
-          "ענף הנדל\"ן, אחד האיטיים ביותר באימוץ טכנולוגיה, נדחק למצב הדורש שינוי מהותי - והמענה לאתגרים יגיע מ-AI ואימוץ טכלנולוגיה בקנה מידה רחב",
-        url: "https://www.calcalist.co.il/conferences/article/sjbpz9p11wl",
-      },
-      {
-        source: "mako", //5
-        logo: "assets/images/media logos/mako.png",
-        title: "AI וניהול חכם: הדרך של ענף הבנייה להתחדשות וצמיחה",
-        body:
-          "הטכנולוגיות החדשות שקיימות היום בשוק יכולות לצמצם משמעותית את בעיית הדיור הלאומית",
-        url: "https://www.mako.co.il/news-business/duns_100-realestate/Article-ebba5c87bde1691026.htm",
-      },
-      {
-        source: "ynet", //6
-        logo: "assets/images/media logos/ynet.png",
-        title: "בינה מלאכותית בעיצוב ואדריכלות: חיובי או שלילי?",
-        body:
-          "בשנים הקרובות נפח העבודה שייעשה באמצעות בינה מלאכותית ואוטומציה יגיע לכ-40%",
-        url: "https://www.ynet.co.il/architecture/article/sygzyvxt3",
-      },
-      {
-        source: "nadlancenter", //7
-        logo: "assets/images/media logos/nadlan-center.png",
-        title: "ה-AI משנה את האדריכלות, האם יחליף אותה?",
-        body:
-          "משרדי אדריכלים ומעצבי פנים משתמשים ב-AI כדי ליצור הדמיות וסרטונים במהירות ולייעל תהליכים",
-        url: "https://www.nadlancenter.co.il/article/13052",
-      },
-      {
-        source: "walla", //8
-        logo: "assets/images/media logos/walla.png",
-        title: "זה כבר כאן: האם אנו לפני מהפכת ה-AI בעולם האדריכלות, העיצוב והבנייה?",
-        body:
-          "עולם הבינה המלאכותית ישפיע נמרצות על תחומים רבים בענף",
-        url: "https://home.walla.co.il/item/3647977",
-      },
-    ],
-  },
-  contact: {
-    successMessage: "תודה על ההודעה! נחזור אליכם בהקדם",
-  },
-  footer: {
-    title: "רוצים לשמוע עוד על הפתרונות שלנו? צרו איתנו קשר",
-    body: "בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל\"ן, האדריכלות וההנדסה.",
-    copyright: "© 2026 Pro Algorithm. All rights reserved.",
-    socials: [
-      { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },
-      { label: "Instagram", url: "https://www.instagram.com/pro.algorithm", icon: "fab fa-instagram" },
-      { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61579382173682", icon: "fab fa-facebook-f" },
-      { label: "LinkedIn", url: "https://www.linkedin.com/company/pro-algorithm", icon: "fab fa-linkedin-in" },
-    ],
   },
 };

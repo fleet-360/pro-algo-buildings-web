@@ -17,6 +17,20 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        var key = "pro-algorithm-locale";
+        var englishDomains = ["buildalgo.com", "www.buildalgo.com"];
+        var host = location.hostname.toLowerCase();
+        var isEnglish = englishDomains.some(function (domain) {
+          return host === domain || host.endsWith("." + domain);
+        });
+        var saved = localStorage.getItem(key);
+        var locale = saved === "en" || saved === "he" ? saved : isEnglish ? "en" : "he";
+        document.documentElement.lang = locale;
+        document.documentElement.dataset.locale = locale;
+      })();
+    </script>
     <script src="content.js" defer></script>
     <script src="script.js" defer></script>
   </head>
@@ -30,27 +44,32 @@
       </div>
     </div>
 
-    <a class="skip-link" href="#main">דלגו לתוכן</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink">דלגו לתוכן</a>
 
     <header class="site-header" data-animate>
       <nav class="header-shell" aria-label="ניווט ראשי">
         <a class="header-cta" data-content="contact-phone" href="#" aria-label="צרו קשר">
-          <span class="desktop-only">צרו קשר</span>
+          <span class="desktop-only"></span>
           <i class="fas fa-phone mobile-only" aria-hidden="true"></i>
         </a>
 
         <div class="header-links" data-nav-links></div>
 
+        <div class="lang-switcher" data-lang-switcher role="group" aria-label="Language">
+          <button type="button" class="lang-switcher-btn" data-lang="he">HE</button>
+          <button type="button" class="lang-switcher-btn" data-lang="en">EN</button>
+        </div>
+
         <a class="brand" href="#hero" aria-label="Pro Algorithm">
           <img data-logo src="assets/images/company logos/MAIN-LOGO.png" alt="Pro Algorithm" />
-          <span>נדל״ן ובנייה</span>
+          <span data-i18n="brandTagline">נדל״ן ובנייה</span>
         </a>
 
         <button class="menu-toggle mobile-only" type="button" aria-expanded="false" aria-controls="mobile-nav">
           <span></span>
           <span></span>
           <span></span>
-          <span class="sr-only">פתיחת תפריט</span>
+          <span class="sr-only" data-i18n="openMenu">פתיחת תפריט</span>
         </button>
       </nav>
 
@@ -154,18 +173,18 @@
           <form class="contact-form-inline" id="contactForm" data-contact-form>
             <div class="form-group">
               <input type="text" id="contact-name" name="name" required placeholder=" " autocomplete="name" />
-              <label for="contact-name">שם מלא</label>
+              <label for="contact-name" data-i18n="formFullName">שם מלא</label>
             </div>
             <div class="form-group">
               <input type="tel" id="contact-phone" name="phone" required placeholder=" " autocomplete="tel" />
-              <label for="contact-phone">טלפון</label>
+              <label for="contact-phone" data-i18n="formPhone">טלפון</label>
             </div>
             <div class="form-group">
               <input type="email" id="contact-email" name="email" required placeholder=" " autocomplete="email" />
-              <label for="contact-email">אימייל</label>
+              <label for="contact-email" data-i18n="formEmail">אימייל</label>
             </div>
             <button type="submit" class="btn btn-submit">
-              <span>שלח פרטים</span>
+              <span data-i18n="formSubmit">שלח פרטים</span>
               <i class="fas fa-paper-plane" aria-hidden="true"></i>
             </button>
           </form>

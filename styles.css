@@ -262,6 +262,42 @@ button {
   font-weight: 700;
 }
 
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 6, 65, 0.06);
+}
+
+.lang-switcher-btn {
+  min-width: 44px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.lang-switcher-btn:hover,
+.lang-switcher-btn:focus-visible {
+  color: var(--ink);
+}
+
+.lang-switcher-btn.is-active {
+  background: var(--paper-strong);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 6, 65, 0.12);
+}
+
 .cta-icon {
   width: 18px;
   height: 18px;
@@ -2185,5 +2221,79 @@ button {
     opacity: 1;
     transform: none;
     transition-delay: 0ms;
+  }
+}
+
+html[lang="en"] .hero-card,
+html[lang="en"] .intro-card,
+html[lang="en"] .section-heading,
+html[lang="en"] .expertise-card,
+html[lang="en"] .solution-content,
+html[lang="en"] .video-card,
+html[lang="en"] .media-card,
+html[lang="en"] .footer-inner,
+html[lang="en"] .mobile-nav,
+html[lang="en"] .header-links {
+  direction: ltr;
+}
+
+html[lang="en"] .brand {
+  direction: ltr;
+}
+
+html[lang="en"] .brand img {
+  justify-self: start;
+}
+
+html[lang="en"] .brand span {
+  text-align: left;
+}
+
+html[lang="en"] .stats,
+html[lang="en"] .customers-stage,
+html[lang="en"] .video-side-list,
+html[lang="en"] .video-content,
+html[lang="en"] .btn-submit,
+html[lang="en"] .footer-brand,
+html[lang="en"] .contact-toast {
+  direction: ltr;
+}
+
+html[lang="en"] .footer-bottom {
+  flex-direction: row;
+}
+
+html[lang="en"] .footer-brand {
+  justify-items: start;
+  text-align: left;
+  margin-inline-end: 0;
+  margin-inline-start: auto;
+}
+
+html[lang="en"] .footer-brand-left {
+  text-align: left;
+  justify-items: start;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+@media (max-width: 1024px) {
+  html[lang="en"] .video-card-compact,
+  html[lang="en"] .video-card-compact .video-content {
+    direction: ltr;
+  }
+}
+
+@media (max-width: 900px) {
+  .lang-switcher {
+    order: 2;
+  }
+
+  .brand {
+    order: 3;
+  }
+
+  .menu-toggle {
+    order: 4;
   }
 }
