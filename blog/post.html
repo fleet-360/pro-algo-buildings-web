@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="he" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" data-meta-description />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="" data-canonical />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Pro Algorithm" />
+    <meta property="og:title" content="" data-og-title />
+    <meta property="og:description" content="" data-og-description />
+    <meta property="og:url" content="" data-og-url />
+    <meta property="og:image" content="" data-og-image />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Pro Algorithm | Blog</title>
+    <link rel="icon" type="image/png" href="../assets/images/company logos/Favicon-black.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <script>
+      (function () {
+        var key = "pro-algorithm-locale";
+        var englishDomains = ["buildalgo.com", "www.buildalgo.com"];
+        var host = location.hostname.toLowerCase();
+        var isEnglish = englishDomains.some(function (domain) {
+          return host === domain || host.endsWith("." + domain);
+        });
+        var saved = localStorage.getItem(key);
+        var locale = saved === "en" || saved === "he" ? saved : isEnglish ? "en" : "he";
+        document.documentElement.lang = locale;
+        document.documentElement.dataset.locale = locale;
+      })();
+    </script>
+    <script src="../content.js" defer></script>
+    <script src="../blog-post.js" defer></script>
+  </head>
+  <body class="blog-post-page">
+    <a class="skip-link" href="#main" data-i18n="skipLink">דלגו לתוכן</a>
+
+    <header class="site-header" data-animate>
+      <nav class="header-shell" aria-label="ניווט ראשי">
+        <a class="header-cta blog-back-link" href="/#blog" data-content="back-to-blog">← חזרה לבלוג</a>
+
+        <div class="header-links" data-nav-links></div>
+
+        <div class="lang-switcher" data-lang-switcher role="group" aria-label="Language">
+          <button type="button" class="lang-switcher-btn" data-lang="he">HE</button>
+          <button type="button" class="lang-switcher-btn" data-lang="en">EN</button>
+        </div>
+
+        <a class="brand" href="/" aria-label="Pro Algorithm">
+          <img data-logo src="../assets/images/company logos/MAIN-LOGO.png" alt="Pro Algorithm" />
+          <span data-i18n="brandTagline">נדל״ן ובנייה</span>
+        </a>
+
+        <button class="menu-toggle mobile-only" type="button" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only" data-i18n="openMenu">פתיחת תפריט</span>
+        </button>
+      </nav>
+
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden></div>
+    </header>
+
+    <main id="main" class="blog-post-main">
+      <article class="blog-article container" data-blog-article>
+        <div class="blog-article-hero" data-blog-hero hidden>
+          <img data-blog-image src="" alt="" />
+        </div>
+        <div class="blog-article-content" data-blog-content></div>
+      </article>
+    </main>
+
+    <footer class="footer footer--bottom-only" id="footer">
+      <div class="footer-bg" aria-hidden="true"></div>
+      <div class="container footer-inner footer-inner--bottom-only" data-animate>
+        <div class="footer-bottom">
+          <div class="footer-brand-left">
+            <div class="socials" data-social-links></div>
+            <p data-content="copyright"></p>
+          </div>
+          <div class="footer-brand">
+            <img class="footer-bottom-logo" data-logo-white src="../assets/images/company logos/MAIN-LOGO white.png" alt="Pro Algorithm" />
+            <p data-content="footer-body"></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

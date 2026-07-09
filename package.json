@@ -1,0 +1,7 @@
+{
+  "name": "pro-algo-buildings-web",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/generate-seo.mjs"
+  }
+}

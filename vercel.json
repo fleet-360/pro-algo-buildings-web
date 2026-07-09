@@ -1,0 +1,140 @@
+{
+  "redirects": [
+    {
+      "source": "/pro-algorithm",
+      "destination": "/#hero",
+      "permanent": true
+    },
+    {
+      "source": "/pro-algo",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/build",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/ai",
+      "destination": "/#expertise",
+      "permanent": true
+    },
+    {
+      "source": "/gnn",
+      "destination": "/#expertise",
+      "permanent": true
+    },
+    {
+      "source": "/bim",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/construction",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate",
+      "destination": "/#hero",
+      "permanent": true
+    },
+    {
+      "source": "/automation",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/revit",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/#blog",
+      "permanent": true
+    },
+    {
+      "source": "/podcast",
+      "destination": "/#podcast",
+      "permanent": true
+    },
+    {
+      "source": "/media",
+      "destination": "/#media",
+      "permanent": true
+    },
+    {
+      "source": "/נדלן",
+      "destination": "/#hero",
+      "permanent": true
+    },
+    {
+      "source": "/בנייה",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/אדריכלות",
+      "destination": "/#expertise",
+      "permanent": true
+    },
+    {
+      "source": "/בינה-מלאכותית",
+      "destination": "/#expertise",
+      "permanent": true
+    },
+    {
+      "source": "/אוטומציה",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/תכנון",
+      "destination": "/#solutions",
+      "permanent": true
+    },
+    {
+      "source": "/הנדסה",
+      "destination": "/#expertise",
+      "permanent": true
+    },
+    {
+      "source": "/פרו-אלגוריתם",
+      "destination": "/#hero",
+      "permanent": true
+    },
+    {
+      "source": "/מגורים",
+      "destination": "/#customers",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/post.html"
+    },
+    {
+      "source": "/blog/:slug/",
+      "destination": "/blog/post.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}

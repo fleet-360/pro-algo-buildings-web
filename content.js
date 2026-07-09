@@ -21,6 +21,34 @@ window.PRO_ALGORITHM = {
       },
     },
   },
+  seo: {
+    siteUrl: "https://www.buildalgo.co.il",
+    redirects: [
+      { path: "/pro-algorithm", section: "hero" },
+      { path: "/pro-algo", section: "solutions" },
+      { path: "/build", section: "solutions" },
+      { path: "/ai", section: "expertise" },
+      { path: "/gnn", section: "expertise" },
+      { path: "/bim", section: "solutions" },
+      { path: "/construction", section: "solutions" },
+      { path: "/real-estate", section: "hero" },
+      { path: "/automation", section: "solutions" },
+      { path: "/revit", section: "solutions" },
+      { path: "/contact", section: "contact" },
+      { path: "/blog", section: "blog" },
+      { path: "/podcast", section: "podcast" },
+      { path: "/media", section: "media" },
+      { path: "/נדלן", section: "hero" },
+      { path: "/בנייה", section: "solutions" },
+      { path: "/אדריכלות", section: "expertise" },
+      { path: "/בינה-מלאכותית", section: "expertise" },
+      { path: "/אוטומציה", section: "solutions" },
+      { path: "/תכנון", section: "solutions" },
+      { path: "/הנדסה", section: "expertise" },
+      { path: "/פרו-אלגוריתם", section: "hero" },
+      { path: "/מגורים", section: "customers" },
+    ],
+  },
   locales: {
     he: {
       meta: {
@@ -56,10 +84,19 @@ window.PRO_ALGORITHM = {
         podcastAllPrefix: "← ",
         langHe: "עברית",
         langEn: "English",
+        blogSection: "בלוג",
+        readBlogPost: "קראו את המאמר ←",
+        backToHome: "← חזרה לאתר",
+        backToBlog: "← חזרה לבלוג",
+        relatedSitesSection: "האתרים שלנו",
+        visitSite: "לאתר ←",
+        blogInternalLinks: "קישורים באתר",
+        blogExternalCta: "לאתר המלא ←",
       },
       nav: [
         { label: "מומחיות", target: "expertise" },
         { label: "פרויקטים", target: "solutions-intro" },
+        { label: "בלוג", target: "blog" },
         { label: "מרכז ידע", target: "podcast" },
       ],
       cta: {
@@ -186,7 +223,7 @@ window.PRO_ALGORITHM = {
             info: "17 דצמבר 2025",
             length: "00:01:18",
             url: "https://www.youtube.com/shorts/_HUQrO_xbGI",
-            image: "assets/images/podcast thumbnails/podcast-5-3.png",
+            image: "assets/images/podcast thumbnails/podcast-6.png",
           },
           {
             title: "החיבור בין AI לפרמטריות",
@@ -194,7 +231,7 @@ window.PRO_ALGORITHM = {
             info: "11 דצמבר 2025",
             length: "00:00:46",
             url: "https://www.youtube.com/shorts/LzLAs7v1FMc",
-            image: "assets/images/podcast thumbnails/podcast-5-5.png",
+            image: "assets/images/podcast thumbnails/podcast-8.png",
           },
           {
             title: "עתיד מקצוע האדריכלות",
@@ -202,7 +239,7 @@ window.PRO_ALGORITHM = {
             info: "6 דצמבר 2025",
             length: "00:00:29",
             url: "https://www.youtube.com/shorts/81_jL2nej1k",
-            image: "assets/images/podcast thumbnails/podcast-5-2.png",
+            image: "assets/images/podcast thumbnails/podcast-5-3.png",
           },
           {
             title: "תובנות מהמחקר על טכנולוגיות מחר",
@@ -210,7 +247,7 @@ window.PRO_ALGORITHM = {
             info: "3 דצמבר 2025",
             length: "00:00:52",
             url: "https://www.youtube.com/shorts/NdzYcBNJTmI",
-            image: "assets/images/podcast thumbnails/podcast-5-4.png",
+            image: "assets/images/podcast thumbnails/podcast-7.png",
           },
         ],
       },
@@ -282,12 +319,148 @@ window.PRO_ALGORITHM = {
           },
         ],
       },
+      blogs: {
+        eyebrow: "מהכתבה שלנו",
+        title: "טכנולוגיה, נדל״ן ובנייה",
+        body: "תובנות מעשיות על AI, אוטומציה והנדסה בענף הבנייה — וגם על האקוסיסטם הטכנולוגי של Pro Algorithm.",
+        items: [
+          {
+            slug: "gnn-autonomous-planning",
+            type: "internal",
+            title: "איך רשתות GNN הופכות תכנון פנים לאוטונומי",
+            excerpt:
+              "Graph Neural Networks מאפשרות ללמוד את לוגיקת התכנון שלכם ולבצע פריסה מרחבית חכמה של מחיצות, דלתות ופתחים — בלי עבודה ידנית חוזרת.",
+            image: "assets/images/projects images/projects-image-1.png",
+            body: [
+              "בענף הבנייה והנדל״ן, תכנון פנים מורכב הוא אחד התהליכים שצורכים הכי הרבה זמן הנדסי. כל פרויקט דורש התאמה בין דרישות רגולטוריות, לוגיקה ארגונית ואילוצים מרחביים — ולעיתים אלפי החלטות קטנות שמצטברות לשבועות עבודה.",
+              "ב-Pro Algorithm אנחנו מאמנים מודלי Graph Neural Networks (GNN) שמבינים את הקשרים בין אלמנטים בתוכנית — קירות, פתחים, מחיצות ומערכות — ולא רק את המיקום הגיאומטרי שלהם. המודל לומד את הלוגיקה הייחודית של הארגון שלכם ומיישם אותה על תוכניות חדשות.",
+              "התוצאה: אוטומציה מלאה לשלבי הגמר, החל ממיקום חכם של דלתות ופתחים בודדים ועד לפריסה מרחבית שלמה של מערכות מחיצות וקירות גבס. פחות טעויות, יותר עקביות, וצוותים שמתמקדים בהחלטות אסטרטגיות במקום בעבודה חוזרת.",
+              "רוצים לראות איך זה נראה בפרויקטים אמיתיים? עברו לגלריית הפתרונות שלנו או למדו עוד על תחומי המומחיות שלנו.",
+            ],
+            links: [
+              { label: "גלריית הפתרונות", href: "/#solutions" },
+              { label: "תחומי מומחיות", href: "/#expertise" },
+              { label: "צרו קשר", href: "/#contact" },
+            ],
+          },
+          {
+            slug: "hybrid-quality-control",
+            type: "internal",
+            title: "בקרת איכות היברידית: כשאלגוריתמים והנדסה פוגשים את השטח",
+            excerpt:
+              "מנועי ולידציה שמשלבים הנדסה קלאסית עם ניתוח AI מזהים פערים בין תוכניות לביצוע — לפני שהם הופכים לתקלות בשטח.",
+            image: "assets/images/projects images/projects-image-3.png",
+            body: [
+              "אחת הבעיות הכואבות ביותר בפרויקטי בנייה היא הפער בין מה שתוכנן לבין מה שבאמת יוצא לשטח. השוואה גרפית בין שרטוטים לא תמיד מספיקה — כי היא לא מבינה את ההקשר ההנדסי והסמנטי שמאחורי כל אלמנט.",
+              "הפתרון שלנו לבקרת איכות קונסטרוקטיבית היברידית משלב אלגוריתמים הנדסיים מורכבים עם יכולות ניתוח של מודלי בינה מלאכותית. המערכת מבצעת הצלבה חכמה בין תוכניות הקונסטרוקציה לשרטוטי הביצוע, ומזהה פערים לוגיים ופיזיים טרם הירידה לשטח.",
+              "לקוחותינו — יזמים, קבלנים ומשרדי הנדסה מובילים — חוסכים חודשים של עבודה ידנית ובדיקות חוזרות. פחות תיקונים בשטח אומר פחות עיכובים, פחות עלויות ורווחיות טובה יותר.",
+              "גלו את הפתרונות שלנו וראו עם מי אנחנו עובדים.",
+            ],
+            links: [
+              { label: "הפתרונות שלנו", href: "/#solutions" },
+              { label: "בין לקוחותינו", href: "/#customers" },
+              { label: "המלצות ותקשורת", href: "/#media" },
+            ],
+          },
+          {
+            slug: "dwg-to-bim-transformation",
+            type: "internal",
+            title: "מ-DWG ל-BIM: למה טרנספורמציה חכמה משנה את כללי המשחק",
+            excerpt:
+              "מודלי Machine Learning שמזהים תבניות אדריכליות בשרטוטים דו-מימדיים ומתרגמים אותן לאלמנטים תלת-מימדיים עשירים במידע.",
+            image: "assets/images/projects images/projects-image-5.png",
+            body: [
+              "מעבר משרטוטים דו-מימדיים לסביבת BIM מתקדמת הוא אחד האתגרים הגדולים בענף. ארגונים רבים יושבים על מאגרי DWG עצומים — אבל המידע בהם נשאר שטוח, לא מקושר ולא ניתן לניתוח אוטומטי.",
+              "אנחנו מפתחים מודלי Machine Learning לזיהוי אובייקטים הנדסיים. האלגוריתמים מנתחים שרטוטים דו-מימדיים, מזהים תבניות אדריכליות, ומתרגמים אותן בזמן אמת לאלמנטים תלת-מימדיים עשירים במידע בתוך סביבת Revit.",
+              "זה לא רק חיסכון בזמן — זה שינוי מהותי ביכולת של הארגון לנהל נתונים, לבצע בקרות איכות ולשלב AI בתהליכי התכנון. תשתית ה-BIM הופכת לבסיס לכל האוטומציה העתידית.",
+              "שמעו עוד על הטכנולוגיה בפודקאסט שלנו, או צרו קשר לשיחה על הפרויקט שלכם.",
+            ],
+            links: [
+              { label: "גלריית הפתרונות", href: "/#solutions" },
+              { label: "פודקאסט", href: "/#podcast" },
+              { label: "צרו קשר", href: "/#contact" },
+            ],
+          },
+          {
+            slug: "pro-algorithm-main-site",
+            type: "external",
+            title: "Pro Algorithm: כשטכנולוגיה מתקדמת פוגשת תוצאות עסקיות אמיתיות",
+            excerpt:
+              "בשוק שבו כל עסק שומע ש״הוא חייב AI״, אנחנו מתחילים מהבעיה העסקית — ורק אחר כך הטכנולוגיה.",
+            image: "assets/images/blog/pro-algorithm.png",
+            externalUrl: "https://pro-algorithm.co.il/",
+            cta: "בקרו אותנו ב-pro-algorithm.co.il",
+            body: [
+              "בשוק שבו כל עסק שומע ש״הוא חייב AI״, ב-Pro Algorithm אנחנו מתחילים מהכיוון ההפוך — קודם הבעיה העסקית שלכם, ורק אחר כך הטכנולוגיה. Pro Algorithm היא חברת תוכנה, AI ואוטומציה ישראלית, המפתחת מערכות ווב מתקדמות, אלגוריתמים בהתאמה אישית ופתרונות חכמים שנבנים סביב האופן שבו הארגון שלכם באמת עובד.",
+              "האתר הראשי שלנו הוא הבית של כל מה שאנחנו עושים: סקירה של השירותים, הגישה המקצועית שלנו, והידע שאנחנו משתפים. תמצאו כאן את הבלוג שלנו, שבו אנחנו מפרקים נושאי AI ואוטומציה לשפה פשוטה ופרקטית, ואת הפודקאסט שלנו, שבו אנחנו צוללים לעומק עולמות הפיתוח, הטכנולוגיה והמערכות החכמות.",
+              "מה שמבדל אותנו הוא העומק. אנחנו לא מספקים תבניות מוכנות — אנחנו מתכננים ומהנדסים מערכות מהיסוד: תשתיות נתונים, תהליכי עבודה מבוססי AI ופלטפורמות ווב שגדלות יחד איתכם. מהפגישה הראשונה ועד העלייה לאוויר, אתם עובדים עם צוות שמבין גם את הקוד וגם את העסק שמאחוריו.",
+              "מוזמנים לסייר באתר, לקרוא בבלוג ולהאזין לפודקאסט — וכשתרצו לראות מה אלגוריתם שנבנה במיוחד בשבילכם יכול לעשות לעסק שלכם, אנחנו במרחק הודעה אחת.",
+            ],
+          },
+          {
+            slug: "pro-algorithm-software-house",
+            type: "external",
+            title: "בית התוכנה הבוטיקי שמאחורי אפליקציות, SaaS ומערכות AI בהתאמה אישית",
+            excerpt:
+              "יש חברות שקונות תוכנת מדף ומכריחות את העסק להתאים את עצמו אליה. החכמות בונות תוכנה שמתאימה לעסק.",
+            image: "assets/images/blog/pro-algo.png",
+            externalUrl: "https://www.pro-algo.com/",
+            cta: "קבלו ייעוץ חינם ב-pro-algo.com",
+            body: [
+              "יש חברות שקונות תוכנת מדף ומכריחות את העסק להתאים את עצמו אליה. החכמות בונות תוכנה שמתאימה לעסק. זה בדיוק מה שאנחנו עושים ב-Pro Algorithm — בית תוכנה בוטיק, ישראלי במאה אחוז, המתמחה בפיתוח אפליקציות בהתאמה אישית, מערכות SaaS מתקדמות, שילוב AI ואוטומציה מקצה לקצה.",
+              "אתר הפיתוח שלנו, pro-algo.com, מציג את הדרך שבה אנחנו עובדים: צוות מובחר של מהנדסים מנוסים ומומחי AI שיושבים איתכם, מבינים את התהליכים שלכם, ובונים מערכות שפשוט עובדות. תיק העבודות שלנו כולל אפליקציות עסקיות מותאמות, פתרונות E-commerce ומובייל, ואוטומציה חכמה שרצה 24/7.",
+              "הלקוחות שלנו מספרים את הסיפור הכי טוב: חברות שהחליפו שלוש מערכות נפרדות בפלטפורמה אחת שבנינו עבורן, צוותים שהפכו קבצי הנדסה מורכבים למערכת לזיהוי שגיאות אוטומטי וחסכו חודשים של עבודה ידנית, ועסקים שמוצרי ה-SaaS מבוססי ה-AI שלהם הצמיחו את ההכנסות באופן משמעותי.",
+              "אם אתם מחפשים שותף טכנולוגי שמבין גם את הצד העסקי וגם את הצד ההנדסי — ומספק מערכות ברמת פרודקשן, לא אבות-טיפוס — כאן מתחילים.",
+            ],
+          },
+          {
+            slug: "tzach-dabush-portfolio",
+            type: "external",
+            title: "להכיר את האיש שמאחורי Pro Algorithm: צח דבוש על AI, NLP ומחקר יישומי",
+            excerpt:
+              "מאחורי כל חברת טכנולוגיה חזקה עומד מישהו שחי ונושם את התחום — מייסד ו-CTO עם עומק אקדמי ב-AI ו-NLP.",
+            image: "assets/images/blog/tzach-dabush.jpg",
+            externalUrl: "https://tzach-dabush.com/",
+            cta: "קראו עוד ב-tzach-dabush.com",
+            body: [
+              "מאחורי כל חברת טכנולוגיה חזקה עומד מישהו שחי ונושם את התחום. צח דבוש — מייסד ו-CTO של Pro Algorithm — משלב מנהיגות הנדסית מעשית עם עומק אקדמי בתחומי הבינה המלאכותית ועיבוד השפה הטבעית (NLP).",
+              "האתר האישי שלו, tzach-dabush.com, הוא פורטפוליו מקצועי המציג את עבודתו המחקרית, שיתופי פעולה עם פרופסורים מובילים, ופרסומים בתחומי ה-AI וה-NLP. באתר תמצאו גם את מדור המאמרים שלו: תכנים מעמיקים ונגישים שבוחנים לאן ה-AI הולך, איך מודלי שפה באמת עובדים, ואיך תובנות מחקריות הופכות למערכות שעסקים יכולים לסמוך עליהן.",
+              "השילוב הזה הוא שמעצב את ה-DNA של Pro Algorithm. הפתרונות של החברה לא נבנים על הייפ או על כלים ארוזים מחדש — הם מבוססים על הבנה אמיתית של האלגוריתמים שמתחת למכסה המנוע, שחודדה גם במחקר וגם בשנים של בניית מערכות פרודקשן ללקוחות אמיתיים.",
+              "אם אתם רוצים להבין את החשיבה שמאחורי הטכנולוגיה — או פשוט נהנים מתוכן חד וכתוב היטב על AI ו-NLP — המאמרים של צח הם נקודת פתיחה מצוינת.",
+            ],
+          },
+        ],
+      },
       contact: {
         successMessage: "תודה על ההודעה! נחזור אליכם בהקדם",
       },
       footer: {
         title: "רוצים לשמוע עוד על הפתרונות שלנו? צרו איתנו קשר",
         body: 'בית תוכנה ישראלי המפתח פתרונות AI ו-GNN לענף הנדל"ן, האדריכלות וההנדסה.',
+        relatedSites: {
+          eyebrow: "האקוסיסטם שלנו",
+          title: "עוד אתרים של Pro Algorithm",
+          items: [
+            {
+              name: "Pro Algorithm",
+              url: "https://pro-algorithm.co.il/",
+              description: "האתר הראשי — שירותים, בלוג, פודקאסט וגישה מקצועית ל-AI ואוטומציה",
+              image: "assets/images/blog/pro-algorithm.png",
+            },
+            {
+              name: "Pro Algorithm — בית תוכנה",
+              url: "https://www.pro-algo.com/",
+              description: "פיתוח אפליקציות, SaaS ומערכות AI בהתאמה אישית",
+              image: "assets/images/blog/pro-algo.png",
+            },
+            {
+              name: "צח דבוש",
+              url: "https://tzach-dabush.com/",
+              description: "פורטפוליו, מחקר ומאמרים על AI, NLP וטכנולוגיה יישומית",
+              image: "assets/images/blog/tzach-dabush.jpg",
+            },
+          ],
+        },
         copyright: "© 2026 Pro Algorithm. All rights reserved.",
         socials: [
           { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },
@@ -331,10 +504,18 @@ window.PRO_ALGORITHM = {
         podcastAllPrefix: "",
         langHe: "עברית",
         langEn: "English",
+        blogSection: "Blog",
+        readBlogPost: "Read article →",
+        backToHome: "← Back to site",
+        backToBlog: "← Back to blog",
+        visitSite: "Visit site →",
+        blogInternalLinks: "On this site",
+        blogExternalCta: "Full site →",
       },
       nav: [
         { label: "Expertise", target: "expertise" },
         { label: "Projects", target: "solutions-intro" },
+        { label: "Blog", target: "blog" },
         { label: "Knowledge Hub", target: "podcast" },
       ],
       cta: {
@@ -557,12 +738,148 @@ window.PRO_ALGORITHM = {
           },
         ],
       },
+      blogs: {
+        eyebrow: "From our blog",
+        title: "Technology, Real Estate & Construction",
+        body: "Practical insights on AI, automation, and engineering in construction — plus the broader Pro Algorithm technology ecosystem.",
+        items: [
+          {
+            slug: "gnn-autonomous-planning",
+            type: "internal",
+            title: "How GNNs Turn Interior Planning into an Autonomous Process",
+            excerpt:
+              "Graph Neural Networks learn your planning logic and perform smart spatial layout of partitions, doors, and openings — without repetitive manual work.",
+            image: "assets/images/projects images/projects-image-1.png",
+            body: [
+              "In construction and real estate, complex interior planning is one of the most time-consuming engineering processes. Every project requires balancing regulatory requirements, organizational logic, and spatial constraints — often thousands of small decisions that add up to weeks of work.",
+              "At Pro Algorithm, we train Graph Neural Network (GNN) models that understand relationships between elements in a plan — walls, openings, partitions, and systems — not just their geometric positions. The model learns your organization's unique logic and applies it to new plans.",
+              "The result: full automation of finishing stages, from smart placement of individual doors and openings to complete spatial layout of partition and drywall systems. Fewer errors, more consistency, and teams focused on strategic decisions instead of repetitive work.",
+              "Want to see how this works in real projects? Browse our solutions gallery or learn more about our areas of expertise.",
+            ],
+            links: [
+              { label: "Solutions gallery", href: "/#solutions" },
+              { label: "Areas of expertise", href: "/#expertise" },
+              { label: "Contact us", href: "/#contact" },
+            ],
+          },
+          {
+            slug: "hybrid-quality-control",
+            type: "internal",
+            title: "Hybrid Quality Control: When Algorithms and Engineering Meet the Field",
+            excerpt:
+              "Validation engines combining classic engineering with AI analysis identify gaps between plans and execution — before they become site issues.",
+            image: "assets/images/projects images/projects-image-3.png",
+            body: [
+              "One of the most painful problems in construction projects is the gap between what was planned and what actually happens in the field. Graphical comparison between drawings isn't always enough — because it doesn't understand the engineering and semantic context behind each element.",
+              "Our hybrid constructive quality control solution combines complex engineering algorithms with AI model analysis capabilities. The system performs smart cross-referencing between structural plans and execution drawings, identifying logical and physical gaps before reaching the field.",
+              "Our clients — leading developers, contractors, and engineering firms — save months of manual work and repeated reviews. Fewer site corrections mean fewer delays, lower costs, and better margins.",
+              "Explore our solutions and see who we work with.",
+            ],
+            links: [
+              { label: "Our solutions", href: "/#solutions" },
+              { label: "Our clients", href: "/#customers" },
+              { label: "Media coverage", href: "/#media" },
+            ],
+          },
+          {
+            slug: "dwg-to-bim-transformation",
+            type: "internal",
+            title: "From DWG to BIM: Why Smart Transformation Changes the Game",
+            excerpt:
+              "Machine Learning models that recognize architectural patterns in 2D drawings and translate them into information-rich 3D elements.",
+            image: "assets/images/projects images/projects-image-5.png",
+            body: [
+              "Moving from 2D drawings to an advanced BIM environment is one of the industry's biggest challenges. Many organizations sit on enormous DWG archives — but the information remains flat, unlinked, and not available for automated analysis.",
+              "We develop Machine Learning models for identifying engineering objects. The algorithms analyze 2D drawings, recognize architectural patterns, and translate them in real time into information-rich 3D elements within a Revit environment.",
+              "This isn't just time savings — it's a fundamental change in the organization's ability to manage data, perform quality control, and integrate AI into planning processes. The BIM infrastructure becomes the foundation for all future automation.",
+              "Hear more about the technology on our podcast, or get in touch to discuss your project.",
+            ],
+            links: [
+              { label: "Solutions gallery", href: "/#solutions" },
+              { label: "Podcast", href: "/#podcast" },
+              { label: "Contact us", href: "/#contact" },
+            ],
+          },
+          {
+            slug: "pro-algorithm-main-site",
+            type: "external",
+            title: "Pro Algorithm: Where Advanced Technology Meets Real Business Results",
+            excerpt:
+              'In a market where every business is told it "needs AI," we start with your business problem — not the buzzword.',
+            image: "assets/images/blog/pro-algorithm.png",
+            externalUrl: "https://pro-algorithm.co.il/",
+            cta: "Visit us at pro-algorithm.co.il",
+            body: [
+              'In a market where every business is told it "needs AI," Pro Algorithm takes a different approach — we start with your business problem, not with the buzzword. Pro Algorithm is an Israeli software, AI, and automation company that builds advanced web systems, custom algorithms, and intelligent solutions tailored to the way your organization actually works.',
+              "Our main site is the home of everything we do: an overview of our services, our thinking, and the knowledge we share. You'll find our blog, where we break down practical AI and automation topics in plain language, and our podcast, where we dive into technology, development, and the future of intelligent business systems.",
+              "What sets us apart is depth. We don't deliver templates — we design and engineer systems from the ground up: data pipelines, AI-powered workflows, and web platforms that scale with you. From first consultation to production deployment, you work with a team that understands both the code and the business behind it.",
+              "Explore the site, read the blog, listen to the podcast — and when you're ready to see what a custom-built algorithm can do for your business, we're one message away.",
+            ],
+          },
+          {
+            slug: "pro-algorithm-software-house",
+            type: "external",
+            title: "The Boutique Israeli Software House Behind Custom Apps, SaaS, and AI Systems",
+            excerpt:
+              "Some companies buy off-the-shelf software and force their business to fit it. The smart ones build software that fits their business.",
+            image: "assets/images/blog/pro-algo.png",
+            externalUrl: "https://www.pro-algo.com/",
+            cta: "Get a free consultation at pro-algo.com",
+            body: [
+              "Some companies buy off-the-shelf software and force their business to fit it. The smart ones build software that fits their business. That's exactly what we do at Pro Algorithm — a boutique, 100% Israeli software house specializing in custom application development, advanced SaaS platforms, AI integration, and end-to-end automation.",
+              "Our development site, pro-algo.com, showcases how we work: a hand-picked team of experienced engineers and AI specialists who sit with you, understand your processes, and build systems that simply work. Our portfolio spans custom business applications, e-commerce and mobile solutions, and intelligent automation that runs 24/7.",
+              "Our clients tell the story best: companies that replaced three separate systems with one platform we built for them, teams that turned complex engineering files into automated error-detection systems and saved months of manual work, and businesses whose AI-powered SaaS products meaningfully grew their revenue.",
+              "If you're looking for a technology partner that understands both the business side and the engineering side — and delivers production-grade systems, not prototypes — this is where to start.",
+            ],
+          },
+          {
+            slug: "tzach-dabush-portfolio",
+            type: "external",
+            title: "Meet the Mind Behind Pro Algorithm: Tzach Dabush on AI, NLP, and Applied Research",
+            excerpt:
+              "Behind every strong technology company stands someone who lives and breathes the field — a founder and CTO with academic depth in AI and NLP.",
+            image: "assets/images/blog/tzach-dabush.jpg",
+            externalUrl: "https://tzach-dabush.com/",
+            cta: "Read more at tzach-dabush.com",
+            body: [
+              "Behind every strong technology company stands someone who lives and breathes the field. Tzach Dabush — founder and CTO of Pro Algorithm — brings together hands-on engineering leadership with academic depth in artificial intelligence and natural language processing.",
+              "His personal site, tzach-dabush.com, is a professional portfolio showcasing his research work, collaborations with leading professors, and publications in AI and NLP. It's also home to his articles: in-depth, accessible pieces that explore where AI is heading, how language models actually work, and how research findings translate into systems that businesses can rely on.",
+              "This blend is what shapes Pro Algorithm's DNA. The company's solutions aren't built on hype or on repackaged tools — they're grounded in a genuine understanding of the algorithms underneath, refined through both research and years of building production systems for real clients.",
+              "If you want to understand the thinking behind the technology — or simply enjoy sharp, well-written content about AI and NLP — Tzach's articles are a great place to start.",
+            ],
+          },
+        ],
+      },
       contact: {
         successMessage: "Thank you for your message! We'll get back to you soon.",
       },
       footer: {
         title: "Want to learn more about our solutions? Get in touch",
         body: "An Israeli software house developing AI and GNN solutions for real estate, architecture, and engineering.",
+        relatedSites: {
+          eyebrow: "Our ecosystem",
+          title: "More Pro Algorithm websites",
+          items: [
+            {
+              name: "Pro Algorithm",
+              url: "https://pro-algorithm.co.il/",
+              description: "Main site — services, blog, podcast, and our approach to AI and automation",
+              image: "assets/images/blog/pro-algorithm.png",
+            },
+            {
+              name: "Pro Algorithm — Software House",
+              url: "https://www.pro-algo.com/",
+              description: "Custom apps, SaaS platforms, and tailored AI systems",
+              image: "assets/images/blog/pro-algo.png",
+            },
+            {
+              name: "Tzach Dabush",
+              url: "https://tzach-dabush.com/",
+              description: "Portfolio, research, and articles on AI, NLP, and applied technology",
+              image: "assets/images/blog/tzach-dabush.jpg",
+            },
+          ],
+        },
         copyright: "© 2026 Pro Algorithm. All rights reserved.",
         socials: [
           { label: "YouTube", url: "https://www.youtube.com/@ProAlgorithm-israel/videos", icon: "fab fa-youtube" },

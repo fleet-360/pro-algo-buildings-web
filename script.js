@@ -42,6 +42,18 @@
   const pad = (number) => String(number).padStart(2, "0");
   const ui = () => content.ui || {};
 
+  function isLocalDevHost() {
+    const host = window.location.hostname.toLowerCase();
+    return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+  }
+
+  function blogPostUrl(slug) {
+    const encoded = encodeURIComponent(slug);
+    return isLocalDevHost()
+      ? `/blog/post.html?slug=${encoded}`
+      : `/blog/${encoded}`;
+  }
+
   const CONTACT_API = {
     url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
   };
@@ -100,18 +112,54 @@
     const mediaList = $("[data-media-list]");
     if (mediaList) mediaList.setAttribute("aria-label", strings.mediaSection);
 
+    const blogSection = $("#blog");
+    if (blogSection) blogSection.setAttribute("aria-label", strings.blogSection);
+
+    const blogList = $("[data-blog-list]");
+    if (blogList) blogList.setAttribute("aria-label", strings.blogSection);
+
     $$('[data-scroll-prev="media"]').forEach((button) => {
       button.setAttribute("aria-label", strings.scrollPrev);
     });
     $$('[data-scroll-next="media"]').forEach((button) => {
       button.setAttribute("aria-label", strings.scrollNext);
     });
+    $$('[data-scroll-prev="blog"]').forEach((button) => {
+      button.setAttribute("aria-label", strings.scrollPrev);
+    });
+    $$('[data-scroll-next="blog"]').forEach((button) => {
+      button.setAttribute("aria-label", strings.scrollNext);
+    });
+  }
+
+  function resolveSiteUrl() {
+    return (i18nRoot.seo?.siteUrl || window.location.origin).replace(/\/$/, "");
+  }
+
+  function hydrateSeoMeta() {
+    const siteUrl = resolveSiteUrl();
+    const canonical = $("[data-canonical]");
+    if (canonical) canonical.href = `${siteUrl}/`;
+
+    setMeta('[data-og-title]', content.meta.title);
+    setMeta('[data-og-description]', content.meta.description);
+    setMeta('[data-og-url]', `${siteUrl}/`);
+
+    const ogImage = `${siteUrl}/${content.assets.logo.replace(/^\//, "")}`;
+    setMeta('meta[property="og:image"]', ogImage);
+  }
+
+  function setMeta(selector, value) {
+    const node = $(selector);
+    if (node && value) node.setAttribute("content", value);
   }
 
   function hydrateStaticContent() {
     document.title = content.meta.title;
     const description = $('meta[name="description"]');
     if (description) description.content = content.meta.description;
+
+    hydrateSeoMeta();
 
     $$("[data-logo]").forEach((image) => {
       image.src = content.assets.logo;
@@ -125,6 +173,11 @@
     setText('[data-content="solutions-title"]', content.solutionsIntro.title);
     setText('[data-content="customers-eyebrow"]', content.customers.eyebrow);
     setText('[data-content="customers-title"]', content.customers.title);
+    setText('[data-content="blog-eyebrow"]', content.blogs?.eyebrow);
+    setText('[data-content="blog-title"]', content.blogs?.title);
+    setText('[data-content="blog-body"]', content.blogs?.body);
+    setText('[data-content="related-sites-eyebrow"]', content.footer.relatedSites?.eyebrow);
+    setText('[data-content="related-sites-title"]', content.footer.relatedSites?.title);
     setText('[data-content="podcast-eyebrow"]', content.podcast.eyebrow);
     setText('[data-content="podcast-title"]', content.podcast.title);
     setText('[data-content="podcast-body"]', content.podcast.body);
@@ -330,6 +383,56 @@
       .join("");
   }
 
+  function renderBlogs() {
+    const list = $("[data-blog-list]");
+    if (!list || !content.blogs?.items?.length) return;
+
+    const readMore = ui().readBlogPost || "Read article →";
+
+    list.innerHTML = content.blogs.items
+      .map(
+        (item) => `
+          <a class="blog-card" href="${blogPostUrl(item.slug)}" data-animate>
+            <span class="blog-card-media">
+              <img src="${item.image}" alt="" loading="lazy" />
+            </span>
+            <span class="blog-card-content">
+              <span class="blog-card-type">${item.type === "external" ? (locale === "he" ? "אתר חיצוני" : "External") : (locale === "he" ? "מאמר" : "Article")}</span>
+              <span class="blog-card-title">${item.title}</span>
+              <span class="blog-card-excerpt">${item.excerpt}</span>
+              <span class="blog-card-link">${readMore}</span>
+            </span>
+          </a>
+        `,
+      )
+      .join("");
+  }
+
+  function renderRelatedSites() {
+    const list = $("[data-related-sites]");
+    const sites = content.footer.relatedSites?.items;
+    if (!list || !sites?.length) return;
+
+    const visitLabel = ui().visitSite || "Visit site →";
+
+    list.innerHTML = sites
+      .map(
+        (site) => `
+          <a class="related-site-card" href="${site.url}" target="_blank" rel="noreferrer">
+            <span class="related-site-media">
+              <img src="${site.image}" alt="" loading="lazy" />
+            </span>
+            <span class="related-site-copy">
+              <span class="related-site-name">${site.name}</span>
+              <span class="related-site-description">${site.description}</span>
+              <span class="related-site-link">${visitLabel}</span>
+            </span>
+          </a>
+        `,
+      )
+      .join("");
+  }
+
   function renderPodcast() {
     const list = $("[data-podcast-list]");
     const [featured, ...sideItems] = content.podcast.items;
@@ -470,6 +573,21 @@
         closeMobileMenu();
       });
     });
+  }
+
+  function scrollToHashTarget() {
+    const hash = window.location.hash;
+    if (!hash || hash === "#") return;
+
+    const target = $(hash);
+    if (!target) return;
+
+    const splashVisible = $("#splash") && !sessionStorage.getItem("pro-algorithm-splash-seen");
+    const delay = splashVisible ? 2200 : 120;
+
+    window.setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, delay);
   }
 
   function setupMobileMenu() {
@@ -648,6 +766,7 @@
     const tracks = {
       podcast: $("[data-podcast-list]"),
       media: $("[data-media-list]"),
+      blog: $("[data-blog-list]"),
     };
 
     $$("[data-scroll-prev]").forEach((button) => {
@@ -660,7 +779,7 @@
   }
 
   function setupKeyboardScroll() {
-    $$(".carousel, .media-layout").forEach((track) => {
+    $$(".carousel, .media-layout, .blog-layout").forEach((track) => {
       track.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
@@ -795,12 +914,15 @@
     renderStats();
     initCounters();
     renderCustomers();
+    renderBlogs();
+    renderRelatedSites();
     renderPodcast();
     renderMedia();
     renderSocials();
     setupLanguageSwitcher();
     setupMobileMenu();
     setupSmoothNav();
+    scrollToHashTarget();
     setupRevealAnimations();
     setupSolutionSlider();
     setupCarousels();
