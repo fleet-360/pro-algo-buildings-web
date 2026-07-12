@@ -55,7 +55,7 @@
   }
 
   const CONTACT_API = {
-    url: "https://fleet360-server-1069352823739.me-west1.run.app/contact/buildings",
+    url: "https://api.fleet360.co.il/contact/buildings",
   };
 
   function applyDocumentLocale() {
