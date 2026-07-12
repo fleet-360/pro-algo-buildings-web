@@ -1,9 +1,9 @@
 window.PRO_ALGORITHM = {
   englishDomains: ["buildalgo.com", "www.buildalgo.com"],
   assets: {
-    logo: "assets/images/company logos/MAIN-LOGO.png",
-    logoWhite: "assets/images/company logos/MAIN-LOGO white.png",
-    logoIcon: "assets/images/company logos/Favicon-black.png",
+    logo: "assets/images/company-logos/MAIN-LOGO.png",
+    logoWhite: "assets/images/company-logos/MAIN-LOGO white.png",
+    logoIcon: "assets/images/company-logos/Favicon-black.png",
     heroFallback: "assets/images/fallback/hero-fallback.svg",
     heroVideo: "assets/videos/hero-logo-background-video.mp4",
     heroVideoSmall: "assets/videos/hero-video-small-logo.mp4",
