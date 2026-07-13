@@ -1,53 +1,93 @@
 {
   "redirects": [
     {
-      "source": "/pro-algorithm",
-      "destination": "/#hero",
-      "permanent": true
-    },
-    {
-      "source": "/pro-algo",
-      "destination": "/#solutions",
-      "permanent": true
-    },
-    {
-      "source": "/build",
-      "destination": "/#solutions",
-      "permanent": true
-    },
-    {
       "source": "/ai",
-      "destination": "/#expertise",
+      "destination": "/blog/gnn-autonomous-planning",
       "permanent": true
     },
     {
       "source": "/gnn",
-      "destination": "/#expertise",
+      "destination": "/blog/gnn-autonomous-planning",
       "permanent": true
     },
     {
-      "source": "/bim",
-      "destination": "/#solutions",
+      "source": "/בינה-מלאכותית",
+      "destination": "/blog/gnn-autonomous-planning",
+      "permanent": true
+    },
+    {
+      "source": "/אדריכלות",
+      "destination": "/blog/gnn-autonomous-planning",
+      "permanent": true
+    },
+    {
+      "source": "/הנדסה",
+      "destination": "/blog/hybrid-quality-control",
       "permanent": true
     },
     {
       "source": "/construction",
-      "destination": "/#solutions",
+      "destination": "/blog/hybrid-quality-control",
       "permanent": true
     },
     {
-      "source": "/real-estate",
-      "destination": "/#hero",
+      "source": "/בנייה",
+      "destination": "/blog/hybrid-quality-control",
       "permanent": true
     },
     {
-      "source": "/automation",
-      "destination": "/#solutions",
+      "source": "/תכנון",
+      "destination": "/blog/hybrid-quality-control",
+      "permanent": true
+    },
+    {
+      "source": "/build",
+      "destination": "/blog/hybrid-quality-control",
+      "permanent": true
+    },
+    {
+      "source": "/bim",
+      "destination": "/blog/dwg-to-bim-transformation",
       "permanent": true
     },
     {
       "source": "/revit",
-      "destination": "/#solutions",
+      "destination": "/blog/dwg-to-bim-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/automation",
+      "destination": "/blog/dwg-to-bim-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/אוטומציה",
+      "destination": "/blog/dwg-to-bim-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/pro-algorithm",
+      "destination": "/blog/pro-algorithm-main-site",
+      "permanent": true
+    },
+    {
+      "source": "/פרו-אלגוריתם",
+      "destination": "/blog/pro-algorithm-main-site",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate",
+      "destination": "/blog/pro-algorithm-main-site",
+      "permanent": true
+    },
+    {
+      "source": "/נדלן",
+      "destination": "/blog/pro-algorithm-main-site",
+      "permanent": true
+    },
+    {
+      "source": "/pro-algo",
+      "destination": "/blog/pro-algorithm-software-house",
       "permanent": true
     },
     {
@@ -68,46 +108,6 @@
     {
       "source": "/media",
       "destination": "/#media",
-      "permanent": true
-    },
-    {
-      "source": "/נדלן",
-      "destination": "/#hero",
-      "permanent": true
-    },
-    {
-      "source": "/בנייה",
-      "destination": "/#solutions",
-      "permanent": true
-    },
-    {
-      "source": "/אדריכלות",
-      "destination": "/#expertise",
-      "permanent": true
-    },
-    {
-      "source": "/בינה-מלאכותית",
-      "destination": "/#expertise",
-      "permanent": true
-    },
-    {
-      "source": "/אוטומציה",
-      "destination": "/#solutions",
-      "permanent": true
-    },
-    {
-      "source": "/תכנון",
-      "destination": "/#solutions",
-      "permanent": true
-    },
-    {
-      "source": "/הנדסה",
-      "destination": "/#expertise",
-      "permanent": true
-    },
-    {
-      "source": "/פרו-אלגוריתם",
-      "destination": "/#hero",
       "permanent": true
     },
     {

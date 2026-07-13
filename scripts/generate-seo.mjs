@@ -14,11 +14,14 @@ function loadContent() {
 }
 
 function generateRedirects(seo) {
-  return (seo.redirects || []).map(({ path, section }) => ({
-    source: path,
-    destination: `/#${section}`,
-    permanent: true,
-  }));
+  return (seo.redirects || []).map((item) => {
+    const destination = item.destination || (item.section ? `/#${item.section}` : "/");
+    return {
+      source: item.path,
+      destination,
+      permanent: true,
+    };
+  });
 }
 
 function collectBlogSlugs(locales) {
