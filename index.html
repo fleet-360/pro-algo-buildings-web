@@ -128,51 +128,44 @@
     </header>
 
     <main id="main">
-      <section class="hero section-dark" id="hero" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true" data-hero-media></div>
-        <div class="hero-overlay" aria-hidden="true"></div>
-        <div class="container hero-inner" data-animate>
-          <article class="hero-card">
-            <p class="eyebrow" data-content="hero-eyebrow"></p>
-            <h1 id="hero-title" data-content="hero-title"></h1>
-            <p data-content="hero-body"></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="expertise" id="expertise" aria-labelledby="expertise-heading">
-        <div class="container section-heading" data-animate>
-          <p class="section-kicker" data-content="expertise-eyebrow"></p>
-          <h2 id="expertise-heading" data-content="expertise-title"></h2>
-        </div>
-        <div class="container expertise-stage" data-animate="scroll">
-          <div class="expertise-grid" data-expertise-list></div>
-        </div>
-      </section>
-
-      <section class="solutions-intro" aria-labelledby="solutions-heading">
-        <div class="container section-heading" data-animate>
-          <p class="section-kicker" id="solutions-intro" data-content="solutions-eyebrow"></p>
-          <h2 id="solutions-heading" data-content="solutions-title"></h2>
-        </div>
-      </section>
-
-      <section class="solutions" id="solutions" aria-label="פתרונות">
-        <div class="solutions-shell">
-          <div class="solutions-media" data-projects-media aria-hidden="true"></div>
-          <div class="solution-viewport" data-solutions-track tabindex="0" aria-label="גלריית פתרונות"></div>
-          <div class="solution-controls" aria-label="ניווט פתרונות">
-            <div class="solution-count" aria-live="polite">
-              <span data-solution-current>01</span>
-              <span>/</span>
-              <span data-solution-total>05</span>
+      <section class="hero story-hero section-dark" id="hero" aria-labelledby="hero-title">
+        <div class="story-sticky" data-story-sticky>
+          <div class="story-poster" aria-hidden="true" data-story-poster></div>
+          <canvas class="story-canvas" aria-hidden="true" data-story-canvas></canvas>
+          <div class="story-fade" aria-hidden="true" data-story-fade></div>
+          <div class="story-stage" data-story-stage>
+            <div class="story-act story-act--title" data-story-act="title">
+              <h1 id="hero-title" data-content="hero-title"></h1>
+              <p class="story-lead" data-content="hero-body"></p>
+            </div>
+            <div class="story-act story-act--expertise" data-story-act="expertise">
+              <p class="story-act-label" data-content="story-expertise-label"></p>
+              <div class="story-chips" data-story-expertise></div>
+            </div>
+            <div class="story-act story-act--stats" data-story-act="stats">
+              <p class="story-act-label" data-content="story-stats-label"></p>
+              <div class="story-stats" data-story-stats></div>
+            </div>
+            <div class="story-act story-act--bridge" data-story-act="bridge">
+              <p class="story-caption" data-content="story-bridge"></p>
+            </div>
+            <div class="story-act story-act--solutions" data-story-act="solutions">
+              <p class="story-act-label" data-content="story-solutions-label"></p>
+              <div class="story-solutions" data-story-solutions></div>
+            </div>
+            <div class="story-act story-act--closing" data-story-act="closing">
+              <p class="story-closing-eyebrow" data-content="story-closing-eyebrow"></p>
+              <h2 class="story-closing-title" data-content="story-closing-title"></h2>
+              <p class="story-closing-body" data-content="story-closing-body"></p>
+              <a class="story-cta" href="#contact" data-content="story-closing-cta"></a>
             </div>
           </div>
+          <nav class="story-progress" data-story-progress aria-label="פרקי הסיפור"></nav>
+          <div class="story-scroll-hint" data-story-hint>
+            <span data-content="hero-scroll-hint"></span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </div>
         </div>
-      </section>
-
-      <section class="stats" aria-label="נתונים" data-animate>
-        <div class="container stats-grid" data-stats-list></div>
       </section>
 
       <section class="customers" id="customers" aria-labelledby="customers-heading">

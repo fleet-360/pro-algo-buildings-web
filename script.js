@@ -169,8 +169,11 @@
     });
     setText('[data-content="hero-title"]', content.hero.title);
     setText('[data-content="hero-body"]', content.hero.body);
-    setText('[data-content="solutions-eyebrow"]', content.solutionsIntro.eyebrow);
-    setText('[data-content="solutions-title"]', content.solutionsIntro.title);
+    setText('[data-content="hero-scroll-hint"]', content.hero.scrollHint);
+    setText('[data-content="story-expertise-label"]', content.hero.acts?.expertiseLabel);
+    setText('[data-content="story-stats-label"]', content.hero.acts?.statsLabel);
+    setText('[data-content="story-bridge"]', content.hero.acts?.bridge);
+    setText('[data-content="story-solutions-label"]', content.hero.acts?.solutionsLabel);
     setText('[data-content="customers-eyebrow"]', content.customers.eyebrow);
     setText('[data-content="customers-title"]', content.customers.title);
     setText('[data-content="blog-eyebrow"]', content.blogs?.eyebrow);
@@ -211,161 +214,421 @@
     mobileNav.innerHTML = links;
   }
 
-  function renderHeroMedia() {
-    const heroMedia = $("[data-hero-media]");
-    if (!heroMedia || !content.assets.heroVideo) return;
+  // Scroll-driven storytelling hero: scrubs a WebP frame sequence on a canvas
+  // inside a pinned (sticky) section, Apple-style. The site's own content
+  // (expertise, stats, solutions) materializes as HUD overlays anchored to the
+  // video's narrative beats, and the fixed header gives way to a labeled
+  // progress rail for the duration of the story.
+  const STORY_BEATS = {
+    title: { in: [0, 0], out: [0.055, 0.09] },
+    expertise: { in: [0.1, 0.13], out: [0.285, 0.315] },
+    stats: { in: [0.33, 0.36], out: [0.47, 0.5] },
+    bridge: { in: [0.505, 0.53], out: [0.55, 0.575] },
+    solutions: { in: [0.585, 0.615], out: [0.835, 0.865] },
+    closing: { in: [0.885, 0.92], out: [2, 3] },
+  };
+  const STORY_ANCHORS = [
+    { key: "title", progress: 0 },
+    { key: "expertise", progress: 0.115 },
+    { key: "stats", progress: 0.345 },
+    { key: "solutions", progress: 0.61 },
+    { key: "closing", progress: 0.93 },
+  ];
+  const STORY_CHIP_START = 0.135;
+  const STORY_CHIP_STEP = 0.036;
 
-    const markReady = () => {
-      heroMedia.classList.add("is-video-ready");
-    };
+  let scrollToStoryAnchor = null;
 
-    const createHeroVideo = (src, className) => {
-      const video = document.createElement("video");
-      video.className = className;
-      video.autoplay = true;
-      video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.preload = "auto";
-      video.setAttribute("aria-hidden", "true");
+  function initStoryHero() {
+    const section = $(".story-hero");
+    const sticky = $("[data-story-sticky]");
+    const canvas = $("[data-story-canvas]");
+    const poster = $("[data-story-poster]");
+    const stage = $("[data-story-stage]");
+    const progressRail = $("[data-story-progress]");
+    const fadeOverlay = $("[data-story-fade]");
+    const hint = $("[data-story-hint]");
+    const siteHeader = $(".site-header");
+    const config = content.assets.storyFrames;
+    if (!section || !sticky || !canvas || !stage || !config) return;
 
-      video.addEventListener("loadeddata", markReady, { once: true });
-      video.addEventListener("canplay", markReady, { once: true });
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const formatNumber = (value) =>
+      value.toLocaleString(locale === "he" ? "he-IL" : "en-US");
 
-      const source = document.createElement("source");
-      source.src = src;
-      source.type = "video/mp4";
-      video.append(source);
-      return video;
-    };
+    const actNodes = {};
+    $$("[data-story-act]", stage).forEach((node) => {
+      actNodes[node.dataset.storyAct] = node;
+    });
 
-    const desktopVideo = createHeroVideo(
-      content.assets.heroVideo,
-      "hero-video hero-video--desktop",
-    );
-    heroMedia.prepend(desktopVideo);
-
-    if (content.assets.heroVideoSmall) {
-      const mobileVideo = createHeroVideo(
-        content.assets.heroVideoSmall,
-        "hero-video hero-video--mobile",
-      );
-      heroMedia.prepend(mobileVideo);
-
-      const mqSmall = window.matchMedia("(max-width: 519px)");
-      const mqMobile = window.matchMedia("(max-width: 900px)");
-
-      const syncPlayback = () => {
-        if (!mqMobile.matches) {
-          mobileVideo.pause();
-          desktopVideo.play().catch(() => {});
-          return;
-        }
-
-        if (mqSmall.matches) {
-          desktopVideo.pause();
-          mobileVideo.play().catch(() => {});
-          return;
-        }
-
-        mobileVideo.pause();
-        desktopVideo.play().catch(() => {});
-      };
-
-      syncPlayback();
-      mqSmall.addEventListener("change", syncPlayback);
-      mqMobile.addEventListener("change", syncPlayback);
-    }
-  }
-
-  function renderProjectsMedia() {
-    const projectsMedia = $("[data-projects-media]");
-    if (!projectsMedia || !content.assets.projectsVideo) return;
-
-    const video = document.createElement("video");
-    video.autoplay = true;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.setAttribute("aria-hidden", "true");
-
-    const source = document.createElement("source");
-    source.src = content.assets.projectsVideo;
-    source.type = "video/mp4";
-    video.append(source);
-    projectsMedia.prepend(video);
-  }
-
-  function renderExpertise() {
-    const list = $("[data-expertise-list]");
-    const checkIcon = content.assets.icons.expertise;
-    const total = content.expertise.length;
-    list.innerHTML = content.expertise
-      .map(
-        (item, index) => `
-          <article class="expertise-card" style="--expertise-stagger: ${total - 1 - index}">
-            <img class="check-icon" src="${checkIcon}" alt="" aria-hidden="true" loading="lazy" />
-            <h3>${item.title}</h3>
-            <p>${item.body}</p>
-          </article>
-        `,
-      )
-      .join("");
-
-    const stage = $(".expertise-stage");
-    if (stage && content.assets.expertiseScrollSide) {
-      stage.style.setProperty(
-        "--expertise-scroll-mobile",
-        `url("${content.assets.expertiseScrollSide}")`,
-      );
-    }
-  }
-
-  function renderSolutions() {
-    const track = $("[data-solutions-track]");
-    const ofLabel = ui().solutionOf || "of";
-    track.innerHTML = content.solutions
-      .map(
-        (item, index) => `
-          <article class="solution-slide" data-solution-slide aria-label="${pad(index + 1)} ${ofLabel} ${pad(content.solutions.length)}">
-            <div class="solution-visual" aria-hidden="true">
-              <img src="${item.image}" alt="" loading="lazy" />
-            </div>
-            <div class="solution-content">
-              <h3>${item.title}</h3>
-              <div class="solution-tags">
-                ${item.bullets.map((bullet) => `<span class="solution-label">${bullet}</span>`).join("")}
+    // --- Build the HUD overlays from the site's existing content ---
+    const chipsRoot = $("[data-story-expertise]");
+    if (chipsRoot) {
+      const checkIcon = content.assets.icons.expertise;
+      chipsRoot.innerHTML = (content.expertise || [])
+        .map(
+          (item) => `
+            <article class="story-chip">
+              <img src="${checkIcon}" alt="" aria-hidden="true" loading="lazy" />
+              <div class="story-chip-copy">
+                <h3>${item.title}</h3>
+                <p>${item.body}</p>
               </div>
-              <button type="button" class="solution-toggle" aria-expanded="false">
-                ${content.solutionsIntro.readMore || "Read more → "}
-              </button>
-              <p class="solution-body">${item.body}</p>
-            </div>
-          </article>
-        `,
-      )
-      .join("");
+            </article>
+          `,
+        )
+        .join("");
+    }
+    const chipNodes = $$(".story-chip", stage);
 
-    $("[data-solution-total]").textContent = pad(content.solutions.length);
-  }
+    const statsRoot = $("[data-story-stats]");
+    if (statsRoot) {
+      statsRoot.innerHTML = (content.stats || [])
+        .map(
+          (item) => `
+            <article class="story-stat">
+              <strong class="story-stat-value">
+                <span data-story-number data-target="${item.value}">0</span>
+                <span class="story-stat-suffix">${item.suffix || ""}</span>
+              </strong>
+              <h3>${item.title}</h3>
+              <p>${item.body}</p>
+            </article>
+          `,
+        )
+        .join("");
+    }
+    const statNumbers = $$("[data-story-number]", stage);
 
-  function renderStats() {
-    const list = $("[data-stats-list]");
-    list.innerHTML = content.stats
-      .map(
-        (item) => `
-          <article class="stat-card" data-animate>
-            <img class="stat-icon" src="${item.icon}" alt="" loading="lazy" />
-            <strong class="stat-value">
-              <span class="stat-number" data-target="${item.value}">0</span>
-              <span class="stat-suffix">${item.suffix ? ` ${item.suffix}` : ""}</span>
-            </strong>
-            <h3 class="stat-title">${item.title}</h3>
-            <p class="stat-label">${item.body}</p>
-          </article>
-        `,
-      )
-      .join("");
+    const solutionsRoot = $("[data-story-solutions]");
+    if (solutionsRoot) {
+      const solutions = content.solutions || [];
+      const total = pad(solutions.length);
+      solutionsRoot.innerHTML = solutions
+        .map(
+          (item, index) => `
+            <article class="story-solution" data-story-solution>
+              <p class="story-solution-index">${pad(index + 1)}<span> / ${total}</span></p>
+              <h3>${item.title}</h3>
+              <div class="story-solution-tags">
+                ${item.bullets.map((bullet) => `<span>${bullet}</span>`).join("")}
+              </div>
+              <p class="story-solution-body">${item.body}</p>
+            </article>
+          `,
+        )
+        .join("");
+    }
+    const solutionNodes = $$("[data-story-solution]", stage);
+
+    const closing = content.hero.acts?.closing || {};
+    setText('[data-content="story-closing-eyebrow"]', closing.eyebrow);
+    setText('[data-content="story-closing-title"]', closing.title);
+    setText('[data-content="story-closing-body"]', closing.body);
+    setText('[data-content="story-closing-cta"]', closing.cta);
+
+    const reducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      new URLSearchParams(window.location.search).has("reduced");
+
+    const mqMobile = window.matchMedia("(max-width: 900px)");
+    const posterFor = () => (mqMobile.matches ? config.posterMobile : config.posterDesktop);
+    if (poster && posterFor()) poster.style.backgroundImage = `url("${posterFor()}")`;
+
+    if (reducedMotion || !canvas.getContext) {
+      section.classList.add("story-hero--static");
+      chipNodes.forEach((chip) => chip.classList.add("is-on"));
+      statNumbers.forEach((node) => {
+        node.textContent = formatNumber(parseInt(node.dataset.target, 10) || 0);
+      });
+      scrollToStoryAnchor = (key) => {
+        const node = actNodes[key];
+        if (node) node.scrollIntoView({ behavior: "smooth", block: "center" });
+      };
+      return;
+    }
+
+    const ctx = canvas.getContext("2d");
+    const frameCount = config.count;
+    const frames = new Array(frameCount).fill(null);
+    const requested = new Set();
+    let frameTemplate = mqMobile.matches ? config.mobilePath : config.desktopPath;
+    let loadGeneration = 0;
+    let firstFrameDrawn = false;
+
+    const frameSrc = (index) =>
+      frameTemplate.replace("{index}", String(index).padStart(3, "0"));
+
+    function loadFrame(index, generation) {
+      if (frames[index] || requested.has(index)) return Promise.resolve();
+      requested.add(index);
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.decoding = "async";
+        image.onload = () => {
+          if (generation === loadGeneration) {
+            frames[index] = image;
+            if (!firstFrameDrawn) scheduleTick();
+          }
+          resolve();
+        };
+        image.onerror = () => resolve();
+        image.src = frameSrc(index);
+      });
+    }
+
+    async function loadFramesProgressively() {
+      const generation = loadGeneration;
+      for (const stride of [8, 4, 2, 1]) {
+        const batch = [];
+        for (let i = 0; i < frameCount; i += stride) {
+          batch.push(loadFrame(i, generation));
+        }
+        await Promise.all(batch);
+        if (generation !== loadGeneration) return;
+        scheduleTick();
+      }
+    }
+
+    function nearestLoadedFrame(index) {
+      const bounded = clamp(Math.round(index), 0, frameCount - 1);
+      if (frames[bounded]) return frames[bounded];
+      for (let distance = 1; distance < frameCount; distance += 1) {
+        const before = frames[bounded - distance];
+        if (before) return before;
+        const after = frames[bounded + distance];
+        if (after) return after;
+      }
+      return null;
+    }
+
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.round(sticky.clientWidth * dpr);
+      const height = Math.round(sticky.clientHeight * dpr);
+      if (width === canvasWidth && height === canvasHeight) return false;
+      canvasWidth = canvas.width = width;
+      canvasHeight = canvas.height = height;
+      return true;
+    }
+
+    function drawFrame(frameIndex) {
+      const image = nearestLoadedFrame(frameIndex);
+      if (!image || !canvasWidth || !canvasHeight) return;
+      const iw = image.naturalWidth;
+      const ih = image.naturalHeight;
+      const scale = Math.max(canvasWidth / iw, canvasHeight / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      ctx.drawImage(image, (canvasWidth - dw) / 2, (canvasHeight - dh) / 2, dw, dh);
+      if (!firstFrameDrawn) {
+        firstFrameDrawn = true;
+        section.classList.add("story-hero--ready");
+      }
+    }
+
+    function sectionProgress() {
+      const rect = section.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      if (total <= 0) return 0;
+      return clamp(-rect.top / total, 0, 1);
+    }
+
+    function scrollToProgress(progress) {
+      const total = section.offsetHeight - window.innerHeight;
+      window.scrollTo({
+        top: Math.round(section.offsetTop + progress * total),
+        behavior: "smooth",
+      });
+    }
+
+    const railLabels = content.hero.rail || [];
+    const railStops = [];
+    let railFill = null;
+    if (progressRail) {
+      const track = document.createElement("span");
+      track.className = "story-rail-track";
+      track.setAttribute("aria-hidden", "true");
+      railFill = document.createElement("span");
+      railFill.className = "story-rail-fill";
+      track.append(railFill);
+      progressRail.append(track);
+
+      STORY_ANCHORS.forEach((anchor, index) => {
+        const stop = document.createElement("button");
+        stop.type = "button";
+        stop.className = "story-rail-stop";
+        stop.innerHTML = `
+          <span class="story-rail-label">${railLabels[index] || ""}</span>
+          <span class="story-rail-dot" aria-hidden="true"></span>
+        `;
+        stop.addEventListener("click", () => scrollToProgress(anchor.progress));
+        progressRail.append(stop);
+        railStops.push(stop);
+      });
+    }
+
+    scrollToStoryAnchor = (key) => {
+      const anchor = STORY_ANCHORS.find((item) => item.key === key);
+      if (anchor) scrollToProgress(anchor.progress);
+    };
+
+    function actOpacity(progress, beat) {
+      const [inStart, inEnd] = beat.in;
+      const [outStart, outEnd] = beat.out;
+      const fadeIn =
+        inEnd <= inStart ? 1 : clamp((progress - inStart) / (inEnd - inStart), 0, 1);
+      const fadeOut = clamp((outEnd - progress) / (outEnd - outStart), 0, 1);
+      return Math.min(fadeIn, fadeOut);
+    }
+
+    function updateOverlays(progress) {
+      Object.entries(STORY_BEATS).forEach(([key, beat]) => {
+        const node = actNodes[key];
+        if (!node) return;
+        const opacity = actOpacity(progress, beat);
+        node.style.opacity = opacity.toFixed(3);
+        node.style.transform = `translateY(${((1 - opacity) * 22).toFixed(1)}px)`;
+        node.classList.toggle("is-active", opacity > 0.5);
+      });
+
+      chipNodes.forEach((chip, index) => {
+        chip.classList.toggle(
+          "is-on",
+          progress >= STORY_CHIP_START + index * STORY_CHIP_STEP,
+        );
+      });
+
+      statNumbers.forEach((node, index) => {
+        const target = parseInt(node.dataset.target, 10) || 0;
+        const local = clamp((progress - (0.355 + index * 0.015)) / 0.075, 0, 1);
+        node.textContent = formatNumber(Math.round(easeOut(local) * target));
+      });
+
+      if (solutionNodes.length) {
+        const start = STORY_BEATS.solutions.in[0];
+        const end = STORY_BEATS.solutions.out[1];
+        const span = (end - start) / solutionNodes.length;
+        const ramp = 0.012;
+        solutionNodes.forEach((node, index) => {
+          const from = start + index * span;
+          const to = from + span;
+          const fadeIn = index === 0 ? 1 : clamp((progress - from) / ramp, 0, 1);
+          const fadeOut =
+            index === solutionNodes.length - 1
+              ? 1
+              : clamp((to - progress) / ramp, 0, 1);
+          const opacity = Math.min(fadeIn, fadeOut);
+          node.style.opacity = opacity.toFixed(3);
+          node.classList.toggle("is-active", opacity > 0.5);
+        });
+      }
+
+      let activeStop = 0;
+      STORY_ANCHORS.forEach((anchor, index) => {
+        if (progress >= anchor.progress - 0.02) activeStop = index;
+      });
+      railStops.forEach((stop, index) => {
+        stop.classList.toggle("is-active", index === activeStop);
+        stop.classList.toggle("is-passed", index < activeStop);
+      });
+
+      if (railFill && STORY_ANCHORS.length > 1) {
+        // Map progress onto the rail's evenly spaced stops so the fill line
+        // always meets each dot exactly when its act begins.
+        let ratio = 1;
+        for (let i = 0; i < STORY_ANCHORS.length - 1; i += 1) {
+          const from = STORY_ANCHORS[i].progress;
+          const to = STORY_ANCHORS[i + 1].progress;
+          if (progress <= to) {
+            ratio = (i + clamp((progress - from) / (to - from), 0, 1)) /
+              (STORY_ANCHORS.length - 1);
+            break;
+          }
+        }
+        railFill.style.height = `${(ratio * 100).toFixed(1)}%`;
+      }
+
+      if (siteHeader) {
+        siteHeader.classList.toggle(
+          "is-story-hidden",
+          progress > 0.015 && progress < 0.96,
+        );
+      }
+      if (fadeOverlay) {
+        fadeOverlay.style.opacity = clamp((progress - 0.95) / 0.05, 0, 1).toFixed(3);
+      }
+      if (hint) hint.classList.toggle("is-hidden", progress > 0.02);
+    }
+
+    let targetProgress = 0;
+    let currentFrame = -1;
+    let rafId = null;
+
+    function tick() {
+      rafId = null;
+      targetProgress = sectionProgress();
+      const targetFrame = targetProgress * (frameCount - 1);
+      if (currentFrame < 0) currentFrame = targetFrame;
+      const delta = targetFrame - currentFrame;
+      if (Math.abs(delta) < 0.35) {
+        currentFrame = targetFrame;
+      } else {
+        currentFrame += delta * 0.22;
+      }
+      drawFrame(currentFrame);
+      updateOverlays(targetProgress);
+      if (Math.abs(targetFrame - currentFrame) > 0.01) scheduleTick();
+    }
+
+    function scheduleTick() {
+      if (rafId !== null) return;
+      // rAF never fires while the page is hidden; fall back to a timer so the
+      // first frame is ready when the tab becomes visible.
+      rafId = document.hidden
+        ? window.setTimeout(tick, 66)
+        : window.requestAnimationFrame(tick);
+    }
+
+    function onScroll() {
+      scheduleTick();
+    }
+
+    let resizeTimer = null;
+    function onResize() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        if (resizeCanvas()) {
+          currentFrame = -1;
+          onScroll();
+        }
+      }, 120);
+    }
+
+    function setFrameSet() {
+      const nextTemplate = mqMobile.matches ? config.mobilePath : config.desktopPath;
+      if (nextTemplate === frameTemplate) return;
+      frameTemplate = nextTemplate;
+      loadGeneration += 1;
+      frames.fill(null);
+      requested.clear();
+      if (poster && posterFor()) poster.style.backgroundImage = `url("${posterFor()}")`;
+      loadFramesProgressively();
+    }
+
+    mqMobile.addEventListener("change", setFrameSet);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+
+    resizeCanvas();
+    targetProgress = sectionProgress();
+    updateOverlays(targetProgress);
+    loadFramesProgressively();
   }
 
   function renderCustomers() {
@@ -565,6 +828,13 @@
         const targetId = link.getAttribute("href");
         if (!targetId || targetId === "#") return;
 
+        if (targetId.startsWith("#story-") && typeof scrollToStoryAnchor === "function") {
+          event.preventDefault();
+          scrollToStoryAnchor(targetId.slice("#story-".length));
+          closeMobileMenu();
+          return;
+        }
+
         const target = $(targetId);
         if (!target) return;
 
@@ -618,109 +888,6 @@
     const firstCard = track.firstElementChild;
     const distance = firstCard ? firstCard.getBoundingClientRect().width + 24 : track.clientWidth * 0.85;
     track.scrollBy({ left: distance * direction, behavior: "smooth" });
-  }
-
-  function setupSolutionToggles() {
-    const readMore = content.solutionsIntro.readMore || "Read more → ";
-    const hideText = content.solutionsIntro.hideText || "Hide text";
-
-    $$(".solution-toggle").forEach((button) => {
-      button.addEventListener("click", () => {
-        const slide = button.closest("[data-solution-slide]");
-        const body = slide?.querySelector(".solution-body");
-        if (!body) return;
-
-        const isOpen = body.classList.toggle("is-open");
-        button.setAttribute("aria-expanded", String(isOpen));
-        button.textContent = isOpen ? hideText : readMore;
-      });
-    });
-  }
-
-  function setupMobileSolutionViewport() {
-    const track = $("[data-solutions-track]");
-    if (!track) return;
-
-    const mq = window.matchMedia("(max-width: 1024px)");
-
-    const sync = () => {
-      if (!mq.matches) {
-        track.style.removeProperty("--solution-mobile-height");
-        return;
-      }
-
-      const slides = $$("[data-solution-slide]", track);
-      if (!slides.length) return;
-
-      const openStates = slides.map((slide) => {
-        const body = slide.querySelector(".solution-body");
-        const wasOpen = body?.classList.contains("is-open");
-        if (body) body.classList.remove("is-open");
-        return { body, wasOpen };
-      });
-
-      track.classList.add("is-measuring");
-      const maxHeight = Math.max(
-        ...slides.map((slide) => slide.scrollHeight),
-        0,
-      );
-      track.classList.remove("is-measuring");
-
-      openStates.forEach(({ body, wasOpen }) => {
-        if (body && wasOpen) body.classList.add("is-open");
-      });
-
-      if (maxHeight > 0) {
-        track.style.setProperty("--solution-mobile-height", `${Math.ceil(maxHeight)}px`);
-      }
-    };
-
-    sync();
-
-    window.addEventListener("resize", sync, { passive: true });
-
-    track.querySelectorAll(".solution-visual img").forEach((image) => {
-      if (image.complete) return;
-      image.addEventListener("load", sync, { once: true });
-    });
-  }
-
-  function setupSolutionSlider() {
-    const track = $("[data-solutions-track]");
-    const slides = $$("[data-solution-slide]", track);
-    const current = $("[data-solution-current]");
-    if (!track || !slides.length) return;
-
-    const setActive = (index) => {
-      const safeIndex = Math.max(0, Math.min(slides.length - 1, index));
-      if (current) current.textContent = pad(safeIndex + 1);
-    };
-
-    const updateFromScroll = () => {
-      const trackRect = track.getBoundingClientRect();
-      const center = trackRect.top + trackRect.height / 2;
-      const nearest = slides.reduce(
-        (best, slide, index) => {
-          const rect = slide.getBoundingClientRect();
-          const distance = Math.abs(rect.top + rect.height / 2 - center);
-          return distance < best.distance ? { index, distance } : best;
-        },
-        { index: 0, distance: Infinity },
-      );
-      setActive(nearest.index);
-    };
-
-    let raf = 0;
-    track.addEventListener(
-      "scroll",
-      () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(updateFromScroll);
-      },
-      { passive: true },
-    );
-
-    setActive(0);
   }
 
   function setupRevealAnimations() {
@@ -778,6 +945,71 @@
     });
   }
 
+  // Mouse drag-to-scroll for the horizontal carousels (touch already scrolls
+  // natively). While dragging, snap and smooth-scroll are suspended so the
+  // track follows the pointer 1:1; a post-drag click on a card is swallowed.
+  function setupDragScroll() {
+    $$(".carousel, .media-layout, .blog-layout").forEach((track) => {
+      let pointerId = null;
+      let startX = 0;
+      let startScroll = 0;
+      let dragged = false;
+
+      track.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "mouse" || event.button !== 0) return;
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startScroll = track.scrollLeft;
+        dragged = false;
+      });
+
+      track.addEventListener("pointermove", (event) => {
+        if (pointerId === null || event.pointerId !== pointerId) return;
+        const deltaX = event.clientX - startX;
+        if (!dragged && Math.abs(deltaX) > 6) {
+          dragged = true;
+          track.classList.add("is-dragging");
+          try {
+            track.setPointerCapture(pointerId);
+          } catch {
+            // Pointer may already be released; dragging still works without capture.
+          }
+        }
+        if (dragged) track.scrollLeft = startScroll - deltaX;
+      });
+
+      const release = (event) => {
+        if (pointerId === null || event.pointerId !== pointerId) return;
+        if (track.hasPointerCapture && track.hasPointerCapture(pointerId)) {
+          track.releasePointerCapture(pointerId);
+        }
+        pointerId = null;
+        track.classList.remove("is-dragging");
+        if (dragged) {
+          // Keep the flag through the click that follows pointerup, then clear.
+          window.setTimeout(() => {
+            dragged = false;
+          }, 0);
+        }
+      };
+      track.addEventListener("pointerup", release);
+      track.addEventListener("pointercancel", release);
+
+      track.addEventListener(
+        "click",
+        (event) => {
+          if (dragged) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        },
+        true,
+      );
+
+      track.addEventListener("dragstart", (event) => event.preventDefault());
+    });
+  }
+
   function setupKeyboardScroll() {
     $$(".carousel, .media-layout, .blog-layout").forEach((track) => {
       track.addEventListener("keydown", (event) => {
@@ -788,63 +1020,6 @@
       });
     });
 
-    const solutionTrack = $("[data-solutions-track]");
-    if (solutionTrack) {
-      solutionTrack.addEventListener("keydown", (event) => {
-        if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-        event.preventDefault();
-        const direction = event.key === "ArrowDown" ? 1 : -1;
-        solutionTrack.scrollBy({ top: solutionTrack.clientHeight * direction, behavior: "smooth" });
-      });
-    }
-  }
-
-  function initCounters() {
-    const counters = $$(".stat-number");
-    const statsSection = $(".stats");
-    if (!counters.length || !statsSection) return;
-
-    let hasAnimated = false;
-
-    const animateCounter = (counter) => {
-      const target = parseInt(counter.dataset.target, 10) || 0;
-      const duration = 2000;
-      const startTime = performance.now();
-
-      const easeOutExpo = (progress) => (progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress));
-
-      const updateCounter = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const current = Math.floor(easeOutExpo(progress) * target);
-
-        counter.textContent = current.toLocaleString(locale === "he" ? "he-IL" : "en-US");
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          counter.textContent = target.toLocaleString(locale === "he" ? "he-IL" : "en-US");
-        }
-      };
-
-      requestAnimationFrame(updateCounter);
-    };
-
-    const animateCounters = () => {
-      if (hasAnimated) return;
-
-      const rect = statsSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
-        hasAnimated = true;
-        counters.forEach(animateCounter);
-        window.removeEventListener("scroll", animateCounters);
-      }
-    };
-
-    window.addEventListener("scroll", animateCounters, { passive: true });
-    animateCounters();
   }
 
   function initContactForm() {
@@ -905,14 +1080,7 @@
     setupSplashScreen();
     hydrateStaticContent();
     renderNav();
-    renderHeroMedia();
-    renderProjectsMedia();
-    renderExpertise();
-    renderSolutions();
-    setupSolutionToggles();
-    setupMobileSolutionViewport();
-    renderStats();
-    initCounters();
+    initStoryHero();
     renderCustomers();
     renderBlogs();
     renderRelatedSites();
@@ -924,8 +1092,8 @@
     setupSmoothNav();
     scrollToHashTarget();
     setupRevealAnimations();
-    setupSolutionSlider();
     setupCarousels();
+    setupDragScroll();
     setupKeyboardScroll();
     initContactForm();
   }

@@ -123,6 +123,7 @@ button {
 
 .hero-card,
 .intro-card,
+.story-act,
 .section-heading,
 .expertise-card,
 .solution-content,
@@ -336,60 +337,6 @@ button {
   color: var(--ink);
 }
 
-.hero-media,
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  margin-top: -12%;
-}
-
-.hero-media {
-  background: var(--ink);
-}
-
-.hero-media::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(360deg, rgba(0, 6, 65, 0.86) 0%, rgba(0, 17, 168, 0.08) 58%),
-    radial-gradient(circle at 50% 105%, rgba(0, 6, 65, 0.92) 0 30%, transparent 31%);
-  pointer-events: none;
-}
-
-.hero-media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  opacity: 0;
-  transition: opacity 700ms ease;
-}
-
-.hero-media.is-video-ready video {
-  opacity: 1;
-}
-
-.hero-media .hero-video--mobile {
-  display: none;
-}
-
-.hero-overlay {
-  z-index: -1;
-  background:
-    radial-gradient(ellipse 92% 24% at 50% 100%, var(--paper) 0 62%, transparent 63%),
-    linear-gradient(180deg, transparent 0 80%, var(--paper) 80% 100%);
-}
-
-.hero-inner {
-  min-height: inherit;
-  display: grid;
-  align-items: end;
-  justify-items: center;
-  padding-block: clamp(380px, 55vh, 620px) clamp(70px, 9vh, 120px);
-}
-
 .hero-card,
 .intro-card {
   width: min(100%, 1100px);
@@ -436,6 +383,609 @@ button {
 .eyebrow:empty,
 .section-kicker:empty {
   display: none;
+}
+
+/* ============================================
+   Story hero — scroll-driven video storytelling
+   ============================================ */
+
+.story-hero {
+  height: 650vh;
+  min-height: 0;
+  overflow: visible; /* sticky breaks inside overflow:hidden */
+  background: var(--ink);
+}
+
+.story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.story-canvas,
+.story-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.story-canvas {
+  display: block;
+  z-index: 0;
+}
+
+.story-poster {
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 600ms ease;
+}
+
+.story-hero--ready .story-poster {
+  opacity: 0;
+}
+
+.story-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, transparent 0 55%, var(--paper) 96% 100%);
+}
+
+.story-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.story-act {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.story-act.is-active {
+  pointer-events: auto;
+}
+
+.story-act-label {
+  margin: 0 0 14px;
+  color: var(--cyan);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 6, 65, 0.55);
+}
+
+/* Act 1 — opening title, lower corner, pure typography */
+.story-act--title {
+  right: clamp(24px, 6vw, 110px);
+  bottom: clamp(64px, 13vh, 140px);
+  max-width: min(620px, 46vw);
+  text-align: start;
+}
+
+.story-act--title h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(38px, 4.8vw, 84px);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  text-shadow: 0 6px 32px rgba(0, 6, 65, 0.6);
+}
+
+.story-act--title .story-lead {
+  margin: 16px 0 0;
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(15px, 1.35vw, 21px);
+  line-height: 1.6;
+  text-shadow: 0 2px 14px rgba(0, 6, 65, 0.65);
+}
+
+/* Act 2 — expertise HUD chips, side column */
+.story-act--expertise {
+  right: clamp(24px, 5vw, 90px);
+  top: clamp(96px, 17vh, 170px);
+  width: min(360px, 30vw);
+}
+
+.story-chips {
+  display: grid;
+  gap: 12px;
+}
+
+.story-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(99, 239, 255, 0.28);
+  border-radius: 14px;
+  background: rgba(2, 8, 44, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 6, 65, 0.35);
+  opacity: 0;
+  transform: translateX(26px);
+  transition: opacity 450ms ease, transform 450ms ease;
+}
+
+.story-chip.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.story-chip img {
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  object-fit: contain;
+}
+
+.story-chip h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 800;
+}
+
+.story-chip p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.45;
+}
+
+/* Act 3 — stat counters, bottom strip */
+.story-act--stats {
+  inset-inline: 0;
+  bottom: clamp(44px, 9vh, 90px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.story-act--stats .story-act-label {
+  margin: 0;
+}
+
+.story-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.story-stat {
+  min-width: clamp(160px, 15vw, 220px);
+  padding: 18px 24px;
+  border: 1px solid rgba(99, 239, 255, 0.28);
+  border-radius: 16px;
+  background: rgba(2, 8, 44, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 6, 65, 0.35);
+  text-align: center;
+}
+
+.story-stat-value {
+  display: block;
+  color: var(--cyan);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-stat-suffix {
+  font-size: 0.6em;
+  font-weight: 800;
+}
+
+.story-stat h3 {
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 800;
+}
+
+.story-stat p {
+  margin: 3px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(12px, 0.95vw, 14px);
+}
+
+/* Interlude — one-line caption */
+.story-act--bridge {
+  inset-inline: 0;
+  bottom: clamp(72px, 15vh, 150px);
+  text-align: center;
+}
+
+.story-caption {
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 0 20px;
+  color: #fff;
+  font-size: clamp(20px, 2.4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 24px rgba(0, 6, 65, 0.7);
+}
+
+/* Act 4 — solutions side panel */
+.story-act--solutions {
+  right: clamp(20px, 4.5vw, 80px);
+  top: 0;
+  bottom: 0;
+  display: grid;
+  align-content: center;
+  width: min(430px, 36vw);
+}
+
+.story-solutions {
+  display: grid;
+}
+
+.story-solution {
+  grid-area: 1 / 1;
+  padding: clamp(18px, 1.8vw, 26px) clamp(18px, 2vw, 28px);
+  border: 1px solid rgba(99, 239, 255, 0.28);
+  border-radius: 18px;
+  background: rgba(2, 8, 44, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 40px rgba(0, 6, 65, 0.4);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.story-solution.is-active {
+  pointer-events: auto;
+}
+
+.story-solution-index {
+  margin: 0 0 8px;
+  color: var(--cyan);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-solution-index span {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 700;
+}
+
+.story-solution h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(17px, 1.5vw, 23px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.story-solution-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.story-solution-tags span {
+  padding: 4px 12px;
+  border: 1px solid rgba(99, 239, 255, 0.4);
+  border-radius: var(--radius-pill);
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.story-solution-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(13px, 1.05vw, 15px);
+  line-height: 1.6;
+}
+
+/* Act 5 — closing */
+.story-act--closing {
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.story-closing-eyebrow {
+  margin: 0 0 12px;
+  color: var(--cyan);
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 6, 65, 0.6);
+}
+
+.story-closing-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(34px, 4.6vw, 74px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  text-shadow: 0 6px 32px rgba(0, 6, 65, 0.65);
+}
+
+.story-closing-body {
+  margin: 16px auto 0;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(15px, 1.35vw, 20px);
+  line-height: 1.6;
+  text-shadow: 0 2px 14px rgba(0, 6, 65, 0.65);
+}
+
+.story-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 14px 38px;
+  border-radius: var(--radius-pill);
+  background: var(--teal);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(16px, 1.3vw, 20px);
+  box-shadow: 0 14px 30px rgba(40, 184, 160, 0.35);
+  transition: transform 200ms ease, background 200ms ease;
+  justify-self: center;
+}
+
+.story-cta:hover,
+.story-cta:focus-visible {
+  background: #23a68f;
+  transform: translateY(-2px);
+}
+
+.story-cta:empty {
+  display: none;
+}
+
+/* Labeled progress rail — replaces the header during the story.
+   Sits on the LEFT edge; all story content anchors right, so it never overlaps.
+   A glowing vertical fill tracks scroll progress between the stops. */
+.story-progress {
+  position: absolute;
+  z-index: 4;
+  left: clamp(14px, 2vw, 30px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 28px;
+  padding: 20px 16px;
+  border: 1px solid rgba(99, 239, 255, 0.22);
+  border-radius: 26px;
+  background: rgba(2, 8, 44, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 6, 65, 0.4);
+  pointer-events: auto;
+}
+
+.story-rail-track {
+  position: absolute;
+  left: 21.5px; /* padding 16 + dot radius 7 - half track width */
+  top: 27px;
+  bottom: 27px;
+  width: 3px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.story-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, var(--cyan), var(--teal));
+  box-shadow: 0 0 10px rgba(99, 239, 255, 0.85);
+}
+
+.story-rail-stop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.story-rail-stop .story-rail-dot {
+  order: -1;
+}
+
+.story-rail-label {
+  opacity: 0.85;
+  transition: opacity 300ms ease, color 300ms ease;
+  text-shadow: 0 2px 8px rgba(0, 6, 65, 0.85);
+  white-space: nowrap;
+}
+
+.story-rail-stop:hover .story-rail-label,
+.story-rail-stop:focus-visible .story-rail-label,
+.story-rail-stop.is-active .story-rail-label {
+  opacity: 1;
+}
+
+.story-rail-stop.is-active {
+  color: #fff;
+}
+
+.story-rail-stop.is-active .story-rail-label {
+  text-shadow: 0 0 14px rgba(99, 239, 255, 0.6), 0 2px 8px rgba(0, 6, 65, 0.85);
+}
+
+.story-rail-dot {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(2, 8, 44, 0.9);
+  transition: background 250ms ease, border-color 250ms ease, box-shadow 250ms ease,
+    transform 250ms ease;
+}
+
+.story-rail-stop.is-passed .story-rail-dot {
+  background: var(--teal);
+  border-color: transparent;
+}
+
+.story-rail-stop.is-active .story-rail-dot {
+  background: var(--cyan);
+  border-color: #fff;
+  box-shadow: 0 0 16px rgba(99, 239, 255, 0.95);
+  transform: scale(1.15);
+}
+
+.story-scroll-hint {
+  position: absolute;
+  z-index: 4;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-shadow: 0 2px 12px rgba(0, 6, 65, 0.65);
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.story-scroll-hint i {
+  animation: story-hint-bounce 1.8s ease-in-out infinite;
+}
+
+.story-scroll-hint.is-hidden {
+  opacity: 0;
+}
+
+@keyframes story-hint-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Static fallback: reduced motion / no canvas */
+.story-hero.story-hero--static {
+  height: auto;
+  min-height: 0;
+}
+
+.story-hero--static .story-sticky {
+  position: relative;
+  height: auto;
+}
+
+.story-hero--static .story-canvas,
+.story-hero--static .story-progress,
+.story-hero--static .story-scroll-hint,
+.story-hero--static .story-fade {
+  display: none;
+}
+
+.story-hero--static .story-poster {
+  opacity: 1;
+}
+
+.story-hero--static .story-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 6, 65, 0.62);
+}
+
+.story-hero--static .story-stage {
+  position: relative;
+  inset: auto;
+  display: grid;
+  justify-items: center;
+  gap: 36px;
+  padding: calc(var(--header-height) + clamp(40px, 8vh, 90px)) clamp(20px, 4vw, 64px)
+    clamp(52px, 8vh, 110px);
+}
+
+.story-hero--static .story-act {
+  position: static;
+  width: min(100%, 720px);
+  max-width: none;
+  opacity: 1;
+  transform: none !important;
+  pointer-events: auto;
+}
+
+.story-hero--static .story-act--solutions {
+  display: block;
+}
+
+.story-hero--static .story-solutions {
+  gap: 18px;
+}
+
+.story-hero--static .story-solution {
+  grid-area: auto;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.story-hero--static .story-solution-body {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+
+.story-hero--static .story-act--closing {
+  display: block;
+  text-align: center;
 }
 
 .button-row,
@@ -999,6 +1549,23 @@ button {
   scroll-behavior: smooth;
   padding: 8px 6px 24px;
   scrollbar-width: none;
+}
+
+/* Drag-to-scroll: the tracks follow the mouse; snap + smooth-scroll are
+   suspended mid-drag so the track tracks the pointer 1:1. */
+.carousel,
+.media-layout,
+.blog-layout {
+  cursor: grab;
+}
+
+.carousel.is-dragging,
+.media-layout.is-dragging,
+.blog-layout.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  user-select: none;
 }
 
 .video-card,
@@ -1897,112 +2464,105 @@ button {
   }
 }
 
-/* Small mobile: fixed video placement + card at 380px, section grows to fit card */
-@media (max-width: 519px) {
-  .hero {
-    --hero-video-width: min(100%, 390px);
-    --hero-video-height: 600px;
-    display: grid;
-    grid-template-areas: "hero-stack";
-    width: var(--hero-video-width);
-    max-width: 390px;
-    height: auto;
-    min-height: 0;
-    margin-inline: auto;
-    overflow: visible;
-    isolation: isolate;
+/* Header gives way to the story rail while the story is playing.
+   Placed after the [data-animate] rules so it wins the cascade. */
+.site-header {
+  transition: transform 450ms ease, opacity 400ms ease;
+}
+
+.site-header.is-story-hidden {
+  transform: translateY(-130%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Story hero: mobile adjustments */
+@media (max-width: 900px) {
+  .story-hero {
+    height: 560vh;
   }
 
-  .hero-media,
-  .hero-overlay,
-  .hero-inner {
-    grid-area: hero-stack;
+  .story-act--title {
+    left: 18px;
+    right: 18px;
+    bottom: 64px;
+    max-width: none;
   }
 
-  .hero-media {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: var(--hero-video-height);
-    margin-top: 0;
-    z-index: 0;
+  .story-act--expertise {
+    left: 18px;
+    right: 46px;
+    top: auto;
+    bottom: 44px;
+    width: auto;
   }
 
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: var(--hero-video-height);
-    margin-top: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .hero-media .hero-video--desktop {
+  .story-rail-label {
     display: none;
   }
 
-  .hero-media .hero-video--mobile {
+  .story-chips {
+    gap: 10px;
+  }
+
+  .story-chip {
+    padding: 11px 14px;
+  }
+
+  .story-act--stats {
+    bottom: 48px;
+    gap: 12px;
+  }
+
+  .story-stats {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 14px;
+  }
+
+  .story-stat {
+    flex: 1 1 150px;
+    min-width: 0;
+    padding: 14px 12px;
+  }
+
+  .story-act--solutions {
+    left: 16px;
+    right: 46px;
+    top: auto;
+    bottom: 40px;
+    width: auto;
     display: block;
-    width: 100%;
-    height: 70%;
-    object-fit: cover;
-    object-position: center top;
   }
 
-  .hero-inner {
-    position: relative;
-    z-index: 2;
-    align-self: start;
-    justify-self: stretch;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    margin-top: 380px;
-    padding: 0 12px 58px;
-    box-sizing: border-box;
-  }
-
-  .hero-inner.container {
-    width: 100%;
+  .story-solution-body {
+    -webkit-line-clamp: 5;
   }
 }
 
-/* Wider mobile: full-bleed regular hero video (desktop asset) */
-@media (max-width: 900px) and (min-width: 520px) {
-  .hero {
-    width: auto;
-    height: auto;
-    max-width: none;
-    min-height: 650px;
-  }
-
-  .hero-media,
-  .hero-overlay {
-    inset: 0;
-    width: auto;
-    height: auto;
-    margin-top: -12%;
-  }
-
-  .hero-media .hero-video--desktop {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  .hero-media .hero-video--mobile {
+@media (max-width: 519px) {
+  .story-progress {
     display: none;
   }
 
-  .hero-inner {
-    min-height: inherit;
-    height: auto;
-    padding-block: clamp(220px, 32vh, 320px) 58px;
+  .story-act--title h1 {
+    font-size: 34px;
+  }
+
+  .story-act--title .story-lead {
+    font-size: 14px;
+  }
+
+  .story-chip p {
+    display: none;
+  }
+
+  .story-closing-title {
+    font-size: 30px;
+  }
+
+  .story-cta {
+    padding: 12px 28px;
   }
 }
 
@@ -2582,6 +3142,7 @@ button {
 
 html[lang="en"] .hero-card,
 html[lang="en"] .intro-card,
+html[lang="en"] .story-act,
 html[lang="en"] .section-heading,
 html[lang="en"] .expertise-card,
 html[lang="en"] .solution-content,
